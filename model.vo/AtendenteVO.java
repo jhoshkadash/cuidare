@@ -23,16 +23,16 @@ public class AtendenteVO {
     public String getNome() {
         return nome;
     }
-    public void setNome(String nome) {
+   public void setNome(String nome) 
+    {
         if(nome==null)
         {
-
+            System.out.println ("Digite um nome");
         }
         else  if(nome.equals("")) 
         {
-
+            System.out.println ("Digite um nome");
         }
         else this.nome = nome;
-
-    }  
+    }
 }
