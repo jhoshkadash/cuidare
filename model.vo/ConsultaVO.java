@@ -1,3 +1,5 @@
+import java.util.calendar;
+
 public class ConsultaVO {
     private String paciente;
     private String medico;
