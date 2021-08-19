@@ -28,16 +28,11 @@ public class PacienteVO {
         if (cpf.length() != 11){
             System.out.println ("Cpf inválido (não digite pontos e nem linhas)");
         }
-
         if(cpf.substring(0).matches("[0-9]*") == false)
         {
             System.out.println ("Cpf inválido (existe letras no cpf)");
         }
-
-        else
-        {
-            this.cpf = cpf;
-        }
+        else this.cpf = cpf;
     }
    
    
@@ -51,10 +46,10 @@ public class PacienteVO {
         {
             System.out.println ("Digite um endereço: ");
         }
-        else  if(endereco.equals("")) 
+        else if(endereco.equals("")) 
         {
             System.out.println ("Digite um endereço: ");
         }
-        else  this.endereco = endereco;
+        else this.endereco = endereco;
     }
 }
