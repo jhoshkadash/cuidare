@@ -6,6 +6,7 @@ public class GerenteVO {
     public String getUsuario() {
         return usuario;
     }
+    
     public void setUsuario(String usuario) {
         if(usuario==null)
         {
@@ -16,11 +17,13 @@ public class GerenteVO {
             System.out.println ("Digite o nome: ");
         }
         else this.usuario = usuario;
-
     }
+    
+    
     public String getSenha() {
         return senha;
     }
+    
     public void setSenha(String senha)
     {
         if(senha==null)
@@ -33,5 +36,4 @@ public class GerenteVO {
         }
         else  this.senha = senha;
     }
-    
 }
