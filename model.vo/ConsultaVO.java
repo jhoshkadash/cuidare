@@ -20,9 +20,12 @@ public class ConsultaVO {
         }
         else  this.paciente = paciente;
     }
+    
+    
     public String getMedico() {
         return medico;
     }
+    
     public void setMedico(String medico)
     {
         if(medico==null)
@@ -35,23 +38,31 @@ public class ConsultaVO {
         }
         else  this.medico = medico;
     }
+    
+    
     public String getData() {
         return data;
     }
+    
     public void setData(String data) {
         this.data = data;
     }
+    
+    
     public String getHora() {
         return hora;
     }
+    
     public void setHora(String hora) {
         this.hora = hora;
     }
+    
+    
     public boolean isStatus() {
         return status;
     }
+    
     public void setStatus(boolean status) {
         this.status = status;
-    }   
-     
+    }    
 }
