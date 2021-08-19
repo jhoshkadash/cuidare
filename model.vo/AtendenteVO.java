@@ -27,11 +27,11 @@ public class AtendenteVO {
     {
         if(nome==null)
         {
-            System.out.println ("Digite um nome");
+            System.out.println ("Digite um nome: ");
         }
         else  if(nome.equals("")) 
         {
-            System.out.println ("Digite um nome");
+            System.out.println ("Digite um nome: ");
         }
         else this.nome = nome;
     }
