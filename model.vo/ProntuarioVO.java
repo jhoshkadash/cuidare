@@ -22,7 +22,7 @@ public class ProntuarioVO {
         }
         else  this.observacoes = observacoes;
     }
-    }    
+        
 
     
 }
