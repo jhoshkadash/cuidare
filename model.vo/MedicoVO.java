@@ -73,6 +73,14 @@ public class MedicoVO {
     }
     
     public void setCrm(String crm) {
-        this.crm = crm;
+        if(crm==null)
+        {
+            System.out.println ("Digite o CRM: ");
+        }
+        else  if(crm.equals("")) 
+        {
+            System.out.println ("Digite o CRM: ");
+        }
+        else this.crm = crm;
     }   
 }
