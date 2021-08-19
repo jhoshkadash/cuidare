@@ -12,11 +12,11 @@ public class ConsultaVO {
     {
         if(paciente==null)
         {
-
+             System.out.println ("Digite o nome do paciente: ");
         }
         else  if(paciente.equals("")) 
         {
-
+             System.out.println ("Digite o nome do paciente: ");
         }
         else  this.paciente = paciente;
     }
@@ -27,11 +27,11 @@ public class ConsultaVO {
     {
         if(medico==null)
         {
-
+            System.out.println ("Digite o nome do médico: ");
         }
         else  if(medico.equals("")) 
         {
-
+            System.out.println ("Digite o nome do médico: ");
         }
         else  this.medico = medico;
     }
