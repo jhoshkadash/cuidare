@@ -1,4 +1,4 @@
 public class ProntuarioVO {
     String[] remedios;
-    String[] observacoes;
+    String[] observacoes;    
 }
