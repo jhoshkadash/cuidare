@@ -8,11 +8,7 @@ public class ProntuarioVO {
     public void setRemedios(String[] remedios) {
         if(remedios==null)
         {
-
-        }
-        else  if(remedios.equals("")) 
-        {
-
+            System.out.println ("Informação inválida.\n");    
         }
         else this.remedios = remedios;
     }
@@ -24,11 +20,11 @@ public class ProntuarioVO {
     public void setObservacoes(String[] observacoes) {
         if(observacoes==null)
         {
-
+             System.out.println ("Informação inválida.\n");
         }
         else  if(observacoes.equals("")) 
         {
-
+             System.out.println ("Adicionar observações da consulta.\n");
         }
         else  this.observacoes = observacoes;
     }
