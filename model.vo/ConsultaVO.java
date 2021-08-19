@@ -45,7 +45,15 @@ public class ConsultaVO {
     }
     
     public void setData(String data) {
-        this.data = data;
+        if(data==null)
+        {
+            System.out.println ("Digite a data: ");
+        }
+        else  if(data.equals("")) 
+        {
+            System.out.println ("Digite a data: ");
+        }
+        else  this.data = data;
     }
     
     
@@ -54,7 +62,15 @@ public class ConsultaVO {
     }
     
     public void setHora(String hora) {
-        this.hora = hora;
+        if(hora==null)
+        {
+            System.out.println ("Digite a hora: ");
+        }
+        else  if(data.equals("")) 
+        {
+            System.out.println ("Digite a hora: ");
+        }
+        else  this.hora = hora;
     }
     
     
