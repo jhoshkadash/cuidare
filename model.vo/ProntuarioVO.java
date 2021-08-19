@@ -6,8 +6,17 @@ public class ProntuarioVO {
         return remedios;
     }
     public void setRemedios(String[] remedios) {
-        this.remedios = remedios;
+        if(remedios==null)
+        {
+
+        }
+        else  if(remedios.equals("")) 
+        {
+
+        }
+        else this.remedios = remedios;
     }
+    
     public String[] getObservacoes() {
         return observacoes;
     }
@@ -22,7 +31,4 @@ public class ProntuarioVO {
         }
         else  this.observacoes = observacoes;
     }
-        
-
-    
 }
