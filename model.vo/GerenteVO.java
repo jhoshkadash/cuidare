@@ -15,8 +15,7 @@ public class GerenteVO {
         {
 
         }
-        else 
-        this.usuario = usuario;
+        else this.usuario = usuario;
 
     }
     public String getSenha() {
