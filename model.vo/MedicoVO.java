@@ -11,11 +11,11 @@ public class MedicoVO {
     public void setNome(String nome) {
         if(nome==null)
         {
-
+            System.out.println ("Digite um nome: ");
         }
         else  if(nome.equals("")) 
         {
-
+            System.out.println ("Digite um nome: ");
         }
         else this.nome = nome;
 
@@ -45,11 +45,11 @@ public class MedicoVO {
     {
         if(endereco==null)
         {
-
+            System.out.println ("Digite um endereço: ");
         }
         else  if(endereco.equals("")) 
         {
-
+            System.out.println ("Digite um endereço: ");
         }
         else  this.endereco = endereco;
     }
