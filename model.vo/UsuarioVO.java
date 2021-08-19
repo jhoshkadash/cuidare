@@ -22,6 +22,7 @@ public class UsuarioVO
         else  this.login = login;
     }
     
+    
     public String getSenha()
     {
         return senha;
