@@ -64,7 +64,15 @@ public class MedicoVO {
     }
     
     public void setValorconsulta(double valorconsulta) {
-        this.valorconsulta = valorconsulta;
+        if(valorconsulta==null)
+        {
+            System.out.println ("Digite um valor de consulta: ")
+        }
+        else  if (valorconsulta<100)
+        {
+            System.out.println ("Erro. O valor mínimo da consulta é R$ 100,00.\n")
+        }
+        else this.valorconsulta = valorconsulta;
     }
     
     
