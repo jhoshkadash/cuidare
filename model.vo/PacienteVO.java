@@ -2,8 +2,7 @@ public class PacienteVO {
    private String nome;
    private String cpf;
    private String endereco;
-   private String bairro;
-   
+  
     public String getNome() {
         return nome;
     }
