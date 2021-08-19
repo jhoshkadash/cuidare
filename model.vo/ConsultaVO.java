@@ -1,4 +1,4 @@
-import java.util.calendar;
+import java.util.Calendar;
 
 public class ConsultaVO {
     private String paciente;
@@ -6,6 +6,8 @@ public class ConsultaVO {
     private String data;
     private String hora;
     private boolean status;
+    
+    Calendar data_consulta; 
 
     public String getPaciente() {
         return paciente;
