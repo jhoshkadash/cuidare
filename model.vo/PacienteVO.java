@@ -6,6 +6,7 @@ public class PacienteVO {
     public String getNome() {
         return nome;
     }
+   
     public void setNome(String nome) {
         if(nome==null)
         {
@@ -16,11 +17,13 @@ public class PacienteVO {
            System.out.println ("Digite um nome: "); 
         }
         else this.nome = nome;
-
-    }  
+    } 
+   
+   
     public String getCpf() {
         return cpf;
     }
+   
     public void setCpf(String cpf) {
         if (cpf.length() != 11){
             System.out.println ("Cpf inválido (não digite pontos e nem linhas)");
@@ -36,9 +39,12 @@ public class PacienteVO {
             this.cpf = cpf;
         }
     }
+   
+   
     public String getEndereco() {
         return endereco;
     }
+   
     public void setEndereco(String endereco)
     {
         if(endereco==null)
