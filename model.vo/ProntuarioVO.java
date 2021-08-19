@@ -17,6 +17,7 @@ public class ProntuarioVO {
         else this.remedios = remedios;
     }
     
+    
     public String[] getObservacoes() {
         return observacoes;
     }
