@@ -9,11 +9,11 @@ public class GerenteVO {
     public void setUsuario(String usuario) {
         if(usuario==null)
         {
-            System.out.println ("Digite o nome de usuário: ");
+            System.out.println ("Digite o nome: ");
         }
         else  if(usuario.equals("")) 
         {
-            System.out.println ("Digite o nome de usuário: ");
+            System.out.println ("Digite o nome: ");
         }
         else this.usuario = usuario;
 
