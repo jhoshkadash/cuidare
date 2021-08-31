@@ -1,3 +1,4 @@
+
 public class PacienteVO {
    private String nome;
    private String cpf;
@@ -10,11 +11,11 @@ public class PacienteVO {
     public void setNome(String nome) {
         if(nome==null)
         {
-           System.out.println ("Digite um nome: ");
+           System.out.println ("Preencha o campo de nome");
         }
         else  if(nome.equals("")) 
         {
-           System.out.println ("Digite um nome: "); 
+           System.out.println ("Nome em branco"); 
         }
         else this.nome = nome;
     } 
