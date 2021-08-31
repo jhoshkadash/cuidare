@@ -3,6 +3,8 @@
 public class AtendenteVO {
     private String nome;
     private String cpf;
+    
+    
     public String getCpf() {
         return cpf;
     }
