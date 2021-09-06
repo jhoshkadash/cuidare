@@ -6,6 +6,17 @@ public class Laudo {
     private String IdConsulta;
     private String Observacoes;
 
+
+
+
+    public Laudo(String IdMedico, String IdPaciente, String IdConsulta, String Observacoes) {
+        this.IdMedico = IdMedico;
+        this.IdPaciente = IdPaciente;
+        this.IdConsulta = IdConsulta;
+        this.Observacoes = Observacoes;
+    }
+    
+
     public String getIdMedico() {
         return this.IdMedico;
     }

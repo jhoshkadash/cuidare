@@ -1,14 +1,21 @@
 
-public class GerenteVO {
+public class GerenteVO extends UsuarioVO {
     private String nome;
-    private String id;
+    private Integer id;
+
+
+    public GerenteVO(String nome, Integer id) {
+        this.nome = nome;
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
-    public String getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(Integer id) {
         if(id == null){
             System.out.println("Erro. Gerente sem ID");
         }

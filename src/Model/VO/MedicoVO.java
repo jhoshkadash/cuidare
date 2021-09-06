@@ -6,6 +6,21 @@ public class MedicoVO {
     private double valorconsulta;
     private String crm;
 
+
+
+
+    public MedicoVO(String nome, String cpf, String endereco, double valorconsulta, String crm) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.valorconsulta = valorconsulta;
+        this.crm = crm;
+    }
+
+
+
+
+
     public String getNome() {
         return nome;
     }
@@ -31,7 +46,7 @@ public class MedicoVO {
         {
             System.out.println ("Cpf inválido (não digite pontos e nem linhas)");
         }
-        if(cpf.substring(0).matches("[0-9]*") == false)
+        if(cpf.matches("[0-9]*") == false)
         {
             System.out.println ("Cpf inválido (existe letras no cpf)");
         }

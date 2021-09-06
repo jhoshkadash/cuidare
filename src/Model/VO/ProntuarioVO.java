@@ -1,84 +1,105 @@
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ProntuarioVO {
-    private Calendar DataNascimento = Calendar.getInstance();
-    private String AntenPatologico;
-    private String MediAtuais;
-    private String MediAlergia;
-    private Float Peso;
-    private Float Altura;
-    private String HistoricoDoenca;
-    private String IdPaciente;
+    private Calendar dataNascimento = Calendar.getInstance();
+    private String antenPatologico;
+    private String mediAtuais;
+    private String mediAlergia;
+    private Float peso;
+    private Float altura;
+    private String historicoDoenca;
+    private String idPaciente;
 
+
+
+
+
+    public ProntuarioVO(String dataNascimento, String antenPatologico, String mediAtuais, String mediAlergia, Float peso, Float altura, String historicoDoenca, String idPaciente) 
+    {
+        
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            this.dataNascimento.setTime(formato.parse(dataNascimento));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        this.antenPatologico = antenPatologico;
+        this.mediAtuais = mediAtuais;
+        this.mediAlergia = mediAlergia;
+        this.peso = peso;
+        this.altura = altura;
+        this.historicoDoenca = historicoDoenca;
+        this.idPaciente = idPaciente;
+    }
+  
 
     public Calendar getDataNascimento() {
-        return this.DataNascimento;
+        return dataNascimento;
     }
 
-    public void setDataNascimento(Calendar DataNascimento) {
-        if(DataNascimento == null){
-        System.out.println("Data de nascimento vazia");
-        }
-        else this.DataNascimento = DataNascimento;
+    public void setDataNascimento(Calendar dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getAntenPatologico() {
-        return this.AntenPatologico;
+        return this.antenPatologico;
     }
 
     public void setAntenPatologico(String AntenPatologico) {
-        this.AntenPatologico = AntenPatologico;
+        this.antenPatologico = AntenPatologico;
     }
 
     public String getMediAtuais() {
-        return this.MediAtuais;
+        return this.mediAtuais;
     }
 
     public void setMediAtuais(String MediAtuais) {
-        this.MediAtuais = MediAtuais;
+        this.mediAtuais = MediAtuais;
     }
 
     public String getMediAlergia() {
-        return this.MediAlergia;
+        return this.mediAlergia;
     }
 
     public void setMediAlergia(String MediAlergia) {
-        this.MediAlergia = MediAlergia;
+        this.mediAlergia = MediAlergia;
     }
 
     public Float getPeso() {
-        return this.Peso;
+        return this.peso;
     }
 
     public void setPeso(Float Peso) {
         if(Peso == null){
             System.out.println("o campo Peso está vazio");
         }
-        else this.Peso = Peso;
+        else this.peso = Peso;
     }
 
     public Float getAltura() {
-        return this.Altura;
+        return this.altura;
     }
 
     public void setAltura(Float Altura) {
          if(Altura == null){
             System.out.println("o campo Altura está vazio");
         }
-        else this.Altura = Altura;
+        else this.altura = Altura;
     }
 
     public String getHistoricoDoenca() {
-        return this.HistoricoDoenca;
+        return this.historicoDoenca;
     }
 
     public void setHistoricoDoenca(String HistoricoDoenca) {
-        this.HistoricoDoenca = HistoricoDoenca;
+        this.historicoDoenca = HistoricoDoenca;
     }
 
     public String getIdPaciente() {
-        return this.IdPaciente;
+        return this.idPaciente;
     }
 
     public void setIdPaciente(String IdPaciente) {
@@ -88,5 +109,5 @@ public class ProntuarioVO {
         else if(IdPaciente.equals("")){
             System.out.println("Erro. Paciente sem id");
         }
-        else this.IdPaciente = IdPaciente;
+        else this.idPaciente = IdPaciente;
     }}
