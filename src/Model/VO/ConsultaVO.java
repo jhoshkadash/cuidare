@@ -1,65 +1,62 @@
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ConsultaVO {
-    private String Id;
-    private Calendar Data = Calendar.getInstance();
-    private Calendar Hora = Calendar.getInstance();
-    private Boolean Status;
-    private String IdMedico;
-    private String IdPaciente;
+    private Integer id;
+    private Calendar data = Calendar.getInstance();
+    private Boolean status;
+    private String idMedico;
+    private String idPaciente;
 
 
-    public String getId() {
-        return this.Id;
+    public ConsultaVO(Integer Id, String Data, Calendar Hora, Boolean Status, String IdMedico, String IdPaciente) {
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            this.data.setTime(formato.parse(Data));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.id = Id;
+        this.status = Status;
+        this.idMedico = IdMedico;
+        this.idPaciente = IdPaciente;
     }
 
-    public void setId(String Id) {
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer Id) {
         if(Id == null){
             System.out.println("Erro. Consulta sem id");
         }
         else if(Id.equals("")){
             System.out.println("Erro. Consulta sem id");
         }
-        else this.Id = Id;
+        else this.id = Id;
     }
 
     public Calendar getData() {
-        return this.Data;
+        return this.data;
     }
 
-    public void setData(Calendar Data) {
-        if(Data == null){
-            System.out.println("Erro. Campo de data não preenchido");
-        }
-        else this.Data = Data;
-    }
-
-    public Calendar getHora() {
-        return this.Hora;
-    }
-
-    public void setHora(Calendar Hora) {
-        if(Hora == null){
-            System.out.println("Erro. Campo de hora não preenchido");
-        }
-        else this.Hora = Hora;
-    }
+   
 
     public Boolean isStatus() {
-        return this.Status;
+        return this.status;
     }
 
     public Boolean getStatus() {
-        return this.Status;
+        return this.status;
     }
 
     public void setStatus(Boolean Status) {
-        this.Status = Status;
+        this.status = Status;
     }
 
     public String getIdMedico() {
-        return this.IdMedico;
+        return this.idMedico;
     }
 
     public void setIdMedico(String IdMedico) {
@@ -70,11 +67,11 @@ public class ConsultaVO {
         else if (IdMedico.equals("")){
             System.out.println("Erro. Campo de Medico vazio");
         }
-        else this.IdMedico = IdMedico;
+        else this.idMedico = IdMedico;
     }
 
     public String getIdPaciente() {
-        return this.IdPaciente;
+        return this.idPaciente;
     }
 
     public void setIdPaciente(String IdPaciente) {
@@ -85,7 +82,7 @@ public class ConsultaVO {
         else if (IdPaciente.equals("")){
             System.out.println("Erro. Campo de Paciente vazio");
         }
-        else this.IdPaciente = IdPaciente;
+        else this.idPaciente = IdPaciente;
     }
     
 }

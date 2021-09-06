@@ -1,9 +1,14 @@
 
 
-public class AtendenteVO {
+public class AtendenteVO extends UsuarioVO {
     private String nome;
     private String cpf;
     
+
+    public AtendenteVO(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
+    }
     
     public String getCpf() {
         return cpf;
