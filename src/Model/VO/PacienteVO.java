@@ -1,4 +1,7 @@
 
+package src.Model.VO;
+
+
 public class PacienteVO {
    private String nome;
    private String cpf;

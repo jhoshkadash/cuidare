@@ -1,3 +1,5 @@
+package src.Model.VO;
+
 
 public class GerenteVO extends UsuarioVO {
     private String nome;

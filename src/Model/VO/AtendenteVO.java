@@ -1,4 +1,4 @@
-
+package src.Model.VO;
 
 public class AtendenteVO extends UsuarioVO {
     private String nome;
