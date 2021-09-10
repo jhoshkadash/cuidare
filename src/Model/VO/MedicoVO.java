@@ -1,3 +1,5 @@
+package src.Model.VO;
+
 
 public class MedicoVO {
     private String nome;

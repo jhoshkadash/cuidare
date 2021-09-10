@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ANSI"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>cuidare</name>
 	<comment></comment>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1629970837312</id>
+			<id>1631295520687</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
