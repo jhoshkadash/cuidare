@@ -7,5 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="model.vo"/>
 	<classpathentry excluding="model.vo/" kind="src" path=""/>
+																																																																<classpathentry kind="lib" path="lib/postgres"/>
 	<classpathentry kind="output" path="main/java"/>
 </classpath>
