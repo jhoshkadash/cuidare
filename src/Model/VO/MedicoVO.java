@@ -1,15 +1,11 @@
 package Model.VO;
 
-
 public class MedicoVO {
     private String nome;
     private String cpf;
     private String endereco;
     private double valorconsulta;
     private String crm;
-
-
-
 
     public MedicoVO(String nome, String cpf, String endereco, double valorconsulta, String crm) {
         this.nome = nome;
@@ -18,9 +14,6 @@ public class MedicoVO {
         this.valorconsulta = valorconsulta;
         this.crm = crm;
     }
-
-
-
 
 
     public String getNome() {
@@ -37,8 +30,9 @@ public class MedicoVO {
             System.out.println ("Digite um nome: ");
         }
         else this.nome = nome;
-
     }  
+    
+    
     public String getCpf() {
         return cpf;
     }
