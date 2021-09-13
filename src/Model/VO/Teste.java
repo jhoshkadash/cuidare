@@ -24,19 +24,18 @@ class principal
 		
 		System.out.println("O nome do atendente é: " + atendente.getNome() + " e o CPF do mesmo é :" + atendente.getCpf());
 		
-		System.out.println("----------------------------------");
+		System.out.println("**********************************");
 		//criar um gerente
 		String nome = "Pedro Luís";
 		Integer id = 0;
 	
-		GerenteVO gerente = new GerenteVO(nome, id++ );
-		
+		GerenteVO gerente = new GerenteVO(nome, id++);
 
 		System.out.println("**********************************");
 		
 		System.out.println("O gerente do sistema é " + gerente.getNome() + " e o seu ID é: " + gerente.getId());
 		
-		System.out.println("----------------------------------");
+		System.out.println("**********************************");
 		
 		//criar um novo médico ("00034595698", "9898241234", "Rua dos milagres, 234, bairro palmeiras", "Laercio Calvacante Gomes", "400")
 		String cpfMedico, crmMedico, enderecoMedico, nomeMedico, txtValorConsulta;
@@ -131,14 +130,8 @@ class principal
 			System.out.println("Historico de doenças: " + prontuario.getHistoricoDoenca());			
 		}
 		
-		
-
 		System.out.println("----------------------------------");
 		
-		
-
-
-
 		/*//criar um novo prontuario
 		prontuario = new Prontuario("Rivotril", "Paciente sofreu um acidente de moto e quebrou o nariz");
 		//criar um novo usuário
