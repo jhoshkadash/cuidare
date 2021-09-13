@@ -1,6 +1,5 @@
 package Model.VO;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,7 +10,6 @@ public class ConsultaVO {
     private Boolean status;
     private String idMedico;
     private String idPaciente;
-
 
     public ConsultaVO(Integer Id, String Data, Calendar Hora, Boolean Status, String IdMedico, String IdPaciente) {
         try {
@@ -26,6 +24,7 @@ public class ConsultaVO {
         this.idPaciente = IdPaciente;
     }
 
+    
     public Integer getId() {
         return this.id;
     }
@@ -40,17 +39,12 @@ public class ConsultaVO {
         else this.id = Id;
     }
 
+    
     public Calendar getData() {
         return this.data;
     }
 
-   
-
     public Boolean isStatus() {
-        return this.status;
-    }
-
-    public Boolean getStatus() {
         return this.status;
     }
 
@@ -58,6 +52,7 @@ public class ConsultaVO {
         this.status = Status;
     }
 
+    
     public String getIdMedico() {
         return this.idMedico;
     }
@@ -72,6 +67,7 @@ public class ConsultaVO {
         }
         else this.idMedico = IdMedico;
     }
+    
 
     public String getIdPaciente() {
         return this.idPaciente;
@@ -87,5 +83,4 @@ public class ConsultaVO {
         }
         else this.idPaciente = IdPaciente;
     }
-    
 }
