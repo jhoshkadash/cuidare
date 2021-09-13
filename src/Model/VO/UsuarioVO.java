@@ -5,9 +5,6 @@ public class UsuarioVO
     private String login;
     private String senha;
 
-
-
-
     public String getLogin() {
         return this.login;
     }
@@ -22,6 +19,7 @@ public class UsuarioVO
         else this.login = login;
     }
 
+    
     public String getSenha() {
         return this.senha;
     }
