@@ -3,7 +3,6 @@ package Model.VO;
 public class AtendenteVO extends UsuarioVO {
     private String nome;
     private String cpf;
-    
 
     public AtendenteVO(String nome, String cpf) {
         this.nome = nome;
@@ -13,18 +12,12 @@ public class AtendenteVO extends UsuarioVO {
     public String getCpf() {
         return cpf;
     }
+    
     public String getNome() {
         return nome;
     }
-    public void setNome(String nome) {
-        if (nome == null){
-            System.out.println("Campo de nome não foi preenchido");
-        }
-        else if (nome.equals("")){
-            System.out.println("Campo de nome está vazio");
-        }
-        else this.nome = nome;
-    }
+    
+    
     public void setCpf(String cpf) {
         if (cpf.length() != 11){
             System.out.println ("Cpf inválido (não digite pontos e nem linhas)");
@@ -35,5 +28,14 @@ public class AtendenteVO extends UsuarioVO {
         }
         else this.cpf = cpf;
     }
+    
+    public void setNome(String nome) {
+        if (nome == null){
+            System.out.println("Campo de nome não foi preenchido");
+        }
+        else if (nome.equals("")){
+            System.out.println("Campo de nome está vazio");
+        }
+        else this.nome = nome;
+    }
 }
-  
