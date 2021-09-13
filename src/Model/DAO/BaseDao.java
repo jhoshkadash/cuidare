@@ -1,27 +1,27 @@
-package src.Model.DAO;
+package Model.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
-public class BaseDao{
+public class BaseDAO {
     Connection conn = null;
-    String url = "jdbc:postgreesql://localhost:5432/Cuidare";
-    String user = "postgres";
-    String senha = "postgres";
+    String url = "jdbc:mariadb://localhost:3306/cuidare";
+    String user = "root";
+    String senha = "root";
 
-
-public Connection getConnection(){
-    if(conn == null){
-        try {
-            conn = DriverManager.getConnection(url, user, senha);
-            System.out.println("Conexao realizada com sucesso");
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public Connection getConnection(){
+        if (conn == null){
+            try{
+                conn = DriverManager.getConnection(url, user, senha);
+                System.out.println("conexão realizada com sucesso");
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+            return conn;
         }
-        return conn;
+        else return conn;
     }
-    else return conn;
-}
+
 }

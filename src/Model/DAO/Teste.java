@@ -1,8 +1,10 @@
-package src.Model.DAO;
+package Model.DAO;
 
-public class Teste {
-    public static void main(String[] args){
-        BaseDao dao = new BaseDao();
-        dao.getConnection();
+public class teste {
+    
+    public static void main (String[] args){
+        BaseDAO dao = new BaseDAO();
+        System.out.println(dao.getConnection());
     }
+    
 }

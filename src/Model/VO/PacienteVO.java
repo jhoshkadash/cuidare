@@ -1,5 +1,5 @@
 
-package src.Model.VO;
+package Model.VO;
 
 
 public class PacienteVO {
