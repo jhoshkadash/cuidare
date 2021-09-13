@@ -14,10 +14,6 @@ public class ProntuarioVO {
     private String historicoDoenca;
     private String idPaciente;
 
-
-
-
-
     public ProntuarioVO(String dataNascimento, String antenPatologico, String mediAtuais, String mediAlergia, Float peso, Float altura, String historicoDoenca, String idPaciente) 
     {
         
@@ -46,6 +42,7 @@ public class ProntuarioVO {
         this.dataNascimento = dataNascimento;
     }
 
+    
     public String getAntenPatologico() {
         return this.antenPatologico;
     }
@@ -53,6 +50,7 @@ public class ProntuarioVO {
     public void setAntenPatologico(String AntenPatologico) {
         this.antenPatologico = AntenPatologico;
     }
+    
 
     public String getMediAtuais() {
         return this.mediAtuais;
@@ -61,6 +59,7 @@ public class ProntuarioVO {
     public void setMediAtuais(String MediAtuais) {
         this.mediAtuais = MediAtuais;
     }
+    
 
     public String getMediAlergia() {
         return this.mediAlergia;
@@ -70,6 +69,7 @@ public class ProntuarioVO {
         this.mediAlergia = MediAlergia;
     }
 
+    
     public Float getPeso() {
         return this.peso;
     }
@@ -81,6 +81,7 @@ public class ProntuarioVO {
         else this.peso = Peso;
     }
 
+    
     public Float getAltura() {
         return this.altura;
     }
@@ -92,6 +93,7 @@ public class ProntuarioVO {
         else this.altura = Altura;
     }
 
+    
     public String getHistoricoDoenca() {
         return this.historicoDoenca;
     }
@@ -100,6 +102,7 @@ public class ProntuarioVO {
         this.historicoDoenca = HistoricoDoenca;
     }
 
+    
     public String getIdPaciente() {
         return this.idPaciente;
     }
@@ -112,4 +115,5 @@ public class ProntuarioVO {
             System.out.println("Erro. Paciente sem id");
         }
         else this.idPaciente = IdPaciente;
-    }}
+    }
+}
