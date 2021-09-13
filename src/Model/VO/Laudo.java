@@ -6,9 +6,6 @@ public class Laudo {
     private String IdConsulta;
     private String Observacoes;
 
-
-
-
     public Laudo(String IdMedico, String IdPaciente, String IdConsulta, String Observacoes) {
         this.IdMedico = IdMedico;
         this.IdPaciente = IdPaciente;
@@ -32,6 +29,7 @@ public class Laudo {
         else this.IdMedico = IdMedico;
     }
 
+    
     public String getIdPaciente() {
         return this.IdPaciente;
     }
@@ -46,6 +44,7 @@ public class Laudo {
         else this.IdPaciente = IdPaciente;
     }
 
+    
     public String getIdConsulta() {
         return this.IdConsulta;
     }
@@ -60,6 +59,7 @@ public class Laudo {
         else this.IdConsulta = IdConsulta;
     }
 
+    
     public String getObservacoes() {
         return this.Observacoes;
     }
@@ -74,6 +74,4 @@ public class Laudo {
         }
         else this.Observacoes = Observacoes;
     }
-
-    
 }
