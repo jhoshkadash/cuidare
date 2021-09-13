@@ -13,11 +13,6 @@ public class AtendenteVO extends UsuarioVO {
         return cpf;
     }
     
-    public String getNome() {
-        return nome;
-    }
-    
-    
     public void setCpf(String cpf) {
         if (cpf.length() != 11){
             System.out.println ("Cpf inválido (não digite pontos e nem linhas)");
@@ -29,6 +24,11 @@ public class AtendenteVO extends UsuarioVO {
         else this.cpf = cpf;
     }
     
+    
+    public String getNome() {
+        return nome;
+    }
+
     public void setNome(String nome) {
         if (nome == null){
             System.out.println("Campo de nome não foi preenchido");
