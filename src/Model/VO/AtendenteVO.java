@@ -9,6 +9,9 @@ public class AtendenteVO extends UsuarioVO {
         this.cpf = cpf;
     }
     
+    public AtendenteVO() {
+    }
+
     public String getCpf() {
         return cpf;
     }

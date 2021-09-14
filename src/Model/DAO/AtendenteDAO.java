@@ -1,6 +1,9 @@
 package Model.DAO;
-import Model.VO.AtendenteDAO
+
+import Model.VO.*;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 
 public class AtendenteDAO extends BaseDAO
 {
@@ -20,8 +23,8 @@ public class AtendenteDAO extends BaseDAO
         {
             e.printStackTrace();
         }
-    }
-    
+    }}
+    /*
     public void removerByCPF(AtendenteVO vo)
     {
         conn = getConnection();
@@ -39,3 +42,4 @@ public class AtendenteDAO extends BaseDAO
         }
     }
 }
+*/
