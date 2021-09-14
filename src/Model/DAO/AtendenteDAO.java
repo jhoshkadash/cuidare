@@ -21,4 +21,21 @@ public class AtendenteDAO extends BaseDAO
             e.printStackTrace();
         }
     }
+    
+    public void removerByCPF(AtendenteVO vo)
+    {
+        conn = getConnection();
+        String sql = "delete from Atendente where cpf = ?";
+        PreparedStatement ptst;
+        try 
+        {
+            ptst = conn.prepareStatement(sql);
+            ptst.setNString(1, vo.getCpf());
+            ptst.executeUpdate();
+        } 
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
