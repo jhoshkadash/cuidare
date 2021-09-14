@@ -14,7 +14,7 @@ public class ProntuarioDAO extends BaseDAO
         try 
         {
             ptst = conn.prepareStatement(sql);
-            ptst.setDate(1, vo.getDataNascimento());
+            ptst.setDate(1, vo.getDataNascimento()); //não consegui referenciar os dados do tipo calendar
             ptst.setNString(2, vo.getAntenPatologico());
             ptst.setNString(3, vo.getMediAtuais());
             ptst.setNString(4, vo.getMediAlergia());
