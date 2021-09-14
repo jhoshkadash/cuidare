@@ -14,7 +14,7 @@ public class BaseDAO {
         if (conn == null){
             try{
                 conn = DriverManager.getConnection(url, user, senha);
-                System.out.println("conexão realizada com sucesso");
+                System.out.println("Dados salvos com sucesso");
             }
             catch(SQLException e){
                 e.printStackTrace();

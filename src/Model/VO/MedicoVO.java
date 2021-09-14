@@ -6,6 +6,7 @@ public class MedicoVO {
     private String endereco;
     private double valorconsulta;
     private String crm;
+    private Integer id;
 
     public MedicoVO(String nome, String cpf, String endereco, double valorconsulta, String crm) {
         this.nome = nome;
@@ -95,4 +96,14 @@ public class MedicoVO {
         }
         else this.crm = crm;
     }   
+
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }

@@ -3,6 +3,7 @@ package Model.VO;
 public class AtendenteVO extends UsuarioVO {
     private String nome;
     private String cpf;
+    private Integer id;
 
     public AtendenteVO(String nome, String cpf) {
         this.nome = nome;
@@ -41,4 +42,14 @@ public class AtendenteVO extends UsuarioVO {
         }
         else this.nome = nome;
     }
+
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }

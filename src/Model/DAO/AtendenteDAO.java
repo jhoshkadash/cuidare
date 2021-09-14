@@ -1,12 +1,12 @@
 package Model.DAO;
 
 import Model.VO.*;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
+import java.util.*;
+import java.sql.*;
 
 public class AtendenteDAO extends BaseDAO
 {
+    //Isenrir um Atendente
     public void inserir(AtendenteVO vo)
     {
         conn = getConnection();
@@ -24,6 +24,7 @@ public class AtendenteDAO extends BaseDAO
             e.printStackTrace();
         }
     }
+    //Remover um Atendente
     public void removerByCPF(AtendenteVO vo)
     {
         conn = getConnection();
@@ -40,4 +41,27 @@ public class AtendenteDAO extends BaseDAO
             e.printStackTrace();
         }
     }
+    //Listar Atendentes
+  
+    public List<AtendenteVO> listar(){
+    conn = getConnection();
+    String sql ="select * from atendente";
+    Statement st;
+    ResultSet rs;
+    List<AtendenteVO> atendentes = new ArrayList<AtendenteVO>();    
+    try {
+        st = conn.createStatement();
+        rs = st.executeQuery(sql);
+        while(rs.next()){
+            AtendenteVO vo = new AtendenteVO();
+            vo.setCpf(rs.getString("CPF"));
+            vo.setNome(rs.getString("Nome"));
+            vo.setId(rs.getInt("id"));
+            atendentes.add(vo);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return atendentes;
+}
 }

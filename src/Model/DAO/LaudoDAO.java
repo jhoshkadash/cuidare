@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 public class LaudoDAO extends BaseDAO
 {
+    //Isenrir um Laudo
     public void inserir(LaudoVO vo)
     {
         conn = getConnection();
@@ -25,6 +26,7 @@ public class LaudoDAO extends BaseDAO
             e.printStackTrace();
         }
     }
+    //Remover um Laudo
     public void removerByCPF(LaudoVO vo)
     {
         conn = getConnection();
@@ -40,5 +42,8 @@ public class LaudoDAO extends BaseDAO
         {
             e.printStackTrace();
         }
+        
+
+
     }
 }

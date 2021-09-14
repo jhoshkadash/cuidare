@@ -1,8 +1,9 @@
 package Model.VO;
 
-public class GerenteVO extends UsuarioVO {
-    private String nome;
+public class GerenteVO {
+    private String nome, cpf;
     private Integer id;
+    
 
     public GerenteVO(String nome, Integer id) {
         this.nome = nome;
@@ -10,6 +11,10 @@ public class GerenteVO extends UsuarioVO {
     }
 
     
+    public GerenteVO() {
+    }
+
+
     public String getNome() {
         return nome;
     }
@@ -38,4 +43,13 @@ public class GerenteVO extends UsuarioVO {
         }
         else this.id = id;
     }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
 }
