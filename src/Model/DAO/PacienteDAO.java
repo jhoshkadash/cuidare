@@ -1,8 +1,8 @@
 package Model.DAO;
 
 import Model.VO.*;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.*;
 
 public class PacienteDAO extends BaseDAO
 {
@@ -40,4 +40,28 @@ public class PacienteDAO extends BaseDAO
             e.printStackTrace();
         }
     }
+    //listar paciente
+    public List <PacienteVO> listar(){
+        conn = getConnection();
+        String sql ="select * from paciente";
+        Statement st;
+        ResultSet rs;
+        List<PacienteVO> pacientes = new ArrayList<PacienteVO>();    
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                PacienteVO vo = new PacienteVO();
+                vo.setCpf(rs.getString("CPF"));
+                vo.setNome(rs.getString("Nome"));
+                vo.setEndereco("endereço");
+                pacientes.add(vo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pacientes;
+    }
+
+
 }

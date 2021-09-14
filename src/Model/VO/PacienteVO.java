@@ -12,6 +12,10 @@ public class PacienteVO {
     }
 
    
+    public PacienteVO() {
+    }
+
+
     public String getNome() {
         return nome;
     }

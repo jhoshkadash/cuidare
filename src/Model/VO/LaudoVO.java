@@ -14,6 +14,10 @@ public class LaudoVO {
     }
     
 
+    public LaudoVO() {
+    }
+
+
     public String getIdMedico() {
         return this.IdMedico;
     }

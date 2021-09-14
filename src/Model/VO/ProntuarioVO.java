@@ -34,6 +34,10 @@ public class ProntuarioVO {
     }
   
 
+    public ProntuarioVO() {
+    }
+
+
     public Calendar getDataNascimento() {
         return dataNascimento;
     }

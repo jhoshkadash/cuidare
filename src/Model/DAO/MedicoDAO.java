@@ -1,8 +1,8 @@
 package Model.DAO;
 
 import Model.VO.*;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.*;
 
 public class MedicoDAO extends BaseDAO
 {
@@ -41,5 +41,31 @@ public class MedicoDAO extends BaseDAO
         {           
             e.printStackTrace();
         }
+    }
+    //listar médicos
+
+    public List <MedicoVO> listar(){
+        conn = getConnection();
+        String sql ="select * from medico";
+        Statement st;
+        ResultSet rs;
+        List<MedicoVO> medicos = new ArrayList<MedicoVO>();    
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                MedicoVO vo = new MedicoVO();
+                vo.setCpf(rs.getString("CPF"));
+                vo.setNome(rs.getString("Nome"));
+                vo.setId(rs.getInt("id"));
+                vo.setCrm(rs.getNString("CRM"));
+                vo.setValorconsulta(rs.getFloat("vConsulta"));
+                vo.setEndereco(rs.getNString("endereço"));
+                medicos.add(vo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return medicos;
     }
 }

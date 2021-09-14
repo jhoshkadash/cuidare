@@ -15,8 +15,10 @@ public class ConsultaDAO extends BaseDAO
         {
             ptst = conn.prepareStatement(sql);
             ptst.setInt(1, vo.getId());
+            /*
             ptst.setTime(2, vo.getData()); //não consegui referenciar os dados do tipo calendar
             ptst.setTime(3, vo.getHora()); //não consegui referenciar os dados do tipo calendar
+            */
             ptst.setBoolean(4, vo.isStatus());
             ptst.setNString(5, vo.getIdMedico());
             ptst.setNString(6, vo.getIdPaciente());
