@@ -2,7 +2,7 @@ package Model.DAO;
 
 import Model.VO.AtendenteVO;
 
-public class teste {
+public class Teste {
     
     public static void main (String[] args){
         BaseDAO dao = new BaseDAO();

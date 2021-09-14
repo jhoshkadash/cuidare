@@ -15,7 +15,7 @@ public class GerenteDAO extends BaseDAO
         try 
         {
             ptst = conn.prepareStatement(sql);
-            ptst.setNInteger(1, vo.getId());
+            ptst.setInt(1, vo.getId());
             ptst.setNString(2, vo.getNome());
             ptst.execute();
         } 
@@ -32,7 +32,7 @@ public class GerenteDAO extends BaseDAO
         try 
         {
             ptst = conn.prepareStatement(sql);
-            ptst.setNInteger(1, vo.getId());
+            ptst.setInt(1, vo.getId());
             ptst.executeUpdate();
         } 
         catch (SQLException e)
