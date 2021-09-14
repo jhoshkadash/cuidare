@@ -4,7 +4,7 @@ public class PacienteVO {
    private String nome;
    private String cpf;
    private String endereco;
-    
+   private Integer id; 
     public PacienteVO(String nome, String cpf, String endereco) {
         this.nome = nome;
         this.cpf = cpf;
@@ -65,4 +65,13 @@ public class PacienteVO {
         }
         else this.endereco = endereco;
     }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }

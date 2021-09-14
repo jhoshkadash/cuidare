@@ -31,7 +31,7 @@ public class GerenteDAO extends BaseDAO
     public void removerById(GerenteVO vo)
     {
         conn = getConnection();
-        String sql = "delete from Gerente where cpf = ?";
+        String sql = "delete from Gerente where id = ?";
         PreparedStatement ptst;
         try 
         {
@@ -66,5 +66,36 @@ public class GerenteDAO extends BaseDAO
         }
         return gerentes;
     }
-
+    //editar nome
+    public void editarNome(GerenteVO vo){
+        conn = getConnection();
+        String  sql = "update gerente set nome = ? where id = ?";
+        PreparedStatement psts;
+             try{
+                psts = conn.prepareStatement(sql);
+                psts.setString(1, vo.getNome());
+                psts.setInt(2, vo.getId());
+                psts.executeUpdate();
+                }
+            catch(SQLException e){
+            e.printStackTrace();
+    }
+    }
+    //editar cpf
+    public void editarCpf(GerenteVO vo){
+        conn = getConnection();
+        String  sql = "update gerente set cpf = ? where id = ?";
+        PreparedStatement psts;
+            try{
+                psts = conn.prepareStatement(sql);
+                psts.setString(1, vo.getCpf());
+                psts.setInt(2, vo.getId());
+                psts.executeUpdate();
+                }
+            catch(SQLException e){
+            e.printStackTrace();
+                }
+        
+        }
+            
 }

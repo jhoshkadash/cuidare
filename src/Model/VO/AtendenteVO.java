@@ -51,5 +51,4 @@ public class AtendenteVO extends UsuarioVO {
     public void setId(Integer id) {
         this.id = id;
     }
-
 }

@@ -68,4 +68,76 @@ public class MedicoDAO extends BaseDAO
         }
         return medicos;
     }
+    //editar nome
+    public void editarNome(MedicoVO vo){
+        conn = getConnection();
+        String  sql = "update medico set nome = ? where id = ?";
+        PreparedStatement psts;
+             try{
+                psts = conn.prepareStatement(sql);
+                psts.setString(1, vo.getNome());
+                psts.setInt(2, vo.getId());
+                psts.executeUpdate();
+                }
+            catch(SQLException e){
+            e.printStackTrace();
+    }
+}
+public void editarCpf(MedicoVO vo){
+    conn = getConnection();
+    String  sql = "update medico set cpf = ? where id = ?";
+    PreparedStatement psts;
+         try{
+            psts = conn.prepareStatement(sql);
+            psts.setString(1, vo.getCpf());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+            }
+        catch(SQLException e){
+        e.printStackTrace();
+}
+}
+//editar crm
+public void editarCrm(MedicoVO vo){
+    conn = getConnection();
+    String  sql = "update medico set crm = ? where id = ?";
+    PreparedStatement psts;
+         try{
+            psts = conn.prepareStatement(sql);
+            psts.setString(1, vo.getCrm());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+            }
+        catch(SQLException e){
+        e.printStackTrace();
+    }
+}
+//editar endereço
+public void editarEndereco(MedicoVO vo){
+    conn = getConnection();
+    String  sql = "update medico set endereco = ? where id = ?";
+    PreparedStatement psts;
+         try{
+            psts = conn.prepareStatement(sql);
+            psts.setString(1, vo.getNome());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+            }
+        catch(SQLException e){
+        e.printStackTrace();
+}}
+//editar valor da consulta
+public void editarVConsulta(MedicoVO vo){
+    conn = getConnection();
+    String  sql = "update medico set vconsulta = ? where id = ?";
+    PreparedStatement psts;
+         try{
+            psts = conn.prepareStatement(sql);
+            psts.setDouble(1, vo.getValorconsulta());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+            }
+        catch(SQLException e){
+        e.printStackTrace();
+}}
 }
