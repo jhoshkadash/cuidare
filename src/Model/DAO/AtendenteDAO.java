@@ -2,7 +2,7 @@ package Model.DAO;
 import Model.VO.AtendenteDAO
 import java.sql.PreparedStatement;
 
-public class AtendenteDAO extends BaseDao
+public class AtendenteDAO extends BaseDAO
 {
     public void inserir(AtendenteVO vo)
     {
