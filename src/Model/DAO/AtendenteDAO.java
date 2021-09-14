@@ -23,8 +23,7 @@ public class AtendenteDAO extends BaseDAO
         {
             e.printStackTrace();
         }
-    }}
-    /*
+    }
     public void removerByCPF(AtendenteVO vo)
     {
         conn = getConnection();
@@ -42,4 +41,3 @@ public class AtendenteDAO extends BaseDAO
         }
     }
 }
-*/

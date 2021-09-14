@@ -11,6 +11,7 @@ public class teste {
 
         atendenteVo.setCpf("33344455567");
         atendenteVo.setNome("Matheus Cunha");
-        atendenteDao.inserir(atendenteVo);} 
+        atendenteDao.removerByCPF(atendenteVo);} 
+
     
 }
