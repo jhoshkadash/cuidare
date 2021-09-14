@@ -10,18 +10,17 @@ public class BaseDAO {
     String user = "root";
     String senha = "root";
 
-    public Connection getConnection(){
-        if (conn == null){
-            try{
+    public Connection getConnection() {
+        if (conn == null) {
+            try {
                 conn = DriverManager.getConnection(url, user, senha);
                 System.out.println("Dados salvos com sucesso");
-            }
-            catch(SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
             return conn;
-        }
-        else return conn;
+        } else
+            return conn;
     }
 
 }

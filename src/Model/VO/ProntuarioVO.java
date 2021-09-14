@@ -14,9 +14,9 @@ public class ProntuarioVO {
     private String historicoDoenca;
     private String idPaciente;
 
-    public ProntuarioVO(String dataNascimento, String antenPatologico, String mediAtuais, String mediAlergia, Float peso, Float altura, String historicoDoenca, String idPaciente) 
-    {
-        
+    public ProntuarioVO(String dataNascimento, String antenPatologico, String mediAtuais, String mediAlergia,
+            Float peso, Float altura, String historicoDoenca, String idPaciente) {
+
         try {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             this.dataNascimento.setTime(formato.parse(dataNascimento));
@@ -32,11 +32,9 @@ public class ProntuarioVO {
         this.historicoDoenca = historicoDoenca;
         this.idPaciente = idPaciente;
     }
-  
 
     public ProntuarioVO() {
     }
-
 
     public Calendar getDataNascimento() {
         return dataNascimento;
@@ -46,7 +44,6 @@ public class ProntuarioVO {
         this.dataNascimento = dataNascimento;
     }
 
-    
     public String getAntenPatologico() {
         return this.antenPatologico;
     }
@@ -54,7 +51,6 @@ public class ProntuarioVO {
     public void setAntenPatologico(String AntenPatologico) {
         this.antenPatologico = AntenPatologico;
     }
-    
 
     public String getMediAtuais() {
         return this.mediAtuais;
@@ -63,7 +59,6 @@ public class ProntuarioVO {
     public void setMediAtuais(String MediAtuais) {
         this.mediAtuais = MediAtuais;
     }
-    
 
     public String getMediAlergia() {
         return this.mediAlergia;
@@ -73,31 +68,28 @@ public class ProntuarioVO {
         this.mediAlergia = MediAlergia;
     }
 
-    
     public Float getPeso() {
         return this.peso;
     }
 
     public void setPeso(Float Peso) {
-        if(Peso == null){
+        if (Peso == null) {
             System.out.println("o campo Peso está vazio");
-        }
-        else this.peso = Peso;
+        } else
+            this.peso = Peso;
     }
 
-    
     public Float getAltura() {
         return this.altura;
     }
 
     public void setAltura(Float Altura) {
-         if(Altura == null){
+        if (Altura == null) {
             System.out.println("o campo Altura está vazio");
-        }
-        else this.altura = Altura;
+        } else
+            this.altura = Altura;
     }
 
-    
     public String getHistoricoDoenca() {
         return this.historicoDoenca;
     }
@@ -106,18 +98,16 @@ public class ProntuarioVO {
         this.historicoDoenca = HistoricoDoenca;
     }
 
-    
     public String getIdPaciente() {
         return this.idPaciente;
     }
 
     public void setIdPaciente(String IdPaciente) {
-        if(IdPaciente == null){
+        if (IdPaciente == null) {
             System.out.println("Erro. Paciente sem id");
-        }
-        else if(IdPaciente.equals("")){
+        } else if (IdPaciente.equals("")) {
             System.out.println("Erro. Paciente sem id");
-        }
-        else this.idPaciente = IdPaciente;
+        } else
+            this.idPaciente = IdPaciente;
     }
 }

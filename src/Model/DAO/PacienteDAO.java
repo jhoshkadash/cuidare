@@ -84,6 +84,7 @@ public class PacienteDAO extends BaseDAO {
             e.printStackTrace();
         }
     }
+
     // editar endereço
     public void editarEndereco(PacienteVO vo) {
         conn = getConnection();

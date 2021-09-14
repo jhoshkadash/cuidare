@@ -24,22 +24,19 @@ public class ConsultaVO {
         this.idPaciente = IdPaciente;
     }
 
-    
     public Integer getId() {
         return this.id;
     }
 
     public void setId(Integer Id) {
-        if(Id == null){
+        if (Id == null) {
             System.out.println("Erro. Consulta sem id");
-        }
-        else if(Id.equals("")){
+        } else if (Id.equals("")) {
             System.out.println("Erro. Consulta sem id");
-        }
-        else this.id = Id;
+        } else
+            this.id = Id;
     }
 
-    
     public Calendar getData() {
         return this.data;
     }
@@ -52,35 +49,31 @@ public class ConsultaVO {
         this.status = Status;
     }
 
-    
     public String getIdMedico() {
         return this.idMedico;
     }
 
     public void setIdMedico(String IdMedico) {
 
-        if(IdMedico == null){
+        if (IdMedico == null) {
             System.out.println("Erro. Campo de medico não preenchido");
-        }
-        else if (IdMedico.equals("")){
+        } else if (IdMedico.equals("")) {
             System.out.println("Erro. Campo de Medico vazio");
-        }
-        else this.idMedico = IdMedico;
+        } else
+            this.idMedico = IdMedico;
     }
-    
 
     public String getIdPaciente() {
         return this.idPaciente;
     }
 
     public void setIdPaciente(String IdPaciente) {
-        
-        if(IdPaciente == null){
+
+        if (IdPaciente == null) {
             System.out.println("Erro. Campo de Paciente não preenchido");
-        }
-        else if (IdPaciente.equals("")){
+        } else if (IdPaciente.equals("")) {
             System.out.println("Erro. Campo de Paciente vazio");
-        }
-        else this.idPaciente = IdPaciente;
+        } else
+            this.idPaciente = IdPaciente;
     }
 }
