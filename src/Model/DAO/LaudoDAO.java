@@ -4,9 +4,9 @@ import Model.VO.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class LaudoDAO
+public class LaudoDAO extends BaseDAO
 {
-    public void inserir(Laudo vo)
+    public void inserir(LaudoVO vo)
     {
         conn = getConnection();
         String sql = "insert into Laudo(IdMedico,IdPAciente,IdConsulta,Observacoes) values (?,?,?,?)";
@@ -25,7 +25,7 @@ public class LaudoDAO
             e.printStackTrace();
         }
     }
-    public void removerByCPF(Laudo vo)
+    public void removerByCPF(LaudoVO vo)
     {
         conn = getConnection();
         String sql = "delete from Laudo where IdMedico = ?";

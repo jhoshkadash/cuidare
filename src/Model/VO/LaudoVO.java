@@ -1,12 +1,12 @@
 package Model.VO;
 
-public class Laudo {
+public class LaudoVO {
     private String IdMedico;
     private String IdPaciente;
     private String IdConsulta;
     private String Observacoes;
 
-    public Laudo(String IdMedico, String IdPaciente, String IdConsulta, String Observacoes) {
+    public LaudoVO(String IdMedico, String IdPaciente, String IdConsulta, String Observacoes) {
         this.IdMedico = IdMedico;
         this.IdPaciente = IdPaciente;
         this.IdConsulta = IdConsulta;
