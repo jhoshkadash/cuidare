@@ -4,7 +4,7 @@ import Model.VO.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class MedicoDAO
+public class MedicoDAO extends BaseDAO
 {
     public void inserir(MedicoVO vo)
     {
