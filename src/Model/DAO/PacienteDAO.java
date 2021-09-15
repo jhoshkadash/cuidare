@@ -4,10 +4,13 @@ import Model.VO.*;
 import java.sql.*;
 import java.util.*;
 
-public class PacienteDAO extends BaseDAO {
+public class PacienteDAO extends BaseDAO 
+/* declaração de classe para a criação de Pacientes DAO implementados a MariaDB */
+{
+    /* método de inserção de Pacientes ao MariaDB */
     public void inserir(PacienteVO vo) {
-        conn = getConnection();
-        String sql = "insert into Paciente(nome,cpf,endereco) values (?,?,?)";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "insert into Paciente(nome,cpf,endereco) values (?,?,?)"; /* comando de inserção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -20,9 +23,10 @@ public class PacienteDAO extends BaseDAO {
         }
     }
 
+    /* método de remoção de dados de Pacientes do DB */
     public void removerByCPF(PacienteVO vo) {
-        conn = getConnection();
-        String sql = "delete from Paciente where cpf = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "delete from Paciente where cpf = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -33,13 +37,13 @@ public class PacienteDAO extends BaseDAO {
         }
     }
 
-    // listar paciente
+    /* criação do método de listagem de Médicos */
     public List<PacienteVO> listar() {
-        conn = getConnection();
-        String sql = "select * from paciente";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "select * from paciente"; /* comando de listagem em SQL para o DB. */
         Statement st;
         ResultSet rs;
-        List<PacienteVO> pacientes = new ArrayList<PacienteVO>();
+        List<PacienteVO> pacientes = new ArrayList<PacienteVO>(); //criação da ArrayList de Pacientes
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
@@ -56,10 +60,10 @@ public class PacienteDAO extends BaseDAO {
         return pacientes;
     }
 
-    // editar nome
+    /* método de edição do dado Nome da tabela Paciente */
     public void editarNome(PacienteVO vo) {
-        conn = getConnection();
-        String sql = "update paciente set nome = ? where id = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "update paciente set nome = ? where id = ?"; /* comando de edição em SQL para o DB. */
         PreparedStatement psts;
         try {
             psts = conn.prepareStatement(sql);
@@ -71,9 +75,10 @@ public class PacienteDAO extends BaseDAO {
         }
     }
 
+    /* método de edição do dado CPF da tabela Paciente */
     public void editarCpf(PacienteVO vo) {
-        conn = getConnection();
-        String sql = "update paciente set cpf = ? where id = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "update paciente set cpf = ? where id = ?"; /* comando de edição em SQL para o DB. */
         PreparedStatement psts;
         try {
             psts = conn.prepareStatement(sql);
@@ -85,10 +90,10 @@ public class PacienteDAO extends BaseDAO {
         }
     }
 
-    // editar endereço
+    /* método de edição do dado Endereco da tabela Paciente */
     public void editarEndereco(PacienteVO vo) {
-        conn = getConnection();
-        String sql = "update paciente set endereco = ? where id = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "update paciente set endereco = ? where id = ?"; /* comando de edição em SQL para o DB. */
         PreparedStatement psts;
         try {
             psts = conn.prepareStatement(sql);

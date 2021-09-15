@@ -4,10 +4,14 @@ import Model.VO.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ConsultaDAO extends BaseDAO {
-    public void inserir(ConsultaVO vo) {
-        conn = getConnection();
-        String sql = "insert into Consulta(Id,Data,Hora,Status,IdMedico,IdPaciente) values (?,?,?,?,?,?)";
+public class ConsultaDAO extends BaseDAO 
+/* declaração de classe para a criação de Consultas DAO implementadas a MariaDB */
+{
+    public void inserir(ConsultaVO vo)
+    /* método de inserção de dados de Consulta ao DB */
+    {
+        conn = getConnection(); //conexão estabelecida
+        String sql = "insert into Consulta(Id,Data,Hora,Status,IdMedico,IdPaciente) values (?,?,?,?,?,?)"; /* comando de inserção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -26,9 +30,11 @@ public class ConsultaDAO extends BaseDAO {
         }
     }
 
-    public void removerById(ConsultaVO vo) {
-        conn = getConnection();
-        String sql = "delete from Consulta where Id = ?";
+    public void removerById(ConsultaVO vo)
+    /* método de remoção de dados da Consulta ao DB */
+    {
+        conn = getConnection(); //conexão estabelecida
+        String sql = "delete from Consulta where Id = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);

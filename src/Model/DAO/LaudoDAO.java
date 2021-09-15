@@ -4,11 +4,14 @@ import Model.VO.*;
 import java.sql.*;
 import java.util.*;
 
-public class LaudoDAO extends BaseDAO {
-    // Isenrir um Laudo
-    public void inserir(LaudoVO vo) {
-        conn = getConnection();
-        String sql = "insert into Laudo(IdMedico,IdPAciente,IdConsulta,Observacoes) values (?,?,?,?)";
+public class LaudoDAO extends BaseDAO
+/* declaração de classe para a criação de Laudos DAO implementados a MariaDB */
+{
+    /* método de inserção de laudos ao MariaDB */
+    public void inserir(LaudoVO vo)
+    {
+        conn = getConnection(); //conexão estabelecida
+        String sql = "insert into Laudo(IdMedico,IdPAciente,IdConsulta,Observacoes) values (?,?,?,?)"; /* comando de inserção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -22,10 +25,10 @@ public class LaudoDAO extends BaseDAO {
         }
     }
 
-    // Remover um Laudo
+    /* método de remoção de dados de Laudo do DB */
     public void removerById(LaudoVO vo) {
-        conn = getConnection();
-        String sql = "delete from Laudo where IdMedico = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "delete from Laudo where IdMedico = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -34,16 +37,15 @@ public class LaudoDAO extends BaseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    // listar laudos
+    /* criação do método de listagem de Laudos */
     public List<LaudoVO> listar() {
-        conn = getConnection();
-        String sql = "select * from laudo";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "select * from laudo"; /* comando de listagem em SQL para o DB. */
         Statement st;
         ResultSet rs;
-        List<LaudoVO> laudos = new ArrayList<LaudoVO>();
+        List<LaudoVO> laudos = new ArrayList<LaudoVO>(); //criação da ArrayList de Laudos
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);

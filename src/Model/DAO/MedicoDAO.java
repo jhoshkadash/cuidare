@@ -4,10 +4,13 @@ import Model.VO.*;
 import java.sql.*;
 import java.util.*;
 
-public class MedicoDAO extends BaseDAO {
+public class MedicoDAO extends BaseDAO 
+/* declaração de classe para a criação de Médicos DAO implementados a MariaDB */
+{
+    /* método de inserção de Médicos ao MariaDB */
     public void inserir(MedicoVO vo) {
-        conn = getConnection();
-        String sql = "insert into Medico(nome,cpf,endereco,valorconsulta,crm) values (?,?,?,?,?)";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "insert into Medico(nome,cpf,endereco,valorconsulta,crm) values (?,?,?,?,?)"; /* comando de inserção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -22,9 +25,10 @@ public class MedicoDAO extends BaseDAO {
         }
     }
 
+    /* método de remoção de dados de Médicos do DB */
     public void removerByCPF(MedicoVO vo) {
-        conn = getConnection();
-        String sql = "delete from Medico where nome = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "delete from Medico where nome = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -34,14 +38,14 @@ public class MedicoDAO extends BaseDAO {
             e.printStackTrace();
         }
     }
-    // listar médicos
-
+   
+    /* criação do método de listagem de Médicos */
     public List<MedicoVO> listar() {
-        conn = getConnection();
-        String sql = "select * from medico";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "select * from medico"; /* comando de listagem em SQL para o DB. */
         Statement st;
         ResultSet rs;
-        List<MedicoVO> medicos = new ArrayList<MedicoVO>();
+        List<MedicoVO> medicos = new ArrayList<MedicoVO>(); //criação da ArrayList de Médicos
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
@@ -61,10 +65,10 @@ public class MedicoDAO extends BaseDAO {
         return medicos;
     }
 
-    // editar nome
+    /* método de edição do dado Nome da tabela Medico */
     public void editarNome(MedicoVO vo) {
-        conn = getConnection();
-        String sql = "update medico set nome = ? where id = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "update medico set nome = ? where id = ?"; /* comando de edição em SQL para o DB. */
         PreparedStatement psts;
         try {
             psts = conn.prepareStatement(sql);
@@ -76,9 +80,10 @@ public class MedicoDAO extends BaseDAO {
         }
     }
 
+    /* método de edição do dado CPF da tabela Medico */
     public void editarCpf(MedicoVO vo) {
-        conn = getConnection();
-        String sql = "update medico set cpf = ? where id = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "update medico set cpf = ? where id = ?"; /* comando de edição em SQL para o DB. */
         PreparedStatement psts;
         try {
             psts = conn.prepareStatement(sql);
@@ -90,10 +95,10 @@ public class MedicoDAO extends BaseDAO {
         }
     }
 
-    // editar crm
+    /* método de edição do dado CRM da tabela Medico */
     public void editarCrm(MedicoVO vo) {
-        conn = getConnection();
-        String sql = "update medico set crm = ? where id = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "update medico set crm = ? where id = ?"; /* comando de edição em SQL para o DB. */
         PreparedStatement psts;
         try {
             psts = conn.prepareStatement(sql);
@@ -105,10 +110,10 @@ public class MedicoDAO extends BaseDAO {
         }
     }
 
-    // editar endereço
+    /* método de edição do dado Endereco da tabela Medico */
     public void editarEndereco(MedicoVO vo) {
-        conn = getConnection();
-        String sql = "update medico set endereco = ? where id = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "update medico set endereco = ? where id = ?"; /* comando de edição em SQL para o DB. */
         PreparedStatement psts;
         try {
             psts = conn.prepareStatement(sql);
@@ -120,10 +125,10 @@ public class MedicoDAO extends BaseDAO {
         }
     }
 
-    // editar valor da consulta
+    /* método de edição do dado ValorConsulta da tabela Medico */
     public void editarVConsulta(MedicoVO vo) {
-        conn = getConnection();
-        String sql = "update medico set vconsulta = ? where id = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "update medico set consulta = ? where id = ?"; /* comando de edição em SQL para o DB. */
         PreparedStatement psts;
         try {
             psts = conn.prepareStatement(sql);

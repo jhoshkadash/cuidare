@@ -4,10 +4,13 @@ import Model.VO.*;
 import java.sql.*;
 import java.util.*;
 
-public class UsuarioDAO extends BaseDAO {
+public class UsuarioDAO extends BaseDAO 
+/* declaração de classe para a criação de Usuarios DAO implementados a MariaDB */
+{
+    /* método de inserção de Usuarios ao MariaDB */
     public void inserir(UsuarioVO vo) {
-        conn = getConnection();
-        String sql = "insert into Usuario(login,senha) values (?,?)";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "insert into Usuario(login,senha) values (?,?)"; /* comando de inserção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -19,9 +22,10 @@ public class UsuarioDAO extends BaseDAO {
         }
     }
 
+    /* método de remoção de Usuarios ao MariaDB */
     public void removerById(UsuarioVO vo) {
-        conn = getConnection();
-        String sql = "delete from Usuario where login = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "delete from Usuario where login = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -32,12 +36,13 @@ public class UsuarioDAO extends BaseDAO {
         }
     }
 
+    /* método de listagem de Usuarios ao MariaDB */
     public List<UsuarioVO> listar() {
-        conn = getConnection();
-        String sql = "select * from user";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "select * from user"; /* comando de listagem em SQL para o DB. */
         Statement st;
         ResultSet rs;
-        List<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+        List<UsuarioVO> usuarios = new ArrayList<UsuarioVO>(); //criação da ArrayList de Usuarios
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
