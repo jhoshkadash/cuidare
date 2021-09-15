@@ -7,7 +7,7 @@ import java.sql.*;
 public class AtendenteDAO extends BaseDAO 
 /* declaração de classe para a criação de Atendentes DAO implementados a MariaDB */
 {
-    // criação do método de inserção de atendentes ao MariaDB
+    /* criação do método de inserção de atendentes ao MariaDB */
     public void inserir(AtendenteVO vo) {
         conn = getConnection(); //conexão estabelecida
         String sql = "insert into Atendente(nome,cpf) values (?,?)"; /* passa o comando de inserção em SQL para o DB. */
@@ -23,7 +23,7 @@ public class AtendenteDAO extends BaseDAO
         }
     }
 
-    // criação do método de remorção de atendentes 
+    /* criação do método de remorção de atendentes */
     public void removerByCPF(AtendenteVO vo) {
         conn = getConnection(); //conexão estabelecida
         String sql = "delete from Atendente where cpf = ?"; /* passa o comando de remoção em SQL para o DB. */
@@ -37,7 +37,7 @@ public class AtendenteDAO extends BaseDAO
         }
     }
 
-    // criação do método de listagem de atendentes 
+    /* criação do método de listagem de atendentes */
     public List<AtendenteVO> listar() {
         conn = getConnection(); //conexão estabelecida
         String sql = "select * from atendente"; /* comando de listagem em SQL para o DB. */
@@ -60,7 +60,7 @@ public class AtendenteDAO extends BaseDAO
         return atendentes;
     }
 
-    // método de edição dos dados (nome e Id) da tabela Atendente 
+    /* método de edição dos dados (nome e Id) da tabela Atendente */ 
     public void editarNome(AtendenteVO vo) {
         conn = getConnection(); //conexão estabelecida
         String sql = "update atendente set nome = ? where id = ?";  /* comando de edição em SQL para o DB. */
@@ -75,7 +75,7 @@ public class AtendenteDAO extends BaseDAO
         }
     }
 
-    // método de edição do dado CPF da tabela Atendente 
+    /* método de edição do dado CPF da tabela Atendente */ 
     public void editarCpf(AtendenteVO vo) {
         conn = getConnection();
         String sql = "update atendente set cpf = ? where id = ?";  /* comando de listagem em SQL para o DB. */
