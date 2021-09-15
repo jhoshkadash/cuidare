@@ -3,6 +3,7 @@ package Model.VO;
 public class UsuarioVO {
     private String login;
     private String senha;
+    private Integer id;
 
     public String getLogin() {
         return this.login;
@@ -29,4 +30,13 @@ public class UsuarioVO {
         } else
             this.senha = senha;
     }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }

@@ -69,5 +69,88 @@ public class ProntuarioDAO extends BaseDAO {
         }
         return prontuarios;
     }
-
+    //editar altura
+    public void editarAltura(ProntuarioVO vo) {
+        conn = getConnection();
+        String sql = "update prontuario set altura = ? where id = ?";
+        PreparedStatement psts;
+        try {
+            psts = conn.prepareStatement(sql);
+            psts.setFloat(1, vo.getAltura());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //editar peso
+    public void editarPeso(ProntuarioVO vo) {
+        conn = getConnection();
+        String sql = "update prontuario set peso = ? where id = ?";
+        PreparedStatement psts;
+        try {
+            psts = conn.prepareStatement(sql);
+            psts.setFloat(1, vo.getPeso());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //editar antecedentes patologicos
+    public void editarAntePato(ProntuarioVO vo) {
+        conn = getConnection();
+        String sql = "update prontuario set antenPatologico = ? where id = ?";
+        PreparedStatement psts;
+        try {
+            psts = conn.prepareStatement(sql);
+            psts.setNString(1, vo.getAntenPatologico());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //editar medicamentos atuais
+    public void editarMediAtuais(ProntuarioVO vo) {
+        conn = getConnection();
+        String sql = "update prontuario set mediAtuais = ? where id = ?";
+        PreparedStatement psts;
+        try {
+            psts = conn.prepareStatement(sql);
+            psts.setNString(1, vo.getMediAtuais());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //editar medicamentos alergicos
+    public void editarMediAlergia(ProntuarioVO vo) {
+        conn = getConnection();
+        String sql = "update prontuario set mediAlergia = ? where id = ?";
+        PreparedStatement psts;
+        try {
+            psts = conn.prepareStatement(sql);
+            psts.setNString(1, vo.getAntenPatologico());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //editar historico de doenças
+    public void editarHistoricoDoencas(ProntuarioVO vo) {
+        conn = getConnection();
+        String sql = "update prontuario set HistoricoDoenca = ? where id = ?";
+        PreparedStatement psts;
+        try {
+            psts = conn.prepareStatement(sql);
+            psts.setNString(1, vo.getHistoricoDoenca());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

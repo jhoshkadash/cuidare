@@ -59,4 +59,18 @@ public class LaudoDAO extends BaseDAO {
         }
         return laudos;
     }
+    //Editar observações
+    public void editarObs(LaudoVO vo) {
+        conn = getConnection();
+        String sql = "update laudo set obs = ? where id = ?";
+        PreparedStatement psts;
+        try {
+            psts = conn.prepareStatement(sql);
+            psts.setString(1, vo.getObservacoes());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

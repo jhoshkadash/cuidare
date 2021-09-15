@@ -13,6 +13,7 @@ public class ProntuarioVO {
     private Float altura;
     private String historicoDoenca;
     private String idPaciente;
+    private Integer id;
 
     public ProntuarioVO(String dataNascimento, String antenPatologico, String mediAtuais, String mediAlergia,
             Float peso, Float altura, String historicoDoenca, String idPaciente) {
@@ -110,4 +111,13 @@ public class ProntuarioVO {
         } else
             this.idPaciente = IdPaciente;
     }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }

@@ -5,6 +5,7 @@ public class LaudoVO {
     private String IdPaciente;
     private String IdConsulta;
     private String Observacoes;
+    private Integer id;
 
     public LaudoVO(String IdMedico, String IdPaciente, String IdConsulta, String Observacoes) {
         this.IdMedico = IdMedico;
@@ -69,4 +70,13 @@ public class LaudoVO {
         } else
             this.Observacoes = Observacoes;
     }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }
