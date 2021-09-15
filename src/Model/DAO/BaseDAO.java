@@ -25,4 +25,3 @@ public class BaseDAO {
             return conn;
     }
 }
-
