@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-public class GerenteDAO extends BaseDAO {
-    // Isenrir um gerente
+public class GerenteDAO extends BaseDAO
+/* declaração de classe para a criação de Gerentes DAO implementados a MariaDB */
+{
+    /* método de inserção de gerentes ao MariaDB */
     public void inserir(GerenteVO vo) {
-        conn = getConnection();
-        String sql = "insert into Gerente(nome, cpf) values (?,?)";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "insert into Gerente(nome, cpf) values (?,?)"; /* comando de inserção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -23,10 +25,10 @@ public class GerenteDAO extends BaseDAO {
         }
     }
 
-    // Remover um gerente
+    /* método de remoção de dados de Gerentes do DB */
     public void removerById(GerenteVO vo) {
-        conn = getConnection();
-        String sql = "delete from Gerente where id = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "delete from Gerente where id = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -37,13 +39,13 @@ public class GerenteDAO extends BaseDAO {
         }
     }
 
-    // Listar Gerentes
+    /* criação do método de listagem de atendentes */
     public List<GerenteVO> listar() {
-        conn = getConnection();
-        String sql = "select * from gerente";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "select * from gerente"; /* comando de listagem em SQL para o DB. */
         Statement st;
         ResultSet rs;
-        List<GerenteVO> gerentes = new ArrayList<GerenteVO>();
+        List<GerenteVO> gerentes = new ArrayList<GerenteVO>(); //criação da ArrayList de Gerentes
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
@@ -60,10 +62,10 @@ public class GerenteDAO extends BaseDAO {
         return gerentes;
     }
 
-    // editar nome
+    /* método de edição do dado nome da tabela Gerente */ 
     public void editarNome(GerenteVO vo) {
-        conn = getConnection();
-        String sql = "update gerente set nome = ? where id = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "update gerente set nome = ? where id = ?"; /* comando de edição em SQL para o DB. */
         PreparedStatement psts;
         try {
             psts = conn.prepareStatement(sql);
@@ -75,10 +77,10 @@ public class GerenteDAO extends BaseDAO {
         }
     }
 
-    // editar cpf
+    /* método de edição do dado CPF da tabela Gerente */
     public void editarCpf(GerenteVO vo) {
-        conn = getConnection();
-        String sql = "update gerente set cpf = ? where id = ?";
+        conn = getConnection(); //conecão estabelecida
+        String sql = "update gerente set cpf = ? where id = ?"; /* comando de edição em SQL para o DB. */
         PreparedStatement psts;
         try {
             psts = conn.prepareStatement(sql);
@@ -88,7 +90,5 @@ public class GerenteDAO extends BaseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
 }
