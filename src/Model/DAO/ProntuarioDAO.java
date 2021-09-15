@@ -4,10 +4,14 @@ import Model.VO.*;
 import java.sql.*;
 import java.util.*;
 
-public class ProntuarioDAO extends BaseDAO {
+public class ProntuarioDAO extends BaseDAO 
+/* declaração de classe para a criação de Prontuarios DAO implementados a MariaDB */
+{
+    /* método de inserção de Prontuarios ao MariaDB */
     public void inserir(ProntuarioVO vo) {
-        conn = getConnection();
+        conn = getConnection(); //conexão estabelecida
         String sql = "insert into Prontuario(dataNascimento,antenPatologico,mediAtuais,mediAlergia,peso,altura,historicoDoenca,idPaciente) values (?,?,?,?,?,?,?,?)";
+        /* comando de inserção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -28,9 +32,10 @@ public class ProntuarioDAO extends BaseDAO {
         }
     }
 
+    /* método de remoção de Prontuarios ao MariaDB */
     public void removerById(ProntuarioVO vo) {
-        conn = getConnection();
-        String sql = "delete from Prontuario where IdPaciente = ?";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "delete from Prontuario where IdPaciente = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         try {
             ptst = conn.prepareStatement(sql);
@@ -41,13 +46,13 @@ public class ProntuarioDAO extends BaseDAO {
         }
     }
 
-    // listar prontuarios
+    /* método de listagem de Prontuarios ao MariaDB */
     public List<ProntuarioVO> listar() {
-        conn = getConnection();
-        String sql = "select * from prontuario";
+        conn = getConnection(); //conexão estabelecida
+        String sql = "select * from prontuario"; /* comando de listagem em SQL para o DB. */
         Statement st;
         ResultSet rs;
-        List<ProntuarioVO> prontuarios = new ArrayList<ProntuarioVO>();
+        List<ProntuarioVO> prontuarios = new ArrayList<ProntuarioVO>(); //criação da ArrayList de Usuarios
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
@@ -69,5 +74,4 @@ public class ProntuarioDAO extends BaseDAO {
         }
         return prontuarios;
     }
-
 }
