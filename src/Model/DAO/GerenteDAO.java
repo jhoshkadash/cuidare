@@ -39,7 +39,7 @@ public class GerenteDAO extends BaseDAO
         }
     }
 
-    /* criação do método de listagem de atendentes */
+    /* criação do método de listagem de gerentes */
     public List<GerenteVO> listar() {
         conn = getConnection(); //conexão estabelecida
         String sql = "select * from gerente"; /* comando de listagem em SQL para o DB. */

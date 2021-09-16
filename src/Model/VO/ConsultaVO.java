@@ -3,26 +3,13 @@ package Model.VO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ConsultaVO {
-    private Integer id;
-    private Calendar data = Calendar.getInstance();
+    private Integer id, idMedico, idPaciente;
+    private Date data= new Date();
+    private Calendar c = Calendar.getInstance();
     private Boolean status;
-    private String idMedico;
-    private String idPaciente;
-
-    public ConsultaVO(Integer Id, String Data, Calendar Hora, Boolean Status, String IdMedico, String IdPaciente) {
-        try {
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            this.data.setTime(formato.parse(Data));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        this.id = Id;
-        this.status = Status;
-        this.idMedico = IdMedico;
-        this.idPaciente = IdPaciente;
-    }
 
     public Integer getId() {
         return this.id;
@@ -37,9 +24,6 @@ public class ConsultaVO {
             this.id = Id;
     }
 
-    public Calendar getData() {
-        return this.data;
-    }
 
     public Boolean isStatus() {
         return this.status;
@@ -49,11 +33,11 @@ public class ConsultaVO {
         this.status = Status;
     }
 
-    public String getIdMedico() {
+    public Integer getIdMedico() {
         return this.idMedico;
     }
 
-    public void setIdMedico(String IdMedico) {
+    public void setIdMedico(Integer IdMedico) {
 
         if (IdMedico == null) {
             System.out.println("Erro. Campo de medico não preenchido");
@@ -63,11 +47,11 @@ public class ConsultaVO {
             this.idMedico = IdMedico;
     }
 
-    public String getIdPaciente() {
+    public Integer getIdPaciente() {
         return this.idPaciente;
     }
 
-    public void setIdPaciente(String IdPaciente) {
+    public void setIdPaciente(Integer IdPaciente) {
 
         if (IdPaciente == null) {
             System.out.println("Erro. Campo de Paciente não preenchido");
