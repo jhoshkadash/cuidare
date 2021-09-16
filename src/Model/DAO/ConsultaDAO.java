@@ -67,4 +67,46 @@ public class ConsultaDAO extends BaseDAO
             }
             return consultas;
         }
+        /* método de edição do dado idMedico da tabela consulta */ 
+    public void editarIdMedico(ConsultaVO vo) {
+        conn = getConnection();
+        String sql = "update consulta set id medico = ? where id = ?";  /* comando de listagem em SQL para o DB. */
+        PreparedStatement psts;
+        try {
+            psts = conn.prepareStatement(sql);
+            psts.setInt(1, vo.getIdMedico());
+            psts.setInt(2, vo.getId());
+            psts.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+            /* método de edição do dado idPaciente da tabela consulta */ 
+            public void editarIdPaciente(ConsultaVO vo) {
+                conn = getConnection();
+                String sql = "update consulta set id paciente = ? where id = ?";  /* comando de listagem em SQL para o DB. */
+                PreparedStatement psts;
+                try {
+                    psts = conn.prepareStatement(sql);
+                    psts.setInt(1, vo.getIdPaciente());
+                    psts.setInt(2, vo.getId());
+                    psts.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            /* método de edição do dado status da tabela consulta */ 
+            public void editarStatus(ConsultaVO vo) {
+                conn = getConnection();
+                String sql = "update consulta set status = ? where id = ?";  /* comando de listagem em SQL para o DB. */
+                PreparedStatement psts;
+                try {
+                    psts = conn.prepareStatement(sql);
+                    psts.setBoolean(1, vo.isStatus());
+                    psts.setInt(2, vo.getId());
+                    psts.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
 }
