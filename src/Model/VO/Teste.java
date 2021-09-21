@@ -1,7 +1,6 @@
 package Model.VO;
-
-import java.util.Scanner;
-import java.util.Calendar;
+/*
+import java.util.*;
 
 class principal {
 	public static void main(String[] args) {
@@ -84,6 +83,7 @@ class principal {
 		// Criar um novo prontuario
 		String dataNascimento, antenPatologico, historicoDoenca, idPaciente, mediAtuais, mediAlergia;
 		Float peso, altura;
+		Date data;
 
 		System.out.println("Digite a data de nascimetno do paciente (dd/mm/aaaa)");
 		dataNascimento = leitura.nextLine();
@@ -106,10 +106,12 @@ class principal {
 
 		System.out.println("**********************************");
 		if (prontuario.getIdPaciente() == cpfPaciente) {
-			Calendar agora = Calendar.getInstance();
+			Calendar dn = Calendar.getInstance();
+			dn = prontuario.getDataNascimento();
+			data = dn.getTime();
 			Float imc = (prontuario.getPeso() / (prontuario.getAltura() * prontuario.getAltura())), idade;
 			System.out.println("Paciente: " + paciente.getNome());
-			System.out.println("Data de nascimento: " + prontuario.getDataNascimento());
+			System.out.println("Data de nascimento: " + data);
 			System.out.println("Peso: " + prontuario.getPeso());
 			System.out.println("Altura: " + prontuario.getAltura());
 			System.out.println("IMC: " + imc);
@@ -138,5 +140,4 @@ class principal {
 		 * usuário user = new UsuarioVO("PedrinhoGerente", "senhadopedrinho");
 		 */
 
-	}
-}
+	

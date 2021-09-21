@@ -1,15 +1,26 @@
 package Model.VO;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 public class ConsultaVO {
     private Integer id, idMedico, idPaciente;
-    private Date data= new Date();
-    private Calendar c = Calendar.getInstance();
     private Boolean status;
+    private Calendar dataConsulta = Calendar.getInstance();
+
+    public void setDataConsulta(String dConsulta) {
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            this.dataConsulta.setTime(formato.parse(dConsulta));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Calendar getDataConsulta(){
+        return this.dataConsulta;
+    }
+
 
     public Integer getId() {
         return this.id;
@@ -23,7 +34,6 @@ public class ConsultaVO {
         } else
             this.id = Id;
     }
-
 
     public Boolean isStatus() {
         return this.status;

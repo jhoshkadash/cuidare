@@ -6,21 +6,16 @@ import java.util.Calendar;
 
 public class ProntuarioVO {
     private Calendar dataNascimento = Calendar.getInstance();
-    private String antenPatologico;
-    private String mediAtuais;
-    private String mediAlergia;
-    private Float peso;
-    private Float altura;
-    private String historicoDoenca;
-    private String idPaciente;
+    private String antenPatologico, idPaciente, mediAtuais, mediAlergia, historicoDoenca;
+    private Float altura, peso;
     private Integer id;
 
-    public ProntuarioVO(String dataNascimento, String antenPatologico, String mediAtuais, String mediAlergia,
+    public ProntuarioVO(String dNascimento, String antenPatologico, String mediAtuais, String mediAlergia,
             Float peso, Float altura, String historicoDoenca, String idPaciente) {
 
         try {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            this.dataNascimento.setTime(formato.parse(dataNascimento));
+            this.dataNascimento.setTime(formato.parse(dNascimento));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -36,13 +31,17 @@ public class ProntuarioVO {
 
     public ProntuarioVO() {
     }
-
     public Calendar getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Calendar dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setDataNascimento(String dNascimento) {
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            this.dataNascimento.setTime(formato.parse(dNascimento));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getAntenPatologico() {
