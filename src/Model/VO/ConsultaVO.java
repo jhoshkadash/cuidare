@@ -1,5 +1,6 @@
 package Model.VO;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -10,7 +11,7 @@ public class ConsultaVO {
 
     public void setDataConsulta(String dConsulta) {
         try {
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             this.dataConsulta.setTime(formato.parse(dConsulta));
         } catch (ParseException e) {
             e.printStackTrace();
