@@ -8,6 +8,7 @@ public class PacienteDAO extends BaseDAO
 /* declaração de classe para a criação de Pacientes DAO implementados a MariaDB */
 {
     /* método de inserção de Pacientes ao MariaDB */
+    @Override
     public void inserir(PacienteVO vo) {
         conn = getConnection(); //conexão estabelecida
         String sql = "insert into Paciente(nome,cpf,endereco) values (?,?,?)"; /* comando de inserção em SQL para o DB. */
