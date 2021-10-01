@@ -41,7 +41,7 @@ public class PessoaVO {
         return this.id;
     }
 
-    public void setId(Integer id){
+    public void setId(Double id){
         this.id = id;
     }
 }
