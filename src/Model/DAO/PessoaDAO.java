@@ -5,9 +5,9 @@ import java.sql.*;
 
 public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
 
-    /* método de inserção de Usuarios ao MariaDB */
+    /* método de inserção de Pessoas ao MariaDB */
     @Override
-    public void Inserir(VO vo) throws SQLException {
+    public void Inserir(VO vo) {
         String sql = "insert into Pessoa  (nome,cpf) values (?,?)"; /* comando de inserção em SQL para o DB. */
         PreparedStatement ptst;
         try {
@@ -31,7 +31,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         }
     }
 
-    /* método de remoção de Usuarios ao MariaDB */
+    /* método de remoção de Pessoas ao MariaDB */
     @Override
     public void Deletar(VO vo) {
         String sql = "delete from Pessoa where id = ?"; /* comando de remoção em SQL para o DB. */
@@ -45,7 +45,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         }
     }
 
-    /* método de listagem de Usuarios ao MariaDB */
+    /* método de listagem de Pessoas ao MariaDB */
     @Override
     public ResultSet Listar() {
 

@@ -2,88 +2,114 @@ package Model.DAO;
 
 import Model.VO.*;
 import java.sql.*;
-import java.util.*;
 
-public class UsuarioDAO extends BaseDAO 
-/* declaração de classe para a criação de Usuarios DAO implementados a MariaDB */
+public class UsuarioDAO < VO extends UsuarioVO> extends PessoaDAO<VO>
+/*
+ * declaração de classe para a criação de Usuarios DAO implementados a MariaDB
+ */
 {
     /* método de inserção de Usuarios ao MariaDB */
-    public void inserir(UsuarioVO vo) {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "insert into Usuario(login,senha) values (?,?)"; /* comando de inserção em SQL para o DB. */
-        PreparedStatement ptst;
-        try {
-            ptst = conn.prepareStatement(sql);
-            ptst.setNString(1, vo.getLogin());
-            ptst.setNString(2, vo.getSenha());
-            ptst.execute();
-        } catch (SQLException e) {
+    @Override
+    public void Inserir(VO vo){
+        try{
+            super.Inserir(vo);
+            String sql = "inset into User (login, senha, tipo , id_pessoa) values (?,?,?,?)";
+            PreparedStatement psts;
+            psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            psts.setString(1, vo.getLogin());
+            psts.setString(2, vo.getSenha());
+            psts.setInt(3, vo.getTipo());
+            psts.setDouble(4, vo.getId());
+            int affectedRows = psts.executeUpdate();
+            if (affectedRows == 0){
+                throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
+            }
+            ResultSet generatedKeys = psts.getGeneratedKeys();
+            if(generatedKeys.next()){
+                vo.setId(generatedKeys.getDouble(1));
+            } else{
+                throw new SQLException("A inserção falhou. nenhum id foi retornado.");
+            } 
+
+        } catch(SQLException e){
             e.printStackTrace();
         }
     }
 
     /* método de remoção de Usuarios ao MariaDB */
-    public void removerById(UsuarioVO vo) {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "delete from Usuario where login = ?"; /* comando de remoção em SQL para o DB. */
+    @Override
+    public void Deletar(VO vo) {
+        try{
+        super.Inserir(vo);
+        String sql = "delete from User where id = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
-        try {
-            ptst = conn.prepareStatement(sql);
-            ptst.setNString(1, vo.getLogin());
-            ptst.executeUpdate();
-        } catch (SQLException e) {
+        ptst = getConnection().prepareStatement(sql);
+        ptst.setDouble(1, vo.getId());
+        ptst.executeUpdate();
+        }catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     /* método de listagem de Usuarios ao MariaDB */
-    public List<UsuarioVO> listar() {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "select * from user"; /* comando de listagem em SQL para o DB. */
+    @Override
+    public ResultSet Listar() {
+        String sql = "select * from User"; /* comando de listagem em SQL para o DB. */
         Statement st;
-        ResultSet rs;
-        List<UsuarioVO> usuarios = new ArrayList<UsuarioVO>(); //criação da ArrayList de Usuarios
+        ResultSet rs = null;
         try {
-            st = conn.createStatement();
+            st = getConnection().prepareStatement(sql);
             rs = st.executeQuery(sql);
-            while (rs.next()) {
-                UsuarioVO vo = new UsuarioVO();
-                vo.setLogin(rs.getNString("login"));
-                vo.setSenha(rs.getNString("senha"));
-                usuarios.add(vo);
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return usuarios;
-    }
-    //editar login
-    public void editarLogin(UsuarioVO vo) {
-        conn = getConnection();
-        String sql = "update user set login = ? where id = ?";
-        PreparedStatement psts;
-        try {
-            psts = conn.prepareStatement(sql);
-            psts.setNString(1, vo.getLogin());
-            psts.setInt(2, vo.getId());
-            psts.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    //editar senha
-    public void editarSenha(UsuarioVO vo) {
-        conn = getConnection();
-        String sql = "update user set senha = ? where id = ?";
-        PreparedStatement psts;
-        try {
-            psts = conn.prepareStatement(sql);
-            psts.setNString(1, vo.getSenha());
-            psts.setInt(2, vo.getId());
-            psts.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        return rs;
     }
 
+    @Override
+    public ResultSet ListarPorNome(VO vo) {
+        String sql = "select * from User where nome = ?";
+        PreparedStatement psts;
+        ResultSet rs = null;
+
+        try {
+            psts = getConnection().prepareStatement(sql);
+            psts.setString(1, vo.getNome());
+            rs = psts.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    @Override
+    public ResultSet ListarPorId(VO vo) {
+        String sql = "select * from User where id = ?";
+        PreparedStatement psts;
+        ResultSet rs = null;
+
+        try {
+            psts = getConnection().prepareStatement(sql);
+            psts.setDouble(1, vo.getId());
+            rs = psts.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    
+    @Override
+    public void Atualizar(VO vo){
+        String sql = "update User set nome = ? where id = ?";
+        PreparedStatement psts;
+        try{
+            psts = getConnection().prepareStatement(sql);
+            psts.setString(1, vo.getNome());
+            psts.setDouble(2, vo.getId());
+            psts.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

@@ -5,6 +5,12 @@ public abstract class PessoaVO {
     private String cpf;
     private Double id;
 
+    public PessoaVO(String nome, String cpf, Double id) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.id = id;
+    }
+
     public String getCpf() {
         return cpf;
     }
@@ -18,9 +24,6 @@ public abstract class PessoaVO {
         } else {
             this.cpf = cpf;
         }
-    }
-    public PessoaVO(String nome, String cpf2, Double id2){
-        this.nome = nome;
     }
 
     public String getNome(){
