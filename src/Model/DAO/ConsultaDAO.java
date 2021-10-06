@@ -45,7 +45,7 @@ public class ConsultaDAO extends BaseDAO
         }
     }
         /* criação do método de listagem de consultas */
-        public List<ConsultaVO> listar() {
+        public List<VO vo> listar() {
             conn = getConnection(); //conexão estabelecida
             String sql = "select * from consulta"; /* comando de listagem em SQL para o DB. */
             Statement st;

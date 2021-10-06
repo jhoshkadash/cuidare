@@ -3,10 +3,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface BaseInterDAO <VO> {
-    public void inserir(VO entity) throws SQLException;
-    public void atualizar(VO entity) throws SQLException;
-    public void deletar(VO entity) throws SQLException;
-    public ResultSet listarPorId(VO entity) throws SQLException;
-    public ResultSet listarPorNome(VO entity) throws SQLException;
-    public ResultSet listar(VO entity) throws SQLException;
+    public void Inserir(VO entity) throws SQLException;
+    public void Atualizar(VO entity) throws SQLException;
+    public void Deletar(VO entity) throws SQLException;
+    public ResultSet ListarPorId(VO entity) throws SQLException;
+    public ResultSet ListarPorNome(VO entity) throws SQLException;
+    public ResultSet Listar() throws SQLException;
 }
