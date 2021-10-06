@@ -4,13 +4,13 @@ import Model.VO.*;
 import java.sql.*;
 import java.util.*;
 
-public class PessoaDAO <VO extends PessoaVO> extends BaseDAO <VO>;
+public class PessoaDAO <VO extends PessoaVO> extends BaseDAO <VO>{
 
 /* método de inserção de Usuarios ao MariaDB */
 @Override
-public void inserir(VO vo) {
+public void inserir(VO vo) throws SQLException {
     conn = getConnection(); //conexão estabelecida
-    String sql = "insert into Usuario(login,senha) values (?,?)"; /* comando de inserção em SQL para o DB. */
+    String sql = "insert into Pessoa  (nome,senha) values (?,?)"; /* comando de inserção em SQL para o DB. */
     PreparedStatement ptst;
     try {
         ptst = conn.prepareStatement(sql);
@@ -23,7 +23,6 @@ public void inserir(VO vo) {
 }
 
 /* método de remoção de Usuarios ao MariaDB */
-@Override
 public void removerById(VO vo) {
     conn = getConnection(); //conexão estabelecida
     String sql = "delete from Usuario where login = ?"; /* comando de remoção em SQL para o DB. */
@@ -38,7 +37,6 @@ public void removerById(VO vo) {
 }
 
 /* método de listagem de Usuarios ao MariaDB */
-@Override
 public List<VO vo> listar() {
     conn = getConnection(); //conexão estabelecida
     String sql = "select * from user"; /* comando de listagem em SQL para o DB. */
@@ -58,4 +56,4 @@ public List<VO vo> listar() {
         e.printStackTrace();
     }
     return usuarios;
-}
+}}

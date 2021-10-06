@@ -1,9 +1,17 @@
 package Model.VO;
 
-public class UsuarioVO {
+public class UsuarioVO extends PessoaVO {
     private String login;
     private String senha;
-    private Integer id;
+    private Integer tipo;// 1-> atendente, 2-> medico, 3-> gerente
+
+
+    public UsuarioVO(String nome, String cpf, String login, String senha, Double id, Integer tipo) {
+        super(nome, cpf, id);
+        this.login = login;
+        this.senha = senha;
+        this.tipo = tipo;
+    }
 
     public String getLogin() {
         return this.login;
@@ -31,12 +39,11 @@ public class UsuarioVO {
             this.senha = senha;
     }
 
-    public Integer getId() {
-        return this.id;
+    public Integer getTipo() {
+        return this.tipo;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
     }
-
 }

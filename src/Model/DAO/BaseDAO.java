@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.mariadb.jdbc.internal.com.read.dao.Results;
 
 public abstract class BaseDAO <VO> implements BaseInterDAO <VO>{
     private static Connection conn = null;

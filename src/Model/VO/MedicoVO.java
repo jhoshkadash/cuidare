@@ -1,50 +1,15 @@
 package Model.VO;
 
-public class MedicoVO {
-    private String nome;
-    private String cpf;
+public class MedicoVO extends UsuarioVO {
     private String endereco;
-    private double valorconsulta;
+    private Double valorconsulta;
     private String crm;
-    private Integer id;
 
-    public MedicoVO(String nome, String cpf, String endereco, double valorconsulta, String crm) {
-        this.nome = nome;
-        this.cpf = cpf;
+    public MedicoVO(String nome, String cpf, String login, String senha,String endereco, Double valorconsulta, String crm, Double id) {
+        super(nome, cpf, login, senha, id, 2);
         this.endereco = endereco;
         this.valorconsulta = valorconsulta;
         this.crm = crm;
-    }
-
-    public MedicoVO() {
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        if (nome == null) {
-            System.out.println("Digite um nome: ");
-        } else if (nome.equals("")) {
-            System.out.println("Digite um nome: ");
-        } else
-            this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        if (cpf.length() != 11) {
-            System.out.println("Cpf inválido (não digite pontos e nem linhas)");
-        }
-        if (cpf.matches("[0-9]*") == false) {
-            System.out.println("Cpf inválido (existe letras no cpf)");
-        } else {
-            this.cpf = cpf;
-        }
     }
 
     public String getEndereco() {
@@ -80,13 +45,4 @@ public class MedicoVO {
         } else
             this.crm = crm;
     }
-
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
 }

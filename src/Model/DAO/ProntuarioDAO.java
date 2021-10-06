@@ -4,11 +4,11 @@ import Model.VO.*;
 import java.sql.*;
 import java.util.*;
 
-public class ProntuarioDAO extends BaseDAO 
+public class ProntuarioDAO <VO extends ProntuarioVO> extends BaseDAO <VO>
 /* declaração de classe para a criação de Prontuarios DAO implementados a MariaDB */
 {
     /* método de inserção de Prontuarios ao MariaDB */
-    public void inserir(ProntuarioVO vo) {
+    public void inserir(VO vo) throws SQLException {
         conn = getConnection(); //conexão estabelecida
         String sql = "insert into Prontuario(dataNascimento,antenPatologico,mediAtuais,mediAlergia,peso,altura,historicoDoenca,idPaciente) values (?,?,?,?,?,?,?,?)";
         /* comando de inserção em SQL para o DB. */
@@ -33,7 +33,7 @@ public class ProntuarioDAO extends BaseDAO
     }
 
     /* método de remoção de Prontuarios ao MariaDB */
-    public void removerById(ProntuarioVO vo) {
+    public void removerById(VO vo) {
         conn = getConnection(); //conexão estabelecida
         String sql = "delete from Prontuario where IdPaciente = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;

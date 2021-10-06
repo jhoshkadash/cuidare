@@ -1,13 +1,26 @@
 package Model.VO;
 
-public class PessoaVO {
+public abstract class PessoaVO {
     private String nome;
-    private String senha;
+    private String cpf;
     private Double id;
 
-    public PessoaVO(String nome, String senha){
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        if (cpf.length() != 11) {
+            System.out.println("Cpf inválido (não digite pontos e nem linhas)");
+        }
+        if (cpf.matches("[0-9]*") == false) {
+            System.out.println("Cpf inválido (existe letras no cpf)");
+        } else {
+            this.cpf = cpf;
+        }
+    }
+    public PessoaVO(String nome, String cpf2, Double id2){
         this.nome = nome;
-        this.senha = senha;
     }
 
     public String getNome(){
@@ -23,19 +36,6 @@ public class PessoaVO {
             this.nome = nome;
     }
 
-    public String getSenha(){
-        return this.senha;
-    }
-
-    public void setSenha(String senha){
-          if(senha == null){
-            System.out.println("Preencha o campo de senha");
-        } else if (senha.equals("")){
-            System.out.println("Senha em branco");
-        } else 
-            this.senha = senha;
-    }
-    
     public Double getId(){
         return this.id;
     }
