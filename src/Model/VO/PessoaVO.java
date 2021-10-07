@@ -3,9 +3,9 @@ package Model.VO;
 public abstract class PessoaVO {
     private String nome;
     private String cpf;
-    private Double id;
+    private Long id;
 
-    public PessoaVO(String nome, String cpf, Double id) {
+    public PessoaVO(String nome, String cpf, Long id) {
         this.nome = nome;
         this.cpf = cpf;
         this.id = id;
@@ -39,11 +39,11 @@ public abstract class PessoaVO {
             this.nome = nome;
     }
 
-    public Double getId(){
+    public Long getIdPessoa(){
         return this.id;
     }
 
-    public void setId(Double id){
+    public void setIdPessoa(Long id){
         this.id = id;
     }
 }

@@ -3,7 +3,7 @@ package Model.VO;
 public class PacienteVO extends PessoaVO {
     private String endereco;
 
-    public PacienteVO(String nome, String cpf, String endereco, Double id) {
+    public PacienteVO(String nome, String cpf, String endereco, Long id) {
         super(nome, cpf, id);
         this.endereco = endereco;
     }

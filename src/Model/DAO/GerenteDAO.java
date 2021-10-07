@@ -7,19 +7,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-public class GerenteDAO extends BaseDAO
+public class GerenteDAO extends UsuarioDAO < GerenteVO >
 /* declaração de classe para a criação de Gerentes DAO implementados a MariaDB */
 {
     /* método de inserção de gerentes ao MariaDB */
-    public void inserir(GerenteVO vo) {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "insert into Gerente(nome, cpf) values (?,?)"; /* comando de inserção em SQL para o DB. */
-        PreparedStatement ptst;
-        try {
-            ptst = conn.prepareStatement(sql);
+    @Override
+    public void Inserir (GerenteVO vo) {
+        try{
+            super.Inserir(vo);
+            String sql = "insert into Gerente (nome, cpf) values (?,?)"; /* comando de inserção em SQL para o DB. */
+            PreparedStatement ptst;
+            ptst = getConnection().prepareStatement(sql);
             ptst.setNString(1, vo.getNome());
             ptst.setNString(2, vo.getCpf());
-            ptst.execute();
+            ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

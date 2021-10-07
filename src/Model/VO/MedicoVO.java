@@ -5,8 +5,8 @@ public class MedicoVO extends UsuarioVO {
     private Double valorconsulta;
     private String crm;
 
-    public MedicoVO(String nome, String cpf, String login, String senha,String endereco, Double valorconsulta, String crm, Double id) {
-        super(nome, cpf, login, senha, id, 2);
+    public MedicoVO(String nome, String cpf, String login, String senha,String endereco, Double valorconsulta, String crm, Long id_pessoa) {
+        super(nome, cpf, login, senha, id_pessoa, 2);
         this.endereco = endereco;
         this.valorconsulta = valorconsulta;
         this.crm = crm;

@@ -8,8 +8,8 @@ import Model.VO.GerenteVO;
 public class Teste {
 
     public static void main(String[] args) {
-        /*teste atendente*/
-       
+        /*teste pessoa*/
+    
         // criando atendentes no BD
         AtendenteDAO atendenteDao = new AtendenteDAO();
         AtendenteVO atendenteVo = new AtendenteVO();

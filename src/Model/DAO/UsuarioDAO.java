@@ -3,7 +3,7 @@ package Model.DAO;
 import Model.VO.*;
 import java.sql.*;
 
-public class UsuarioDAO < VO extends UsuarioVO> extends PessoaDAO<VO>
+public class UsuarioDAO < VO extends UsuarioVO> extends PessoaDAO <VO>
 /*
  * declaração de classe para a criação de Usuarios DAO implementados a MariaDB
  */
@@ -19,14 +19,14 @@ public class UsuarioDAO < VO extends UsuarioVO> extends PessoaDAO<VO>
             psts.setString(1, vo.getLogin());
             psts.setString(2, vo.getSenha());
             psts.setInt(3, vo.getTipo());
-            psts.setDouble(4, vo.getId());
+            psts.setDouble(4, vo.getIdPessoa());
             int affectedRows = psts.executeUpdate();
             if (affectedRows == 0){
                 throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
             }
             ResultSet generatedKeys = psts.getGeneratedKeys();
             if(generatedKeys.next()){
-                vo.setId(generatedKeys.getDouble(1));
+                vo.setIdUser(generatedKeys.getLong(1));
             } else{
                 throw new SQLException("A inserção falhou. nenhum id foi retornado.");
             } 
@@ -44,7 +44,7 @@ public class UsuarioDAO < VO extends UsuarioVO> extends PessoaDAO<VO>
         String sql = "delete from User where id = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
-        ptst.setDouble(1, vo.getId());
+        ptst.setDouble(1, vo.getIdUser());
         ptst.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
@@ -90,7 +90,7 @@ public class UsuarioDAO < VO extends UsuarioVO> extends PessoaDAO<VO>
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setDouble(1, vo.getId());
+            psts.setDouble(1, vo.getIdUser());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,7 +105,7 @@ public class UsuarioDAO < VO extends UsuarioVO> extends PessoaDAO<VO>
         try{
             psts = getConnection().prepareStatement(sql);
             psts.setString(1, vo.getNome());
-            psts.setDouble(2, vo.getId());
+            psts.setDouble(2, vo.getIdUser());
             psts.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

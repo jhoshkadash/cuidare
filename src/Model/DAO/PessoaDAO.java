@@ -15,14 +15,14 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
             ptst.setNString(1, vo.getNome());
             ptst.setNString(2, vo.getCpf());
 
-            int affectedRows = ptst.executeUpdate();
+            int affectedRows = ptst.executeUpdate(); // variavel para verificar se houve alteração na tabela
 
-            if (affectedRows == 0) {
+            if (affectedRows == 0) { // verificação de alteração
                 throw new SQLException("A inserção de dados falhou. Nenhuma linha foi alterada.");
             }
-            ResultSet gerenatedKeys = ptst.getGeneratedKeys();
-            if (gerenatedKeys.next()) {
-                vo.setId(gerenatedKeys.getDouble(1));
+            ResultSet gerenatedKeys = ptst.getGeneratedKeys(); // id retornado da tabela
+            if (gerenatedKeys.next()) { // se houve id retornado, será inserido na pessoa, caso não exibe falha
+                vo.setIdPessoa(gerenatedKeys.getLong(1));
             } else {
                 throw new SQLException("A inserção falhou. nenhum id foi retornado");
             }
@@ -38,7 +38,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         PreparedStatement ptst;
         try {
             ptst = getConnection().prepareStatement(sql);
-            ptst.setDouble(1, vo.getId());
+            ptst.setDouble(1, vo.getIdPessoa());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,22 +85,22 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setDouble(1, vo.getId());
+            psts.setDouble(1, vo.getIdPessoa());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return rs;
     }
-    
+
     @Override
-    public void Atualizar(VO vo){
+    public void Atualizar(VO vo) {
         String sql = "update Pessoa set nome = ? where id = ?";
         PreparedStatement psts;
-        try{
+        try {
             psts = getConnection().prepareStatement(sql);
             psts.setString(1, vo.getNome());
-            psts.setDouble(2, vo.getId());
+            psts.setDouble(2, vo.getIdPessoa());
             psts.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
