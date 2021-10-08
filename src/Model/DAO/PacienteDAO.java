@@ -10,7 +10,8 @@ public class PacienteDAO extends PessoaDAO< PacienteVO >{
     @Override
     public void Inserir(PacienteVO vo) {
         try{
-            String sql = "insert into Paciente (endereco, id_pessoa) values (?,?)"; /* comando de inserção em SQL para o DB. */
+            super.Inserir(vo);
+            String sql = "insert into Paciente (endereço, id_pessoa) values (?,?)"; /* comando de inserção em SQL para o DB. */
             PreparedStatement ptst;
             ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ptst.setNString(1, vo.getEndereco());
