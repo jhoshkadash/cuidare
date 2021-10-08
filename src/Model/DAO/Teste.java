@@ -7,6 +7,7 @@ public class Teste {
         PacienteDAO pacienteDao = new PacienteDAO();
         PacienteVO pacienteVO = new PacienteVO("João", "08051823494", "Pedro Leite de Oliveira");
         pacienteDao.Inserir(pacienteVO);
-        System.out.println(pacienteDao.Listar());
+        pacienteVO.setNome("João Gonçalo")
+        pacienteDao.Atualizar(pacienteVO);
     }
 }

@@ -11,6 +11,9 @@ public class PacienteVO extends PessoaVO {
         this.id_pessoa = super.getIdPessoa();
     }
 
+    public PacienteVO() {
+    }
+
     public String getEndereco() {
         return endereco;
     }

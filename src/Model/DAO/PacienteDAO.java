@@ -50,12 +50,25 @@ public class PacienteDAO extends PessoaDAO< PacienteVO >{
     /* método de listagem de Usuarios ao MariaDB */
     @Override
     public ResultSet Listar() {
-        String sql = "select * from Pessoa"; /* comando de listagem em SQL para o DB. */
+        String sql = "select * from Paciente"; /* comando de listagem em SQL para o DB. */
         Statement st;
         ResultSet rs = null;
+        ResultSet rsPessoa = null;
         try {
             st = getConnection().prepareStatement(sql);
             rs = st.executeQuery(sql);
+            rsPessoa = super.Listar();
+            while (rs.next()) {
+                PacienteVO vo = new PacienteVO();
+                vo.setNome(rsPessoa.getString("nome"));
+                vo.setCpf(rsPessoa.getString("cpf"));
+                vo.setEndereco(rs.getString("endereço"));
+                vo.setId_paciente(rs.getLong("id_paciente"));
+                vo.setId_pessoa(rs.getLong("id_pessoa"));
+
+            }
+
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -96,12 +109,12 @@ public class PacienteDAO extends PessoaDAO< PacienteVO >{
     
     @Override
     public void Atualizar(PacienteVO vo){
-        String sql = "update Paciente set nome = ? where id_paciente = ?";
+        String sql = "update Pessoa set nome = ? where id = ?";
         PreparedStatement psts;
         try{
             psts = getConnection().prepareStatement(sql);
             psts.setString(1, vo.getNome());
-            psts.setDouble(2, vo.getId_paciente());
+            psts.setLong(2, vo.getId_pessoa());
             psts.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
