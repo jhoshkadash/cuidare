@@ -6,12 +6,18 @@ public class UsuarioVO extends PessoaVO {
     private Integer tipo;// 1-> atendente, 2-> medico, 3-> gerente
     private Long id;
 
-    public UsuarioVO(String nome, String cpf, String login, String senha, Long id_pessoa, Integer tipo) {
-        super(nome, cpf, id_pessoa);
+    public UsuarioVO(String nome, String cpf, String login, String senha,  Integer tipo) {
+        super(nome, cpf);
         this.login = login;
         this.senha = senha;
         this.tipo = tipo;
     }
+
+
+    public UsuarioVO() {
+        super();
+    }
+
 
     public String getLogin() {
         return this.login;

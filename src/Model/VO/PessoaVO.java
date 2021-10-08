@@ -5,10 +5,12 @@ public abstract class PessoaVO {
     private String cpf;
     private Long id;
 
-    public PessoaVO(String nome, String cpf, Long id) {
+    public PessoaVO() {
+    }
+
+    public PessoaVO(String nome, String cpf) {
         this.nome = nome;
         this.cpf = cpf;
-        this.id = id;
     }
 
     public String getCpf() {
