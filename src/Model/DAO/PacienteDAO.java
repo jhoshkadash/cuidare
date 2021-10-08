@@ -2,107 +2,109 @@ package Model.DAO;
 
 import Model.VO.*;
 import java.sql.*;
-import java.util.*;
 
-public class PacienteDAO extends BaseDAO 
+public class PacienteDAO extends PessoaDAO< PacienteVO >{
 /* declaração de classe para a criação de Pacientes DAO implementados a MariaDB */
-{
+
     /* método de inserção de Pacientes ao MariaDB */
     @Override
-    public void inserir(PacienteVO vo) {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "insert into Paciente(nome,cpf,endereco) values (?,?,?)"; /* comando de inserção em SQL para o DB. */
-        PreparedStatement ptst;
-        try {
-            ptst = conn.prepareStatement(sql);
-            ptst.setNString(1, vo.getNome());
-            ptst.setNString(2, vo.getCpf());
-            ptst.setNString(3, vo.getEndereco());
-            ptst.execute();
+    public void Inserir(PacienteVO vo) {
+        try{
+            String sql = "insert into Paciente (endereco, id_pessoa) values (?,?)"; /* comando de inserção em SQL para o DB. */
+            PreparedStatement ptst;
+            ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ptst.setNString(1, vo.getEndereco());
+            ptst.setLong(2, vo.getIdPessoa());
+            int effectedrows = ptst.executeUpdate();
+            if (effectedrows == 0){
+                throw new SQLException("A inserção falhou. Nenhuma linha foi alterada");
+            }
+            ResultSet generatedKeys = ptst.getGeneratedKeys();
+            if (generatedKeys.next()){
+                vo.setId_paciente(generatedKeys.getLong(1));
+            } else {
+                throw new SQLException("A inserção falhou. Nenhum id foi retornado");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     /* método de remoção de dados de Pacientes do DB */
-    public void removerByCPF(PacienteVO vo) {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "delete from Paciente where cpf = ?"; /* comando de remoção em SQL para o DB. */
+    /* método de remoção de Usuarios ao MariaDB */
+    @Override
+    public void Deletar(PacienteVO vo) {
+        try{
+        super.Inserir(vo);
+        String sql = "delete from Paciente where id_pessoa = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
-        try {
-            ptst = conn.prepareStatement(sql);
-            ptst.setNString(1, vo.getCpf());
-            ptst.executeUpdate();
-        } catch (SQLException e) {
+        ptst = getConnection().prepareStatement(sql);
+        ptst.setDouble(1, vo.getIdPessoa());
+        ptst.executeUpdate();
+        }catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    /* criação do método de listagem de Médicos */
-    public List<PacienteVO> listar() {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "select * from paciente"; /* comando de listagem em SQL para o DB. */
+    /* método de listagem de Usuarios ao MariaDB */
+    @Override
+    public ResultSet Listar() {
+        String sql = "select * from Pessoa"; /* comando de listagem em SQL para o DB. */
         Statement st;
-        ResultSet rs;
-        List<PacienteVO> pacientes = new ArrayList<PacienteVO>(); //criação da ArrayList de Pacientes
+        ResultSet rs = null;
         try {
-            st = conn.createStatement();
+            st = getConnection().prepareStatement(sql);
             rs = st.executeQuery(sql);
-            while (rs.next()) {
-                PacienteVO vo = new PacienteVO();
-                vo.setCpf(rs.getString("CPF"));
-                vo.setNome(rs.getString("Nome"));
-                vo.setEndereco("endereço");
-                pacientes.add(vo);
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return pacientes;
+        return rs;
     }
 
-    /* método de edição do dado Nome da tabela Paciente */
-    public void editarNome(PacienteVO vo) {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "update paciente set nome = ? where id = ?"; /* comando de edição em SQL para o DB. */
+    @Override
+    public ResultSet ListarPorNome(PacienteVO vo) {
+        String sql = "select * from Pessoa where nome = ?";
         PreparedStatement psts;
+        ResultSet rs = null;
+
         try {
-            psts = conn.prepareStatement(sql);
+            psts = getConnection().prepareStatement(sql);
             psts.setString(1, vo.getNome());
-            psts.setInt(2, vo.getId());
-            psts.executeUpdate();
+            rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return rs;
     }
 
-    /* método de edição do dado CPF da tabela Paciente */
-    public void editarCpf(PacienteVO vo) {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "update paciente set cpf = ? where id = ?"; /* comando de edição em SQL para o DB. */
+    @Override
+    public ResultSet ListarPorId(PacienteVO vo) {
+        String sql = "select * from Paciente where id_paciente = ?";
         PreparedStatement psts;
+        ResultSet rs = null;
+
         try {
-            psts = conn.prepareStatement(sql);
-            psts.setString(1, vo.getCpf());
-            psts.setInt(2, vo.getId());
-            psts.executeUpdate();
+            psts = getConnection().prepareStatement(sql);
+            psts.setLong(1, vo.getId_paciente());
+            rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return rs;
     }
-
-    /* método de edição do dado Endereco da tabela Paciente */
-    public void editarEndereco(PacienteVO vo) {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "update paciente set endereco = ? where id = ?"; /* comando de edição em SQL para o DB. */
+    
+    @Override
+    public void Atualizar(PacienteVO vo){
+        String sql = "update Paciente set nome = ? where id_paciente = ?";
         PreparedStatement psts;
-        try {
-            psts = conn.prepareStatement(sql);
+        try{
+            psts = getConnection().prepareStatement(sql);
             psts.setString(1, vo.getNome());
-            psts.setInt(2, vo.getId());
+            psts.setDouble(2, vo.getId_paciente());
             psts.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 }

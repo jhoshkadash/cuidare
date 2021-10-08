@@ -90,7 +90,7 @@ public class UsuarioDAO < VO extends UsuarioVO> extends PessoaDAO <VO>
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setDouble(1, vo.getIdUser());
+            psts.setLong(1, vo.getIdUser());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,7 +105,7 @@ public class UsuarioDAO < VO extends UsuarioVO> extends PessoaDAO <VO>
         try{
             psts = getConnection().prepareStatement(sql);
             psts.setString(1, vo.getNome());
-            psts.setDouble(2, vo.getIdUser());
+            psts.setLong(2, vo.getIdUser());
             psts.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
