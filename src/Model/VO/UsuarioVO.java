@@ -4,7 +4,8 @@ public class UsuarioVO extends PessoaVO {
     private String login;
     private String senha;
     private Integer tipo;// 1-> atendente, 2-> medico, 3-> gerente
-    private Long id;
+    private Long idUser;
+    private Long idPessoa;
 
     public UsuarioVO(String nome, String cpf, String login, String senha,  Integer tipo) {
         super(nome, cpf);
@@ -54,11 +55,20 @@ public class UsuarioVO extends PessoaVO {
     }
 
     public Long getIdUser() {
-        return this.id;
+        return this.idUser;
     }
 
-    public void setIdUser(Long id) {
-        this.id = id;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
+
+    public Long getIdPessoa() {
+        return this.idPessoa;
+    }
+
+    public void setIdPessoa(Long idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+
     
 }

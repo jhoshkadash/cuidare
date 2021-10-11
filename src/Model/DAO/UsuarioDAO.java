@@ -41,10 +41,10 @@ public class UsuarioDAO < VO extends UsuarioVO> extends PessoaDAO <VO>
     public void Deletar(VO vo) {
         try{
         super.Inserir(vo);
-        String sql = "delete from User where id = ?"; /* comando de remoção em SQL para o DB. */
+        String sql = "delete from User where id_user = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
-        ptst.setDouble(1, vo.getIdUser());
+        ptst.setLong(1, vo.getIdUser());
         ptst.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();

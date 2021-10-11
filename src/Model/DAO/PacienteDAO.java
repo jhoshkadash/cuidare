@@ -22,7 +22,7 @@ public class PacienteDAO extends PessoaDAO< PacienteVO >{
             }
             ResultSet generatedKeys = ptst.getGeneratedKeys();
             if (generatedKeys.next()){
-                vo.setId_paciente(generatedKeys.getLong(1));
+                vo.setIdPaciente(generatedKeys.getLong(1));
             } else {
                 throw new SQLException("A inserção falhou. Nenhum id foi retornado");
             }
@@ -53,22 +53,9 @@ public class PacienteDAO extends PessoaDAO< PacienteVO >{
         String sql = "select * from Paciente"; /* comando de listagem em SQL para o DB. */
         Statement st;
         ResultSet rs = null;
-        ResultSet rsPessoa = null;
         try {
             st = getConnection().prepareStatement(sql);
             rs = st.executeQuery(sql);
-            rsPessoa = super.Listar();
-            while (rs.next()) {
-                PacienteVO vo = new PacienteVO();
-                vo.setNome(rsPessoa.getString("nome"));
-                vo.setCpf(rsPessoa.getString("cpf"));
-                vo.setEndereco(rs.getString("endereço"));
-                vo.setId_paciente(rs.getLong("id_paciente"));
-                vo.setId_pessoa(rs.getLong("id_pessoa"));
-
-            }
-
-            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -99,7 +86,7 @@ public class PacienteDAO extends PessoaDAO< PacienteVO >{
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setLong(1, vo.getId_paciente());
+            psts.setLong(1, vo.getIdPaciente());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,7 +101,7 @@ public class PacienteDAO extends PessoaDAO< PacienteVO >{
         try{
             psts = getConnection().prepareStatement(sql);
             psts.setString(1, vo.getNome());
-            psts.setLong(2, vo.getId_pessoa());
+            psts.setLong(2, vo.getIdPessoa());
             psts.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -2,13 +2,16 @@ package Model.VO;
 
 public class MedicoVO extends UsuarioVO {
     private String endereco;
-    private Double valorconsulta;
+    private Double valorConsulta;
     private String crm;
+    private Long idPessoa;
+    private Long idUser;
+    private Long idMedico;
 
-    public MedicoVO(String nome, String cpf, String login, String senha,String endereco, Double valorconsulta, String crm, Long id_pessoa) {
-        super(nome, cpf, login, senha, id_pessoa, 2);
+    public MedicoVO(String nome, String cpf, String login, String senha, String endereco, Double valorConsulta, String crm) {
+        super(nome, cpf, login, senha, 2);
         this.endereco = endereco;
-        this.valorconsulta = valorconsulta;
+        this.valorConsulta = valorConsulta;
         this.crm = crm;
     }
 
@@ -25,12 +28,12 @@ public class MedicoVO extends UsuarioVO {
             this.endereco = endereco;
     }
 
-    public double getValorconsulta() {
-        return valorconsulta;
+    public double getValorConsulta() {
+        return valorConsulta;
     }
 
-    public void setValorconsulta(double valorconsulta) {
-        this.valorconsulta = valorconsulta;
+    public void setValorConsulta(double valorConsulta) {
+        this.valorConsulta = valorConsulta;
     }
 
     public String getCrm() {
@@ -45,4 +48,32 @@ public class MedicoVO extends UsuarioVO {
         } else
             this.crm = crm;
     }
+
+
+
+    public Long getIdPessoa() {
+        return this.idPessoa;
+    }
+
+    public void setIdPessoa(Long idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+
+    public Long getIdUser() {
+        return this.idUser;
+    }
+
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
+    }
+
+    public Long getIdMedico() {
+        return this.idMedico;
+    }
+
+    public void setIdMedico(Long idMedico) {
+        this.idMedico = idMedico;
+    }
+
+
 }

@@ -55,7 +55,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         try {
             st = getConnection().prepareStatement(sql);
             rs = st.executeQuery(sql);
-            } catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return rs;
