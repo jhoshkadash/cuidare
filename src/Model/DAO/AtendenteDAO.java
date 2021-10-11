@@ -1,7 +1,6 @@
 package Model.DAO;
 
 import Model.VO.*;
-import java.util.*;
 import java.sql.*;
 
 public class AtendenteDAO extends UsuarioDAO <AtendenteVO> 

@@ -4,28 +4,28 @@ import Model.VO.*;
 import java.sql.*;
 import java.util.*;
 
-public class LaudoDAO extends BaseDAO
+public class LaudoDAO extends BaseDAO <LaudoVO>
 /* declaração de classe para a criação de Laudos DAO implementados a MariaDB */
 {
     /* método de inserção de laudos ao MariaDB */
-       @Override
-    public void Inserir(VO vo){
+    @Override
+    public void Inserir (LaudoVO vo){
         try{
-            super.Inserir(vo);
-            String sql = "inset into User (login, senha, tipo , id_pessoa) values (?,?,?,?)";
+            String sql = "inset into Laudo ( nome_paciente, obs, id_medico, id_consulta ,id_paciente ) values (?,?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            psts.setString(1, vo.getLogin());
-            psts.setString(2, vo.getSenha());
-            psts.setInt(3, vo.getTipo());
-            psts.setDouble(4, vo.getIdPessoa());
+            psts.setString(1, vo.getNomePaciente());
+            psts.setString(2, vo.getObservacoes());
+            psts.setLong(3, vo.getIdMedico());
+            psts.setLong(4, vo.getIdConsulta());
+            psts.setLong(5, vo.getIdPaciente());
             int affectedRows = psts.executeUpdate();
             if (affectedRows == 0){
                 throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
             }
             ResultSet generatedKeys = psts.getGeneratedKeys();
             if(generatedKeys.next()){
-                vo.setIdUser(generatedKeys.getLong(1));
+                vo.setIdLaudo(generatedKeys.getLong(1));
             } else{
                 throw new SQLException("A inserção falhou. nenhum id foi retornado.");
             } 
@@ -37,13 +37,12 @@ public class LaudoDAO extends BaseDAO
 
     /* método de remoção de Usuarios ao MariaDB */
     @Override
-    public void Deletar(VO vo) {
+    public void Deletar (LaudoVO vo) {
         try{
-        super.Inserir(vo);
-        String sql = "delete from User where id = ?"; /* comando de remoção em SQL para o DB. */
+        String sql = "delete from Laudo where id_laudo = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
-        ptst.setDouble(1, vo.getIdUser());
+        ptst.setDouble(1, vo.getIdLaudo());
         ptst.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
@@ -53,7 +52,7 @@ public class LaudoDAO extends BaseDAO
     /* método de listagem de Usuarios ao MariaDB */
     @Override
     public ResultSet Listar() {
-        String sql = "select * from User"; /* comando de listagem em SQL para o DB. */
+        String sql = "select * from Laudo"; /* comando de listagem em SQL para o DB. */
         Statement st;
         ResultSet rs = null;
         try {
@@ -66,14 +65,14 @@ public class LaudoDAO extends BaseDAO
     }
 
     @Override
-    public ResultSet ListarPorNome(VO vo) {
-        String sql = "select * from User where nome = ?";
+    public ResultSet ListarPorNome (LaudoVO vo) {
+        String sql = "select * from Laudo where nome_paciente = ?";
         PreparedStatement psts;
         ResultSet rs = null;
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setString(1, vo.getNome());
+            psts.setString(1, vo.getNomePaciente());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,14 +81,14 @@ public class LaudoDAO extends BaseDAO
     }
 
     @Override
-    public ResultSet ListarPorId(VO vo) {
-        String sql = "select * from User where id = ?";
+    public ResultSet ListarPorId (LaudoVO vo) {
+        String sql = "select * from Laudo where id_laudo = ?";
         PreparedStatement psts;
         ResultSet rs = null;
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setLong(1, vo.getIdUser());
+            psts.setLong(1, vo.getIdConsulta());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,13 +97,13 @@ public class LaudoDAO extends BaseDAO
     }
     
     @Override
-    public void Atualizar(VO vo){
-        String sql = "update User set nome = ? where id = ?";
+    public void Atualizar (LaudoVO vo){
+        String sql = "update Laudo set obs = ? where id_laudo = ?";
         PreparedStatement psts;
         try{
             psts = getConnection().prepareStatement(sql);
-            psts.setString(1, vo.getNome());
-            psts.setLong(2, vo.getIdUser());
+            psts.setString(1,vo.getObservacoes());
+            psts.setLong(2, vo.getIdLaudo());
             psts.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

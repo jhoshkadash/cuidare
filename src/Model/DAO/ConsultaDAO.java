@@ -2,10 +2,8 @@ package Model.DAO;
 
 import Model.VO.*;
 import java.sql.*;
-import java.sql.Date;
-import java.util.*;
 
-public class ConsultaDAO < VO extends ConsultaVO> extends BaseDAO< VO >
+public class ConsultaDAO extends BaseDAO < ConsultaVO >
 /* declaração de classe para a criação de Consultas DAO implementadas a MariaDB */
 {
     @Override
@@ -16,7 +14,7 @@ public class ConsultaDAO < VO extends ConsultaVO> extends BaseDAO< VO >
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setLong(1, vo.getIdMedico());
             psts.setLong(2, vo.getIdPaciente());
-            psts.setDate(3,null,vo.getDataConsulta());
+            psts.setDate(3, null ,vo.getDataConsulta());
             psts.setBoolean(4, vo.isStatus());
             psts.setString(5, vo.getNomePaciente());
             psts.setString(6, vo.getNomeMedico());
