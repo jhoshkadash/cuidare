@@ -109,6 +109,5 @@ public class GerenteDAO extends UsuarioDAO < GerenteVO >
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }

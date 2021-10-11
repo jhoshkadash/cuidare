@@ -5,9 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ConsultaVO {
-    private Integer id, idMedico, idPaciente;
+    private Long idConsulta, idMedico, idPaciente;
     private Boolean status;
     private Calendar dataConsulta = Calendar.getInstance();
+    private String nomeMedico, nomePaciente;
 
     public void setDataConsulta(String dConsulta) {
         try {
@@ -23,17 +24,12 @@ public class ConsultaVO {
     }
 
 
-    public Integer getId() {
-        return this.id;
+    public Long getIdConsulta() {
+        return this.idConsulta;
     }
 
-    public void setId(Integer Id) {
-        if (Id == null) {
-            System.out.println("Erro. Consulta sem id");
-        } else if (Id.equals("")) {
-            System.out.println("Erro. Consulta sem id");
-        } else
-            this.id = Id;
+    public void setIdConsulta(Long Id) {
+            this.idConsulta = Id;
     }
 
     public Boolean isStatus() {
@@ -44,11 +40,11 @@ public class ConsultaVO {
         this.status = Status;
     }
 
-    public Integer getIdMedico() {
+    public Long getIdMedico() {
         return this.idMedico;
     }
 
-    public void setIdMedico(Integer IdMedico) {
+    public void setIdMedico(Long IdMedico) {
 
         if (IdMedico == null) {
             System.out.println("Erro. Campo de medico não preenchido");
@@ -58,11 +54,11 @@ public class ConsultaVO {
             this.idMedico = IdMedico;
     }
 
-    public Integer getIdPaciente() {
+    public Long getIdPaciente() {
         return this.idPaciente;
     }
 
-    public void setIdPaciente(Integer IdPaciente) {
+    public void setIdPaciente(Long IdPaciente) {
 
         if (IdPaciente == null) {
             System.out.println("Erro. Campo de Paciente não preenchido");
@@ -71,4 +67,26 @@ public class ConsultaVO {
         } else
             this.idPaciente = IdPaciente;
     }
+
+    public Boolean getStatus() {
+        return this.status;
+    }
+
+
+    public String getNomeMedico() {
+        return this.nomeMedico;
+    }
+
+    public void setNomeMedico(String nomeMedico) {
+        this.nomeMedico = nomeMedico;
+    }
+
+    public String getNomePaciente() {
+        return this.nomePaciente;
+    }
+
+    public void setNomePaciente(String nomePaciente) {
+        this.nomePaciente = nomePaciente;
+    }
+
 }

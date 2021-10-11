@@ -4,86 +4,105 @@ import Model.VO.*;
 import java.util.*;
 import java.sql.*;
 
-public class AtendenteDAO extends BaseDAO 
+public class AtendenteDAO extends UsuarioDAO <AtendenteVO> 
 /* declaração de classe para a criação de Atendentes DAO implementados a MariaDB */
 {
     /* criação do método de inserção de atendentes ao MariaDB */
-    public void inserir(AtendenteVO vo) {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "insert into Atendente(nome,cpf) values (?,?)"; /* passa o comando de inserção em SQL para o DB. */
-        /* passa o comando de inserção em SQL para o DB. */
-        PreparedStatement ptst;
-        try {
-            ptst = conn.prepareStatement(sql);
-            ptst.setNString(1, vo.getNome());
-            ptst.setNString(2, vo.getCpf());
-            ptst.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /* criação do método de remorção de atendentes */
-    public void removerByCPF(AtendenteVO vo) {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "delete from Atendente where cpf = ?"; /* passa o comando de remoção em SQL para o DB. */
-        PreparedStatement ptst;
-        try {
-            ptst = conn.prepareStatement(sql);
-            ptst.setNString(1, vo.getCpf());
-            ptst.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /* criação do método de listagem de atendentes */
-    public List<AtendenteVO> listar() {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "select * from atendente"; /* comando de listagem em SQL para o DB. */
-        Statement st;
-        ResultSet rs;
-        List<AtendenteVO> atendentes = new ArrayList<AtendenteVO>(); //criação da ArrayList de Atendentes
-        try {
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
-            while (rs.next()) {
-                AtendenteVO vo = new AtendenteVO();
-                vo.setCpf(rs.getString("CPF"));
-                vo.setNome(rs.getString("Nome"));
-                vo.setId(rs.getInt("id"));
-                atendentes.add(vo);
+    @Override
+    public void Inserir (AtendenteVO vo){
+        try{
+            super.Inserir(vo);
+            String sql = "inset into Atendente (id_user, id_pessoa) values (?,?)";
+            PreparedStatement psts;
+            psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            psts.setLong(1, vo.getIdUser());
+            psts.setLong(2, vo.getIdPessoa());
+            int affectedRows = psts.executeUpdate();
+            if (affectedRows == 0){
+                throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
             }
+            ResultSet generatedKeys = psts.getGeneratedKeys();
+            if(generatedKeys.next()){
+                vo.setIdAtendente(generatedKeys.getLong(1));
+            } else{
+                throw new SQLException("A inserção falhou. nenhum id foi retornado.");
+            } 
+
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    /* método de remoção de Usuarios ao MariaDB */
+    @Override
+    public void Deletar(AtendenteVO vo) {
+        try{
+        super.Inserir(vo);
+        String sql = "delete from Atendente where id_atendente = ?"; /* comando de remoção em SQL para o DB. */
+        PreparedStatement ptst;
+        ptst = getConnection().prepareStatement(sql);
+        ptst.setDouble(1, vo.getIdAtendente());
+        ptst.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* método de listagem de Usuarios ao MariaDB */
+    @Override
+    public ResultSet Listar() {
+        String sql = "select * from Atendente"; /* comando de listagem em SQL para o DB. */
+        Statement st;
+        ResultSet rs = null;
+        try {
+            st = getConnection().prepareStatement(sql);
+            rs = st.executeQuery(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return atendentes;
+        return rs;
     }
 
-    /* método de edição dos dados (nome e Id) da tabela Atendente */ 
-    public void editarNome(AtendenteVO vo) {
-        conn = getConnection(); //conexão estabelecida
-        String sql = "update atendente set nome = ? where id = ?";  /* comando de edição em SQL para o DB. */
+    @Override
+    public ResultSet ListarPorNome (AtendenteVO vo) {
+        String sql = "select * from Pessoa where nome = ?";
         PreparedStatement psts;
+        ResultSet rs = null;
+
         try {
-            psts = conn.prepareStatement(sql);
+            psts = getConnection().prepareStatement(sql);
             psts.setString(1, vo.getNome());
-            psts.setInt(2, vo.getId());
-            psts.executeUpdate();
+            rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return rs;
     }
 
-    /* método de edição do dado CPF da tabela Atendente */ 
-    public void editarCpf(AtendenteVO vo) {
-        conn = getConnection();
-        String sql = "update atendente set cpf = ? where id = ?";  /* comando de listagem em SQL para o DB. */
+    @Override
+    public ResultSet ListarPorId (AtendenteVO vo) {
+        String sql = "select * from Gerente where id_atendente = ?";
         PreparedStatement psts;
+        ResultSet rs = null;
+
         try {
-            psts = conn.prepareStatement(sql);
-            psts.setString(1, vo.getCpf());
-            psts.setInt(2, vo.getId());
+            psts = getConnection().prepareStatement(sql);
+            psts.setLong(1, vo.getIdAtendente());
+            rs = psts.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    
+    @Override
+    public void Atualizar (AtendenteVO vo){
+        String sql = "update Pessoa set nome = ? where id = ?";
+        PreparedStatement psts;
+        try{
+            psts = getConnection().prepareStatement(sql);
+            psts.setString(1, vo.getNome());
+            psts.setLong(2, vo.getIdPessoa());
             psts.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
