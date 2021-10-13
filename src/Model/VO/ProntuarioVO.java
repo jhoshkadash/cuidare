@@ -4,29 +4,27 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class ProntuarioVO {
+public class ProntuarioVO extends PacienteVO {
     private Calendar dataNascimento = Calendar.getInstance();
-    private String antenPatologico, idPaciente, mediAtuais, mediAlergia, historicoDoenca;
+    private String antenPatologico, mediAtuais, mediAlergia, historicoDoenca;
     private Float altura, peso;
-    private Integer id;
+    private Long idProntuario, idPaciente;
 
-    public ProntuarioVO(String dNascimento, String antenPatologico, String mediAtuais, String mediAlergia,
-            Float peso, Float altura, String historicoDoenca, String idPaciente) {
-
+    public ProntuarioVO(String nome, String cpf, String endereco, String dNascimento, String antenPatologico, String mediAtuais, String mediAlergia,
+                        Float peso, Float altura, String historicoDoenca) {
+        super(nome, cpf, endereco);
         try {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             this.dataNascimento.setTime(formato.parse(dNascimento));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         this.antenPatologico = antenPatologico;
         this.mediAtuais = mediAtuais;
         this.mediAlergia = mediAlergia;
         this.peso = peso;
         this.altura = altura;
         this.historicoDoenca = historicoDoenca;
-        this.idPaciente = idPaciente;
     }
 
     public ProntuarioVO() {
@@ -98,25 +96,21 @@ public class ProntuarioVO {
         this.historicoDoenca = HistoricoDoenca;
     }
 
-    public String getIdPaciente() {
-        return this.idPaciente;
+    public Long getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setIdPaciente(String IdPaciente) {
-        if (IdPaciente == null) {
-            System.out.println("Erro. Paciente sem id");
-        } else if (IdPaciente.equals("")) {
-            System.out.println("Erro. Paciente sem id");
-        } else
-            this.idPaciente = IdPaciente;
+
+    public Long getIdProntuario() {
+        return this.idProntuario;
     }
 
-    public Integer getId() {
-        return this.id;
+    public void setIdProntuario(Long idProntuario) {
+        this.idProntuario = idProntuario;
+    }
+    public void setIdPaciente(Long idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+    
 }
