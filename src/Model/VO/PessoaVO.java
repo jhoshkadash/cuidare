@@ -5,8 +5,6 @@ public abstract class PessoaVO {
     private String cpf;
     private Long id;
 
-    //TESTANDO CONEXÃO COM O GIT
-
     public PessoaVO() {
     }
 
