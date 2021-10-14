@@ -9,7 +9,7 @@ import javafx.scene.Stage;
 public class telaLogin extends Application{
 
     public static void main (String[] args){
-
+        launch();
     }
 
     
