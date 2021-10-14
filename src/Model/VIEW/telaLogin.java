@@ -13,10 +13,12 @@ public class telaLogin extends Application{
     }
 
     @Override
-    public void start(Stage arg0) throws Exception {
-        // TODO Auto-generated method stub
-        
-    }
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("telaLogin.fxml"));
+        Scene cena = new Scene(root);
 
-    
+        primaryStage.setTitle("CUIDARE");
+        primaryStage.setScene(cena);
+        primaryStage.show();
+    }
 }

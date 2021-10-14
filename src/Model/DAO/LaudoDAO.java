@@ -2,7 +2,6 @@ package Model.DAO;
 
 import Model.VO.*;
 import java.sql.*;
-import java.util.*;
 
 public class LaudoDAO extends BaseDAO <LaudoVO>
 /* declaração de classe para a criação de Laudos DAO implementados a MariaDB */
