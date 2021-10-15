@@ -14,7 +14,7 @@ public class telaLogin extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("telaLogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource(""));
         Scene cena = new Scene(root);
 
         primaryStage.setTitle("CUIDARE");
