@@ -9,7 +9,7 @@ public class ConsultaVO {
     private Boolean status;
     private Calendar dataConsulta = Calendar.getInstance();
 
-    public void setDataConsulta(String dConsulta) {
+    public void setDataConsulta( String dConsulta) {
         try {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             this.dataConsulta.setTime(formato.parse(dConsulta));

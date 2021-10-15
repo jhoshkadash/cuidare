@@ -157,6 +157,5 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }

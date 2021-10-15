@@ -8,8 +8,7 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
 {
     /* criação do método de inserção de atendentes ao MariaDB */
     @Override
-    public void Inserir (AtendenteVO vo){
-        try{
+    public void Inserir (AtendenteVO vo) throws SQLException {
             super.Inserir(vo);
             String sql = "inset into Atendente (id_user, id_pessoa) values (?,?)";
             PreparedStatement psts;
@@ -26,25 +25,17 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
             } else{
                 throw new SQLException("A inserção falhou. nenhum id foi retornado.");
             } 
-
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
     }
 
     /* método de remoção de Usuarios ao MariaDB */
     @Override
-    public void Deletar(AtendenteVO vo) {
-        try{
+    public void Deletar(AtendenteVO vo) throws SQLException {
         super.Inserir(vo);
         String sql = "delete from Atendente where id_atendente = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
         ptst.setDouble(1, vo.getIdAtendente());
         ptst.executeUpdate();
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     /* método de listagem de Usuarios ao MariaDB */

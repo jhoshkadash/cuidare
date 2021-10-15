@@ -19,7 +19,6 @@ public abstract class BaseDAO <VO> implements BaseInterDAO <VO>{
         if (conn == null) {
             try {
                 conn = DriverManager.getConnection(url, user, senha);
-                System.out.println("Dados salvos com sucesso");  //conexão bem sucedida
             } catch (SQLException e) {
                 e.printStackTrace();
             }
