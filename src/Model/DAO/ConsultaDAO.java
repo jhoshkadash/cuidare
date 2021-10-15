@@ -9,15 +9,13 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
     @Override
     public void Inserir (ConsultaVO vo){
         try{
-            String sql = "inset into Consulta (id_medico, id_paciente, data, status, nome_paciente, nome_medico) values (?,?,?,?,?,?)";
+            String sql = "inset into Consulta (id_medico, id_paciente, data, status) values (?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setLong(1, vo.getIdMedico());
             psts.setLong(2, vo.getIdPaciente());
             psts.setDate(3, null ,vo.getDataConsulta());
             psts.setBoolean(4, vo.isStatus());
-            psts.setString(5, vo.getNomePaciente());
-            psts.setString(6, vo.getNomeMedico());
             int affectedRows = psts.executeUpdate();
             if (affectedRows == 0){
                 throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
@@ -63,15 +61,14 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         return rs;
     }
 
-    @Override
-    public ResultSet ListarPorNome (ConsultaVO vo) {
-        String sql = "select * from Pessoa where nome_medico = ?";
+    public ResultSet ListarPorNome (PessoaVO vo) {
+        String sql = "select * from Pessoa where nome = ?";
         PreparedStatement psts;
         ResultSet rs = null;
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setString(1, vo.getNomeMedico());
+            psts.setString(1, vo.getNome());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,7 +94,7 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
     
     @Override
     public void Atualizar (ConsultaVO vo){
-        String sql = "update Consulta set data = ? where id_consulta = ?";
+        String sql = "update Consulta set data = ? where id_consulta = ?";//atualiza data da consulta
         PreparedStatement psts;
         try{
             psts = getConnection().prepareStatement(sql);

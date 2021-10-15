@@ -6,7 +6,6 @@ public class LaudoVO {
     private Long idConsulta;
     private Long idLaudo;    
     private String Observacoes;
-    private String nomePaciente;
 
 
     public LaudoVO(String Observacoes) {
@@ -65,12 +64,5 @@ public class LaudoVO {
     }
 
 
-    public String getNomePaciente() {
-        return this.nomePaciente;
-    }
-
-    public void setNomePaciente(String nomePaciente) {
-        this.nomePaciente = nomePaciente;
-    }
 
 }

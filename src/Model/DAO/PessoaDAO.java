@@ -61,7 +61,6 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         return rs;
     }
 
-    @Override
     public ResultSet ListarPorNome(VO vo) {
         String sql = "select * from Pessoa where nome = ?";
         PreparedStatement psts;

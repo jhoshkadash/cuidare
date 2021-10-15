@@ -7,6 +7,5 @@ public interface BaseInterDAO <VO> {
     public void Atualizar(VO entity) throws SQLException;
     public void Deletar(VO entity) throws SQLException;
     public ResultSet ListarPorId(VO entity) throws SQLException;
-    public ResultSet ListarPorNome(VO entity) throws SQLException;
     public ResultSet Listar() throws SQLException;
 }
