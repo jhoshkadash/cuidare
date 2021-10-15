@@ -62,7 +62,7 @@ public class PacienteDAO extends PessoaDAO< PacienteVO >{
         return rs;
     }
 
-    @Override
+
     public ResultSet ListarPorNome(PacienteVO vo) {
         String sql = "select * from Pessoa where nome = ?";
         PreparedStatement psts;
@@ -89,6 +89,21 @@ public class PacienteDAO extends PessoaDAO< PacienteVO >{
             psts.setLong(1, vo.getIdPaciente());
             rs = psts.executeQuery();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet ListarPorCpf(PacienteVO vo){
+        String sql = "select * from Paciente where cpf = ?";
+        PreparedStatement psts;
+        ResultSet rs = null;
+
+        try{
+            psts = getConnection().prepareStatement(sql);
+            psts.setString(1, vo.getCpf());
+            rs = psts.executeQuery();
+        } catch (SQLException e){
             e.printStackTrace();
         }
         return rs;

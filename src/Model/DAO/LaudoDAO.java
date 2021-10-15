@@ -10,14 +10,13 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
     @Override
     public void Inserir (LaudoVO vo){
         try{
-            String sql = "inset into Laudo ( nome_paciente, obs, id_medico, id_consulta ,id_paciente ) values (?,?,?,?,?)";
+            String sql = "inset into Laudo (obs, id_medico, id_consulta ,id_paciente ) values (?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            psts.setString(1, vo.getNomePaciente());
-            psts.setString(2, vo.getObservacoes());
-            psts.setLong(3, vo.getIdMedico());
-            psts.setLong(4, vo.getIdConsulta());
-            psts.setLong(5, vo.getIdPaciente());
+            psts.setString(1, vo.getObservacoes());
+            psts.setLong(2, vo.getIdMedico());
+            psts.setLong(3, vo.getIdConsulta());
+            psts.setLong(4, vo.getIdPaciente());
             int affectedRows = psts.executeUpdate();
             if (affectedRows == 0){
                 throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
@@ -63,21 +62,21 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
         return rs;
     }
 
-    @Override
-    public ResultSet ListarPorNome (LaudoVO vo) {
-        String sql = "select * from Laudo where nome_paciente = ?";
+    public ResultSet ListarPorNome(PessoaVO vo) {
+        String sql = "select * from Pessoa where id = ?";
         PreparedStatement psts;
         ResultSet rs = null;
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setString(1, vo.getNomePaciente());
+            psts.setString(1, vo.getNome());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return rs;
     }
+
 
     @Override
     public ResultSet ListarPorId (LaudoVO vo) {

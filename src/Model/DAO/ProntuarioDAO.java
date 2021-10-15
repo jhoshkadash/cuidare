@@ -66,21 +66,6 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
         return rs;
     }
 
-    @Override
-    public ResultSet ListarPorNome (ProntuarioVO vo) {
-        String sql = "select * from Pessoa where nome = ?";
-        PreparedStatement psts;
-        ResultSet rs = null;
-
-        try {
-            psts = getConnection().prepareStatement(sql);
-            psts.setString(1, vo.getNome());
-            rs = psts.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
-    }
 
     @Override
     public ResultSet ListarPorId (ProntuarioVO vo) {

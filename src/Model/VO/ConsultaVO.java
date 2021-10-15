@@ -8,7 +8,6 @@ public class ConsultaVO {
     private Long idConsulta, idMedico, idPaciente;
     private Boolean status;
     private Calendar dataConsulta = Calendar.getInstance();
-    private String nomeMedico, nomePaciente;
 
     public void setDataConsulta(String dConsulta) {
         try {
@@ -72,21 +71,5 @@ public class ConsultaVO {
         return this.status;
     }
 
-
-    public String getNomeMedico() {
-        return this.nomeMedico;
-    }
-
-    public void setNomeMedico(String nomeMedico) {
-        this.nomeMedico = nomeMedico;
-    }
-
-    public String getNomePaciente() {
-        return this.nomePaciente;
-    }
-
-    public void setNomePaciente(String nomePaciente) {
-        this.nomePaciente = nomePaciente;
-    }
 
 }

@@ -4,15 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class ProntuarioVO extends PacienteVO {
+public class ProntuarioVO  {
     private Calendar dataNascimento = Calendar.getInstance();
     private String antenPatologico, mediAtuais, mediAlergia, historicoDoenca;
     private Float altura, peso;
     private Long idProntuario, idPaciente;
 
-    public ProntuarioVO(String nome, String cpf, String endereco, String dNascimento, String antenPatologico, String mediAtuais, String mediAlergia,
-                        Float peso, Float altura, String historicoDoenca) {
-        super(nome, cpf, endereco);
+    public ProntuarioVO(String dNascimento, String antenPatologico, String mediAtuais, String mediAlergia,
+                        Float peso, Float altura, String historicoDoenca, Long idPaciente) {
         try {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             this.dataNascimento.setTime(formato.parse(dNascimento));
@@ -25,6 +24,7 @@ public class ProntuarioVO extends PacienteVO {
         this.peso = peso;
         this.altura = altura;
         this.historicoDoenca = historicoDoenca;
+        this.idPaciente = idPaciente;
     }
 
     public ProntuarioVO() {
