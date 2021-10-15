@@ -96,7 +96,22 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
         }
         return rs;
     }
-    
+
+    public ResultSet ListarPorCrm(MedicoVO vo){
+        String sql = "select * from Medico where crm = ?";
+        PreparedStatement psts;
+        ResultSet rs = null;
+
+        try{
+            psts = getConnection().prepareStatement(sql);
+            psts.setString(1, vo.getCrm());
+            rs = psts.executeQuery();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
     @Override
     public void Atualizar(MedicoVO vo){
         String sql = "update Pessoa set nome = ? where id = ?";

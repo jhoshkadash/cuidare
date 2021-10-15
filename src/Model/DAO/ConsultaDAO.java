@@ -3,18 +3,23 @@ package Model.DAO;
 import Model.VO.*;
 import java.sql.*;
 
+
 public class ConsultaDAO extends BaseDAO < ConsultaVO >
 /* declaração de classe para a criação de Consultas DAO implementadas a MariaDB */
 {
     @Override
     public void Inserir (ConsultaVO vo){
         try{
+
+            Date data = new Date(vo.getDataConsulta().getTimeInMillis());
+            final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());// tratamento da classe calendar para timestamp
+
             String sql = "inset into Consulta (id_medico, id_paciente, data, status) values (?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setLong(1, vo.getIdMedico());
             psts.setLong(2, vo.getIdPaciente());
-            psts.setDate(3, null ,vo.getDataConsulta());
+            psts.setTimestamp(3, dataSql, vo.getDataConsulta());
             psts.setBoolean(4, vo.isStatus());
             int affectedRows = psts.executeUpdate();
             if (affectedRows == 0){
@@ -61,14 +66,44 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         return rs;
     }
 
-    public ResultSet ListarPorNome (PessoaVO vo) {
-        String sql = "select * from Pessoa where nome = ?";
+    public ResultSet ListarPorNomeMedico (ConsultaVO vo) {
+        String sql = "select * from Medico where id_medico = ?";
         PreparedStatement psts;
         ResultSet rs = null;
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setString(1, vo.getNome());
+            psts.setLong(1, vo.getIdMedico());
+            rs = psts.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet ListarPorNomePaciente (ConsultaVO vo) {
+        String sql = "select * from Paciente where id_Paciente = ?";
+        PreparedStatement psts;
+        ResultSet rs = null;
+
+        try {
+            psts = getConnection().prepareStatement(sql);
+            psts.setLong(1, vo.getIdPaciente());
+            rs = psts.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet ListarPorHorario (ConsultaVO vo) {
+        String sql = "select * from Medico where id_medico = ?";
+        PreparedStatement psts;
+        ResultSet rs = null;
+
+        try {
+            psts = getConnection().prepareStatement(sql);
+            psts.setLong(1, vo.getIdMedico());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -91,15 +126,33 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         }
         return rs;
     }
+
+    public ResultSet ListarPorData(ConsultaVO vo){
+        String sql = "select * from Consulta where data = ?";
+        PreparedStatement psts = null;
+        ResultSet rs =  null;
+        Date data = new Date(vo.getDataConsulta().getTimeInMillis());
+        final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());// tratamento da classe calendar para timestamp
+
+        try{
+            psts.getConnection().prepareStatement(sql);
+            psts.setTimestamp(1, dataSql, vo.getDataConsulta());
+            rs = psts.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
     
     @Override
     public void Atualizar (ConsultaVO vo){
         String sql = "update Consulta set data = ? where id_consulta = ?";//atualiza data da consulta
         PreparedStatement psts;
+        Date data = new Date(vo.getDataConsulta().getTimeInMillis());
+        final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());// tratamento da classe calendar para timestamp
         try{
             psts = getConnection().prepareStatement(sql);
-            psts.setDate(1,null,vo.getDataConsulta());
-            psts.setLong(2, vo.getIdConsulta());
+            psts.setTimestamp(1, dataSql, vo.getDataConsulta());
             psts.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
