@@ -8,8 +8,7 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
 {
     /* método de inserção de laudos ao MariaDB */
     @Override
-    public void Inserir (LaudoVO vo){
-        try{
+    public void Inserir (LaudoVO vo) throws SQLException {
             String sql = "inset into Laudo (obs, id_medico, id_consulta ,id_paciente ) values (?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -27,85 +26,60 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
             } else{
                 throw new SQLException("A inserção falhou. nenhum id foi retornado.");
             } 
-
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
     }
 
     /* método de remoção de Usuarios ao MariaDB */
     @Override
-    public void Deletar (LaudoVO vo) {
-        try{
+    public void Deletar (LaudoVO vo) throws SQLException  {
         String sql = "delete from Laudo where id_laudo = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
         ptst.setDouble(1, vo.getIdLaudo());
         ptst.executeUpdate();
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     /* método de listagem de Usuarios ao MariaDB */
     @Override
-    public ResultSet Listar() {
+    public ResultSet Listar() throws SQLException {
         String sql = "select * from Laudo"; /* comando de listagem em SQL para o DB. */
         Statement st;
         ResultSet rs = null;
-        try {
-            st = getConnection().prepareStatement(sql);
-            rs = st.executeQuery(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        st = getConnection().prepareStatement(sql);
+        rs = st.executeQuery(sql);
         return rs;
     }
 
-    public ResultSet ListarPorNome(PessoaVO vo) {
+    public ResultSet ListarPorNome(PessoaVO vo) throws SQLException  {
         String sql = "select * from Pessoa where id = ?";
         PreparedStatement psts;
         ResultSet rs = null;
 
-        try {
             psts = getConnection().prepareStatement(sql);
             psts.setString(1, vo.getNome());
             rs = psts.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return rs;
     }
 
 
     @Override
-    public ResultSet ListarPorId (LaudoVO vo) {
+    public ResultSet ListarPorId (LaudoVO vo) throws SQLException  {
         String sql = "select * from Laudo where id_laudo = ?";
         PreparedStatement psts;
         ResultSet rs = null;
 
-        try {
             psts = getConnection().prepareStatement(sql);
             psts.setLong(1, vo.getIdConsulta());
             rs = psts.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return rs;
     }
     
     @Override
-    public void Atualizar (LaudoVO vo){
+    public void Atualizar (LaudoVO vo) throws SQLException {
         String sql = "update Laudo set obs = ? where id_laudo = ?";
         PreparedStatement psts;
-        try{
             psts = getConnection().prepareStatement(sql);
             psts.setString(1,vo.getObservacoes());
             psts.setLong(2, vo.getIdLaudo());
             psts.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
     }
 }
