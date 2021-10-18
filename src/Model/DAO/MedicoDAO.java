@@ -18,12 +18,14 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
             psts.setString(3, vo.getEndereco());
             psts.setLong(4, vo.getIdPessoa());
             psts.setLong(5, vo.getIdUser());
-            int affectedRows = psts.executeUpdate();
-            if (affectedRows == 0){
+        
+            int affectedRows = psts.executeUpdate(); //variável para verificação de alterações na tabela
+        
+            if (affectedRows == 0){ // verificação de alteração
                 throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
             }
-            ResultSet generatedKeys = psts.getGeneratedKeys();
-            if(generatedKeys.next()){
+            ResultSet generatedKeys = psts.getGeneratedKeys(); //Id retornado da tabela
+            if(generatedKeys.next()){ //caso nenhum seja id retornado, será inserido na pessoa, caso não exibe falha
                 vo.setIdMedico(generatedKeys.getLong(1));
             } else{
                 throw new SQLException("A inserção falhou. nenhum id foi retornado.");
@@ -51,10 +53,11 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
             rs = st.executeQuery(sql);
         return rs;
     }
-
+    
+    /* método de listagem de Usuarios por nome */
     @Override
     public ResultSet ListarPorNome(MedicoVO vo) throws SQLException {
-        String sql = "select * from Pessoa where nome = ?";
+        String sql = "select * from Pessoa where nome = ?"; /* comando SQL para listagem por nome. */
         PreparedStatement psts;
         ResultSet rs = null;
             psts = getConnection().prepareStatement(sql);
@@ -63,9 +66,10 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
         return rs;
     }
 
+    /* método de listagem de Usuarios por Id */
     @Override
     public ResultSet ListarPorId(MedicoVO vo) throws SQLException {
-        String sql = "select * from Medico where id_medico = ?";
+        String sql = "select * from Medico where id_medico = ?"; /* comando SQL para listagem por Id. */
         PreparedStatement psts;
         ResultSet rs = null;
             psts = getConnection().prepareStatement(sql);
@@ -74,8 +78,9 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
         return rs;
     }
 
+    /* método de listagem de Usuarios por CRM */
     public ResultSet ListarPorCrm(MedicoVO vo) throws SQLException {
-        String sql = "select * from Medico where crm = ?";
+        String sql = "select * from Medico where crm = ?"; /* comando SQL para listagem por CRM. */
         PreparedStatement psts;
         ResultSet rs = null;
             psts = getConnection().prepareStatement(sql);
@@ -84,9 +89,10 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
         return rs;
     }
 
+    /* método para atualização dos dados de Usuarios */
     @Override
     public void Atualizar(MedicoVO vo) throws SQLException {
-        String sql = "update Pessoa set nome = ? where id = ?";
+        String sql = "update Pessoa set nome = ? where id = ?"; /* comando SQL para atualização (update). */
         PreparedStatement psts;
             psts = getConnection().prepareStatement(sql);
             psts.setString(1, vo.getNome());
