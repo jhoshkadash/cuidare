@@ -12,9 +12,8 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
     @Override
     public void Inserir(PacienteVO vo) throws SQLException {
         super.Inserir(vo);
-        String sql = "insert into Paciente (endereço, id_pessoa) values (?,?)"; /*
-                                                                                 * comando de inserção em SQL para o DB.
-                                                                                 */
+        String sql = "insert into Paciente (endereço, id_pessoa) values (?,?)"; //comando de inserção em SQL para o DB.
+                                                                                 
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ptst.setNString(1, vo.getEndereco());
@@ -32,7 +31,6 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
     }
 
     /* método de remoção de dados de Pacientes do DB */
-    /* método de remoção de Usuarios ao MariaDB */
     @Override
     public void Deletar(PacienteVO vo) throws SQLException {
         super.Inserir(vo);
@@ -54,8 +52,9 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         return rs;
     }
 
+    /* método de listagem de pacientes por nome */
     public ResultSet ListarPorNome(PacienteVO vo) throws SQLException {
-        String sql = "select * from Pessoa where nome = ?";
+        String sql = "select * from Pessoa where nome = ?"; //comando SQL para listagem por nome.
         PreparedStatement psts;
         ResultSet rs = null;
         psts = getConnection().prepareStatement(sql);
@@ -64,9 +63,10 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         return rs;
     }
 
+    /* método de listagem de pacientes por Id. */
     @Override
     public ResultSet ListarPorId(PacienteVO vo) throws SQLException {
-        String sql = "select * from Paciente where id_paciente = ?";
+        String sql = "select * from Paciente where id_paciente = ?"; //comando SQL para listagem por Id.
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -76,8 +76,9 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         return rs;
     }
 
+    /* método de listagem de pacientes por CPF. */
     public ResultSet ListarPorCpf(PacienteVO vo) throws SQLException {
-        String sql = "select * from Paciente where cpf = ?";
+        String sql = "select * from Paciente where cpf = ?"; //comando SQL para listagem por CPF.
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -87,9 +88,10 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         return rs;
     }
 
+    /* método de atualização dos dados de pacientes */
     @Override
     public void Atualizar(PacienteVO vo) throws SQLException {
-        String sql = "update Pessoa set nome = ? where id = ?";
+        String sql = "update Pessoa set nome = ? where id = ?"; //comando SQL para a atualização (update) de dados dos pacientes
         PreparedStatement psts;
 
         psts = getConnection().prepareStatement(sql);
