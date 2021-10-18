@@ -54,9 +54,10 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
         return rs;
     }
 
+    /* método de listagem por nome */
     @Override
     public ResultSet ListarPorNome(VO vo) throws SQLException {
-        String sql = "select * from User where nome = ?";
+        String sql = "select * from User where nome = ?"; /* comando de listagem por nome. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -65,10 +66,11 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
         rs = psts.executeQuery();
         return rs;
     }
-
+    
+    /* método de listagem por Id */
     @Override
     public ResultSet ListarPorId(VO vo) throws SQLException {
-        String sql = "select * from User where id = ?";
+        String sql = "select * from User where id = ?"; /* comando de listagem por Id. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -77,10 +79,11 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
         rs = psts.executeQuery();
         return rs;
     }
-
+    
+    /* comando de atualização em SQL. */
     @Override
     public void Atualizar(VO vo) throws SQLException {
-        String sql = "update User set nome = ? where id = ?";
+        String sql = "update User set nome = ? where id = ?"; /* comando de atualização em SQL. */
         PreparedStatement psts;
         psts = getConnection().prepareStatement(sql);
         psts.setString(1, vo.getNome());
