@@ -24,17 +24,20 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             psts.setFloat(6, vo.getPeso());
             psts.setFloat(7, vo.getAltura());
             psts.setLong(8, vo.getIdPaciente());
-            int affectedRows = psts.executeUpdate();
-            if (affectedRows == 0){
+            
+            int affectedRows = psts.executeUpdate(); //variável para verificação de alterações na tabela
+            
+            if (affectedRows == 0){ // verificação de alteração
                 throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
             }
-            ResultSet generatedKeys = psts.getGeneratedKeys();
-            if(generatedKeys.next()){
+            
+            ResultSet generatedKeys = psts.getGeneratedKeys(); //Id retornado da tabela
+            
+            if(generatedKeys.next()){ //caso nenhum seja id retornado, será inserido ao prontuário, caso não, a falha é exibida
                 vo.setIdProntuario(generatedKeys.getLong(1));
             } else{
                 throw new SQLException("A inserção falhou. nenhum id foi retornado.");
             } 
-
         }
 
     /* método de remoção de Usuarios ao MariaDB */
