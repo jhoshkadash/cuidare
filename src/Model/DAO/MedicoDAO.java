@@ -34,7 +34,7 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
             } 
     }
 
-    /* método de remoção de Usuarios ao MariaDB */
+    /* método de remoção de médicos */
     @Override
     public void Deletar(MedicoVO vo) throws SQLException {
         super.Inserir(vo);
@@ -45,7 +45,7 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
         ptst.executeUpdate();
     }
 
-    /* método de listagem de Usuarios ao MariaDB */
+    /* método de listagem de médicos */
     @Override
     public ResultSet Listar() throws SQLException {
         String sql = "select * from User"; /* comando de listagem em SQL para o DB. */
@@ -56,7 +56,7 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
         return rs;
     }
     
-    /* método de listagem de Usuarios por nome */
+    /* método de listagem de médicos por nome */
     @Override
     public ResultSet ListarPorNome(MedicoVO vo) throws SQLException {
         String sql = "select * from Pessoa where nome = ?"; /* comando SQL para listagem por nome. */
@@ -68,7 +68,7 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
         return rs;
     }
 
-    /* método de listagem de Usuarios por Id */
+    /* método de listagem de médicos por Id */
     @Override
     public ResultSet ListarPorId(MedicoVO vo) throws SQLException {
         String sql = "select * from Medico where id_medico = ?"; /* comando SQL para listagem por Id. */
@@ -80,7 +80,7 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
         return rs;
     }
 
-    /* método de listagem de Usuarios por CRM */
+    /* método de listagem de médicos por CRM */
     public ResultSet ListarPorCrm(MedicoVO vo) throws SQLException {
         String sql = "select * from Medico where crm = ?"; /* comando SQL para listagem por CRM. */
         PreparedStatement psts;
@@ -91,7 +91,7 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
         return rs;
     }
 
-    /* método para atualização dos dados de Usuarios */
+    /* método para atualização dos dados de médicos */
     @Override
     public void Atualizar(MedicoVO vo) throws SQLException {
         String sql = "update Pessoa set nome = ? where id = ?"; /* comando SQL para atualização (update). */
