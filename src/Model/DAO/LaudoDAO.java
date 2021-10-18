@@ -6,7 +6,7 @@ import java.sql.*;
 public class LaudoDAO extends BaseDAO <LaudoVO>
 /* declaração de classe para a criação de Laudos DAO implementados a MariaDB */
 {
-    /* método de inserção de laudos ao MariaDB */
+    /* método de inserção de laudos */
     @Override
     public void Inserir (LaudoVO vo) throws SQLException {
             String sql = "inset into Laudo (obs, id_medico, id_consulta ,id_paciente ) values (?,?,?,?)"; 
@@ -32,7 +32,7 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
             } 
     }
 
-    /* método de remoção de laudos ao MariaDB */
+    /* método de remoção de laudos */
     @Override
     public void Deletar (LaudoVO vo) throws SQLException  {
         String sql = "delete from Laudo where id_laudo = ?"; /* comando de remoção em SQL para o DB. */
@@ -42,7 +42,7 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
         ptst.executeUpdate();
     }
 
-    /* método de listagem de laudos ao MariaDB */
+    /* método de listagem de laudos */
     @Override
     public ResultSet Listar() throws SQLException {
         String sql = "select * from Laudo"; /* comando de listagem em SQL para o DB. */
@@ -53,7 +53,7 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
         return rs;
     }
 
-    /* método de listagem por nome de Usuarios */
+    /* método de listagem por nome de pessoas em laudos */
     public ResultSet ListarPorNome(PessoaVO vo) throws SQLException  {
         String sql = "select * from Pessoa where id = ?"; /* comando SQL para listagem por nome. */
         PreparedStatement psts;
