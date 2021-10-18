@@ -40,7 +40,7 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         }
     }
 
-    /* método de remoção de consultas ao MariaDB */
+    /* método de remoção de consultas */
     @Override
     public void Deletar (ConsultaVO vo) {
         try{
@@ -54,7 +54,7 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         }
     }
 
-    /* método de listagem de consultas ao MariaDB */
+    /* método de listagem de consultas */
     @Override
     public ResultSet Listar() {
         String sql = "select * from Consulta"; /* comando de listagem em SQL para o DB. */
