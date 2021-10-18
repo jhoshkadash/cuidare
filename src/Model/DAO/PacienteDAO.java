@@ -18,12 +18,14 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ptst.setNString(1, vo.getEndereco());
         ptst.setLong(2, vo.getIdPessoa());
-        int effectedrows = ptst.executeUpdate();
-        if (effectedrows == 0) {
+        
+        int effectedrows = ptst.executeUpdate(); //variável para verificação de alterações na tabela
+        
+        if (effectedrows == 0) { // verificação de alteração
             throw new SQLException("A inserção falhou. Nenhuma linha foi alterada");
         }
-        ResultSet generatedKeys = ptst.getGeneratedKeys();
-        if (generatedKeys.next()) {
+        ResultSet generatedKeys = ptst.getGeneratedKeys(); //Id retornado da tabela
+        if (generatedKeys.next()) { //caso nenhum seja id retornado, será inserido na pessoa, caso não exibe falha
             vo.setIdPaciente(generatedKeys.getLong(1));
         } else {
             throw new SQLException("A inserção falhou. Nenhum id foi retornado");
