@@ -11,7 +11,7 @@ public class GerenteDAO extends UsuarioDAO<GerenteVO>
  * declaração de classe para a criação de Gerentes DAO implementados a MariaDB
  */
 {
-    /* método de inserção de gerentes ao MariaDB */
+    /* método de inserção de gerentes */
     @Override
     public void Inserir(GerenteVO vo) throws SQLException {
         super.Inserir(vo);
@@ -36,7 +36,7 @@ public class GerenteDAO extends UsuarioDAO<GerenteVO>
         }
     }
 
-    /* método de remoção de gerentes ao MariaDB */
+    /* método de remoção de gerentes */
     @Override
     public void Deletar(GerenteVO vo) throws SQLException {
         super.Inserir(vo);
@@ -47,7 +47,7 @@ public class GerenteDAO extends UsuarioDAO<GerenteVO>
         ptst.executeUpdate();
     }
 
-    /* método de listagem de gerentes ao MariaDB */
+    /* método de listagem de gerentes */
     @Override
     public ResultSet Listar() throws SQLException {
         String sql = "select * from Gerente"; /* comando de listagem em SQL para o DB. */
