@@ -21,23 +21,26 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
             psts.setLong(2, vo.getIdPaciente());
             psts.setTimestamp(3, dataSql, vo.getDataConsulta());
             psts.setBoolean(4, vo.isStatus());
-            int affectedRows = psts.executeUpdate();
-            if (affectedRows == 0){
+            
+            int affectedRows = psts.executeUpdate(); //variável para verificação de alterações na tabela
+            
+            if (affectedRows == 0){ // verificação de alteração
                 throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
             }
-            ResultSet generatedKeys = psts.getGeneratedKeys();
-            if(generatedKeys.next()){
+            
+            ResultSet generatedKeys = psts.getGeneratedKeys(); //Id retornado da tabela
+            
+            if(generatedKeys.next()){ //caso nenhum seja id retornado, será inserido na consulta, caso não exibe falha
                 vo.setIdConsulta(generatedKeys.getLong(1));
             } else{
                 throw new SQLException("A inserção falhou. nenhum id foi retornado.");
             } 
-
         } catch(SQLException e){
             e.printStackTrace();
         }
     }
 
-    /* método de remoção de Usuarios ao MariaDB */
+    /* método de remoção de consultas ao MariaDB */
     @Override
     public void Deletar (ConsultaVO vo) {
         try{
@@ -51,7 +54,7 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         }
     }
 
-    /* método de listagem de Usuarios ao MariaDB */
+    /* método de listagem de consultas ao MariaDB */
     @Override
     public ResultSet Listar() {
         String sql = "select * from Consulta"; /* comando de listagem em SQL para o DB. */
@@ -65,9 +68,10 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         }
         return rs;
     }
-
+    
+    /* método de listagem de consultas por nome do médico */
     public ResultSet ListarPorNomeMedico (ConsultaVO vo) {
-        String sql = "select * from Medico where id_medico = ?";
+        String sql = "select * from Medico where id_medico = ?"; /* comando SQL para listagem por nome de médico. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -80,9 +84,10 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         }
         return rs;
     }
-
+    
+    /* método de listagem de consultas por nome do paciente */
     public ResultSet ListarPorNomePaciente (ConsultaVO vo) {
-        String sql = "select * from Paciente where id_Paciente = ?";
+        String sql = "select * from Paciente where id_Paciente = ?"; /* comando SQL para listagem por nome de paciente. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -96,8 +101,9 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         return rs;
     }
 
+    /* método de listagem de consultas por horário */
     public ResultSet ListarPorHorario (ConsultaVO vo) {
-        String sql = "select * from Medico where id_medico = ?";
+        String sql = "select * from Medico where id_medico = ?"; /* comando SQL para listagem por horário. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -111,9 +117,10 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         return rs;
     }
 
+    /* método de listagem de consultas por Id */
     @Override
     public ResultSet ListarPorId (ConsultaVO vo) {
-        String sql = "select * from Consulta where id_consulta = ?";
+        String sql = "select * from Consulta where id_consulta = ?"; /* comando SQL para listagem por Id. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -127,12 +134,13 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         return rs;
     }
 
+    /* método de listagem de consultas por data */
     public ResultSet ListarPorData(ConsultaVO vo){
-        String sql = "select * from Consulta where data = ?";
+        String sql = "select * from Consulta where data = ?"; /* comando SQL para listagem por data. */
         PreparedStatement psts = null;
         ResultSet rs =  null;
         Date data = new Date(vo.getDataConsulta().getTimeInMillis());
-        final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());// tratamento da classe calendar para timestamp
+        final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime()); // tratamento da classe calendar para timestamp
 
         try{
             psts.getConnection().prepareStatement(sql);
@@ -144,12 +152,13 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         return rs;
     }
     
+    /* método de atualização de dados de consultas */
     @Override
     public void Atualizar (ConsultaVO vo){
-        String sql = "update Consulta set data = ? where id_consulta = ?";//atualiza data da consulta
+        String sql = "update Consulta set data = ? where id_consulta = ?"; /* comando SQL para atualizar data da consulta. */
         PreparedStatement psts;
         Date data = new Date(vo.getDataConsulta().getTimeInMillis());
-        final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());// tratamento da classe calendar para timestamp
+        final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime()); //tratamento da classe calendar para timestamp
         try{
             psts = getConnection().prepareStatement(sql);
             psts.setTimestamp(1, dataSql, vo.getDataConsulta());
