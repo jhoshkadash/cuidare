@@ -25,7 +25,7 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
             throw new SQLException("A inserção falhou. Nenhuma linha foi alterada");
         }
         ResultSet generatedKeys = ptst.getGeneratedKeys(); //Id retornado da tabela
-        if (generatedKeys.next()) { //caso nenhum seja id retornado, será inserido na pessoa, caso não exibe falha
+        if (generatedKeys.next()) { //caso nenhum seja id retornado, será inserido ao paciente, caso não, a falha é exibida
             vo.setIdPaciente(generatedKeys.getLong(1));
         } else {
             throw new SQLException("A inserção falhou. Nenhum id foi retornado");
