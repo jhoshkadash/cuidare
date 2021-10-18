@@ -8,7 +8,7 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
  * declaração de classe para a criação de Usuarios DAO implementados a MariaDB
  */
 {
-    /* método de inserção de Usuarios ao MariaDB */
+    /* método de inserção de Usuarios */
     @Override
     public void Inserir(VO vo) throws SQLException {
         super.Inserir(vo);
@@ -35,7 +35,7 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
         }
     }
 
-    /* método de remoção de Usuarios ao MariaDB */
+    /* método de remoção de Usuarios */
     @Override
     public void Deletar(VO vo) throws SQLException {
         super.Inserir(vo);
@@ -46,7 +46,7 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
         ptst.executeUpdate();
     }
 
-    /* método de listagem de Usuarios ao MariaDB */
+    /* método de listagem de Usuarios */
     @Override
     public ResultSet Listar() throws SQLException {
         String sql = "select * from User"; /* comando de listagem em SQL para o DB. */
@@ -93,6 +93,5 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
         psts.setString(1, vo.getNome());
         psts.setLong(2, vo.getIdUser());
         psts.executeUpdate();
-
     }
 }
