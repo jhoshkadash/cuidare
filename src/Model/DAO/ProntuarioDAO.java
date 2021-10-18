@@ -7,7 +7,7 @@ import java.util.Date;
 public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
 /* declaração de classe para a criação de Prontuarios DAO implementados a MariaDB */
 {
-    /* método de inserção de Prontuarios ao MariaDB */
+    /* método de inserção de prontuários */
     @Override
     public void Inserir (ProntuarioVO vo) throws SQLException{
             Date data = new Date();
@@ -40,7 +40,7 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             } 
         }
 
-    /* método de remoção de Usuarios ao MariaDB */
+    /* método de remoção de Usuarios */
     @Override
     public void Deletar (ProntuarioVO vo) throws SQLException{
         String sql = "delete from Prontuario where id_prontuario = ?"; /* comando de remoção em SQL para o DB. */
@@ -50,7 +50,7 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
         ptst.executeUpdate();
     }
 
-    /* método de listagem de Usuarios ao MariaDB */
+    /* método de listagem de Usuarios */
     @Override
     public ResultSet Listar() throws SQLException {
         String sql = "select * from Prontuario"; /* comando de listagem em SQL para o DB. */
@@ -61,7 +61,7 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
         return rs;
     }
 
-     /* método de listagem por Id */
+     /* método de listagem de prontuário por Id */
     @Override
     public ResultSet ListarPorId (ProntuarioVO vo) throws SQLException {
         String sql = "select * from Prontuario where id_prontuario = ?"; /* comando de listagem por Id. */
@@ -73,7 +73,7 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
         return rs;
     }
     
-    /* método de atualização */
+    /* método de atualização de dados de prontuários */
     @Override
     public void Atualizar (ProntuarioVO vo) throws SQLException {
         String sql = "update Prontuario set medi_atuais = ? where id_prontuario = ?"; /* comando de atualização (update) em SQL. */
