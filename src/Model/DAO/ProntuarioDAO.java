@@ -58,10 +58,10 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
         return rs;
     }
 
-
+     /* método de listagem por Id */
     @Override
     public ResultSet ListarPorId (ProntuarioVO vo) throws SQLException {
-        String sql = "select * from Prontuario where id_prontuario = ?";
+        String sql = "select * from Prontuario where id_prontuario = ?"; /* comando de listagem por Id. */
         PreparedStatement psts;
         ResultSet rs = null;
             psts = getConnection().prepareStatement(sql);
@@ -70,9 +70,10 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
         return rs;
     }
     
+    /* método de atualização */
     @Override
     public void Atualizar (ProntuarioVO vo) throws SQLException {
-        String sql = "update Prontuario set medi_atuais = ? where id_prontuario = ?";
+        String sql = "update Prontuario set medi_atuais = ? where id_prontuario = ?"; /* comando de atualização (update) em SQL. */
         PreparedStatement psts;
             psts = getConnection().prepareStatement(sql);
             psts.setString(1,vo.getMediAtuais());
