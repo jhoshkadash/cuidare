@@ -8,7 +8,7 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
      * declaração de classe para a criação de Pacientes DAO implementados a MariaDB
      */
 
-    /* método de inserção de Pacientes ao MariaDB */
+    /* método de inserção de pacientes */
     @Override
     public void Inserir(PacienteVO vo) throws SQLException {
         super.Inserir(vo);
@@ -32,7 +32,7 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         }
     }
 
-    /* método de remoção de dados de Pacientes do DB */
+    /* método de remoção de dados de pacientes */
     @Override
     public void Deletar(PacienteVO vo) throws SQLException {
         super.Inserir(vo);
@@ -43,7 +43,7 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         ptst.executeUpdate();
     }
 
-    /* método de listagem de Usuarios ao MariaDB */
+    /* método de listagem de pacientes */
     @Override
     public ResultSet Listar() throws SQLException {
         String sql = "select * from Paciente"; /* comando de listagem em SQL para o DB. */
