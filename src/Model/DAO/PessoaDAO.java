@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
 
-    /* método de inserção de Pessoas ao MariaDB */
+    /* método de inserção de pessoas ao MariaDB */
     @Override
     public void Inserir(VO vo) throws SQLException {
         String sql = "insert into Pessoa  (nome,cpf) values (?,?)"; /* comando de inserção em SQL para o DB. */
@@ -27,7 +27,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         }
     }
 
-    /* método de remoção de Pessoas ao MariaDB */
+    /* método de remoção de pessoas */
     @Override
     public void Deletar(VO vo) throws SQLException {
         String sql = "delete from Pessoa where id = ?"; /* comando de remoção em SQL para o DB. */
@@ -37,7 +37,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         ptst.executeUpdate();
     }
 
-    /* método de listagem de Pessoas ao MariaDB */
+    /* método de listagem de pessoas */
     @Override
     public ResultSet Listar() throws SQLException {
 
@@ -51,7 +51,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         return rs;
     }
 
-    /* método de listagem por nome */
+    /* método de listagem de pessoas por nome */
     public ResultSet ListarPorNome(VO vo) throws SQLException {
         String sql = "select * from Pessoa where nome = ?"; /* comando de listagem por nome em SQL. */
         PreparedStatement psts;
@@ -64,7 +64,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         return rs;
     }
 
-    /* método de listagem Id */
+    /* método de listagem de pessoas por Id */
     @Override
     public ResultSet ListarPorId(VO vo) throws SQLException {
         String sql = "select * from Pessoa where id = ?"; /* comando para listagem por Id em SQL. */
@@ -78,7 +78,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         return rs;
     }
 
-    /* método de atualização */
+    /* método de atualização de dados de pessoas */
     @Override
     public void Atualizar(VO vo) throws SQLException {
         String sql = "update Pessoa set nome = ? where id = ?"; /* comando de atualização (update) em SQL. */
