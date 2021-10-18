@@ -38,7 +38,7 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
         ptst.executeUpdate();
     }
 
-    /* método de listagem de atendentes ao MariaDB */
+    /* método de listagem de atendentes */
     @Override
     public ResultSet Listar() {
         String sql = "select * from Atendente"; /* comando SQL para listagem de atendentes. */
