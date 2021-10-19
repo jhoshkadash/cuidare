@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class GerenteDAO extends UsuarioDAO<GerenteVO>
+public class GerenteDAO extends UsuarioDAO <GerenteVO>
 /*
  * declaração de classe para a criação de Gerentes DAO implementados a MariaDB
  */
@@ -15,10 +15,12 @@ public class GerenteDAO extends UsuarioDAO<GerenteVO>
     @Override
     public void Inserir(GerenteVO vo) throws SQLException {
         super.Inserir(vo);
-        String sql = "inset into Gerente (id_user, id_pessoa) values (?,?)";
+        String sql = "inset into Gerente (id_gerente_user, id_gerente_pessoa) values (?,?)";
         PreparedStatement psts;
         psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        vo.setIdUser();
         psts.setLong(1, vo.getIdUser());
+        vo.setIdPessoa();
         psts.setLong(2, vo.getIdPessoa());
         int affectedRows = psts.executeUpdate();
         if (affectedRows == 0) {
@@ -56,7 +58,7 @@ public class GerenteDAO extends UsuarioDAO<GerenteVO>
 
     @Override
     public ResultSet ListarPorNome(GerenteVO vo) throws SQLException {
-        String sql = "select * from Gerente where nome = ?";
+        String sql = "select * from Pessoa where nome = ?";
         PreparedStatement psts;
         ResultSet rs = null;
 

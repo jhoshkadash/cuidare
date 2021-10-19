@@ -55,16 +55,16 @@ public class MedicoVO extends UsuarioVO {
         return this.idPessoa;
     }
 
-    public void setIdPessoa(Long idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setIdPessoa() {
+        this.idPessoa = super.getIdPessoa();
     }
 
     public Long getIdUser() {
         return this.idUser;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setIdUser() {
+        this.idUser = super.getIdUser();
     }
 
     public Long getIdMedico() {

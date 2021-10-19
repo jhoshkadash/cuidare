@@ -10,13 +10,15 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
     @Override
     public void Inserir(MedicoVO vo) throws SQLException {
             super.Inserir(vo);
-            String sql = "inset into Medico (crm, valor_consulta, endereço, id_pessoa, id_user, ) values (?,?,?,?,?)";
+            String sql = "inset into Medico (crm, valor_consulta, endereco, id_medico_pessoa, id_medico_user, ) values (?,?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setString(1, vo.getCrm());
             psts.setDouble(2, vo.getValorConsulta());
             psts.setString(3, vo.getEndereco());
+            vo.setIdPessoa();
             psts.setLong(4, vo.getIdPessoa());
+            vo.setIdUser();
             psts.setLong(5, vo.getIdUser());
             int affectedRows = psts.executeUpdate();
             if (affectedRows == 0){

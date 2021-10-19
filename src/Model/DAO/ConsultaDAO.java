@@ -127,7 +127,7 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         return rs;
     }
 
-    public ResultSet ListarPorData(ConsultaVO vo){
+    public ResultSet ListarPorData(ConsultaVO vo) throws SQLException {
         String sql = "select * from Consulta where data = ?";
         PreparedStatement psts = null;
         ResultSet rs =  null;

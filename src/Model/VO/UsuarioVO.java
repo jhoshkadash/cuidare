@@ -3,11 +3,11 @@ package Model.VO;
 public class UsuarioVO extends PessoaVO {
     private String login;
     private String senha;
-    private Integer tipo;// 1-> atendente, 2-> medico, 3-> gerente
+    private int tipo = 0;// 1-> atendente, 2-> medico, 3-> gerente
     private Long idUser;
     private Long idPessoa;
 
-    public UsuarioVO(String nome, String cpf, String login, String senha,  Integer tipo) {
+    public UsuarioVO(String nome, String cpf, String login, String senha, int tipo) {
         super(nome, cpf);
         this.login = login;
         this.senha = senha;
@@ -63,7 +63,7 @@ public class UsuarioVO extends PessoaVO {
     }
 
     public Long getIdPessoa() {
-        return this.idPessoa;
+        return super.getIdPessoa();
     }
 
     public void setIdPessoa(Long idPessoa) {

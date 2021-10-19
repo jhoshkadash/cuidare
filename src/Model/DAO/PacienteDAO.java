@@ -12,12 +12,13 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
     @Override
     public void Inserir(PacienteVO vo) throws SQLException {
         super.Inserir(vo);
-        String sql = "insert into Paciente (endereço, id_pessoa) values (?,?)"; /*
+        String sql = "insert into Paciente (endereco, id_paciente_pessoa) values (?,?)"; /*
                                                                                  * comando de inserção em SQL para o DB.
                                                                                  */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ptst.setNString(1, vo.getEndereco());
+        vo.setIdPessoa();
         ptst.setLong(2, vo.getIdPessoa());
         int effectedrows = ptst.executeUpdate();
         if (effectedrows == 0) {
@@ -36,7 +37,7 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
     @Override
     public void Deletar(PacienteVO vo) throws SQLException {
         super.Inserir(vo);
-        String sql = "delete from Paciente where id_pessoa = ?"; /* comando de remoção em SQL para o DB. */
+        String sql = "delete from Paciente where id_paciente_pessoa = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
         ptst.setDouble(1, vo.getIdPessoa());
@@ -77,7 +78,7 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
     }
 
     public ResultSet ListarPorCpf(PacienteVO vo) throws SQLException {
-        String sql = "select * from Paciente where cpf = ?";
+        String sql = "select * from Pessoa where cpf = ?";
         PreparedStatement psts;
         ResultSet rs = null;
 

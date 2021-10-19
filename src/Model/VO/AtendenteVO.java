@@ -21,8 +21,8 @@ public class AtendenteVO extends UsuarioVO {
         return this.idUser;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setIdUser() {
+        this.idUser = super.getIdUser();
     }
 
     public Long getIdAtendente() {

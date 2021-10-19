@@ -16,25 +16,24 @@ public class GerenteVO extends UsuarioVO {
         return this.idUser;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setIdUser() {
+        this.idUser = super.getIdUser();
     }
 
     public Long getIdPessoa() {
         return this.idPessoa;
     }
 
-    public void setIdPessoa(Long idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setIdPessoa() {
+        this.idPessoa = super.getIdPessoa();
     }
 
     public Long getIdGerente() {
         return this.idGerente;
     }
 
-    public void setIdGerente(Long idGerente) {
-        this.idGerente = idGerente;
-    }
     
-
+    public void setIdGerente(Long idgerente){
+        this.idGerente = idgerente;
+    }
 }

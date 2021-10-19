@@ -9,7 +9,7 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
     /* método de inserção de laudos ao MariaDB */
     @Override
     public void Inserir (LaudoVO vo) throws SQLException {
-            String sql = "inset into Laudo (obs, id_medico, id_consulta ,id_paciente ) values (?,?,?,?)";
+            String sql = "inset into Laudo (obs, id_medico, id_consulta ,id_prontuario_paciente ) values (?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setString(1, vo.getObservacoes());

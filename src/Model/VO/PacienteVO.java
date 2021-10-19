@@ -30,8 +30,8 @@ public class PacienteVO extends PessoaVO {
         return this.idPessoa;
     }
 
-    public void setIdPessoa(Long idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setIdPessoa() {
+        this.idPessoa = super.getIdPessoa();
     }
 
     public Long getIdPaciente() {
