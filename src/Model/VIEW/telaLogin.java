@@ -1,9 +1,6 @@
 package Model.VIEW;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class telaLogin extends Application{
@@ -14,11 +11,6 @@ public class telaLogin extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource(""));
-        Scene cena = new Scene(root);
-
-        primaryStage.setTitle("CUIDARE");
-        primaryStage.setScene(cena);
-        primaryStage.show();
+       
     }
 }

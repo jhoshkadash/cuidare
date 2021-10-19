@@ -11,6 +11,14 @@
         "e:\\Drivers & Programas\\javafx-sdk-17.0.0.1\\lib\\javafx.media.jar",
         "e:\\Drivers & Programas\\javafx-sdk-17.0.0.1\\lib\\javafx.swing.jar",
         "e:\\Drivers & Programas\\javafx-sdk-17.0.0.1\\lib\\javafx.web.jar",
-        "e:\\Drivers & Programas\\javafx-sdk-17.0.0.1\\lib\\javafx-swt.jar"
+        "e:\\Drivers & Programas\\javafx-sdk-17.0.0.1\\lib\\javafx-swt.jar",
+        "e:\\Java libs\\javafx-sdk-17.0.1\\lib\\javafx.base.jar",
+        "e:\\Java libs\\javafx-sdk-17.0.1\\lib\\javafx.controls.jar",
+        "e:\\Java libs\\javafx-sdk-17.0.1\\lib\\javafx.fxml.jar",
+        "e:\\Java libs\\javafx-sdk-17.0.1\\lib\\javafx.graphics.jar",
+        "e:\\Java libs\\javafx-sdk-17.0.1\\lib\\javafx.media.jar",
+        "e:\\Java libs\\javafx-sdk-17.0.1\\lib\\javafx.swing.jar",
+        "e:\\Java libs\\javafx-sdk-17.0.1\\lib\\javafx.web.jar",
+        "e:\\Java libs\\javafx-sdk-17.0.1\\lib\\javafx-swt.jar"
     ]
 }
