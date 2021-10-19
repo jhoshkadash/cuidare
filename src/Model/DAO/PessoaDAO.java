@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
 
-    /* método de inserção de Pessoas ao MariaDB */
+    /* método de inserção de pessoas ao MariaDB */
     @Override
     public void Inserir(VO vo) throws SQLException {
         String sql = "insert into Pessoa  (nome,cpf) values (?,?)"; /* comando de inserção em SQL para o DB. */
@@ -14,20 +14,20 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         ptst.setNString(1, vo.getNome());
         ptst.setNString(2, vo.getCpf());
 
-        int affectedRows = ptst.executeUpdate(); // variavel para verificar se houve alteração na tabela
+        int affectedRows = ptst.executeUpdate(); //variável para verificação de alterações na tabela
 
         if (affectedRows == 0) { // verificação de alteração
             throw new SQLException("A inserção de dados falhou. Nenhuma linha foi alterada.");
         }
-        ResultSet gerenatedKeys = ptst.getGeneratedKeys(); // id retornado da tabela
-        if (gerenatedKeys.next()) { // se houve id retornado, será inserido na pessoa, caso não exibe falha
+        ResultSet gerenatedKeys = ptst.getGeneratedKeys(); //Id retornado da tabela
+        if (gerenatedKeys.next()) { //caso nenhum seja id retornado, será inserido na pessoa, caso não exibe falha
             vo.setIdPessoa(gerenatedKeys.getLong(1));
         } else {
             throw new SQLException("A inserção falhou. nenhum id foi retornado");
         }
     }
 
-    /* método de remoção de Pessoas ao MariaDB */
+    /* método de remoção de pessoas */
     @Override
     public void Deletar(VO vo) throws SQLException {
         String sql = "delete from Pessoa where id = ?"; /* comando de remoção em SQL para o DB. */
@@ -37,7 +37,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         ptst.executeUpdate();
     }
 
-    /* método de listagem de Pessoas ao MariaDB */
+    /* método de listagem de pessoas */
     @Override
     public ResultSet Listar() throws SQLException {
 
@@ -51,8 +51,9 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         return rs;
     }
 
+    /* método de listagem de pessoas por nome */
     public ResultSet ListarPorNome(VO vo) throws SQLException {
-        String sql = "select * from Pessoa where nome = ?";
+        String sql = "select * from Pessoa where nome = ?"; /* comando de listagem por nome em SQL. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -63,9 +64,10 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         return rs;
     }
 
+    /* método de listagem de pessoas por Id */
     @Override
     public ResultSet ListarPorId(VO vo) throws SQLException {
-        String sql = "select * from Pessoa where id = ?";
+        String sql = "select * from Pessoa where id = ?"; /* comando para listagem por Id em SQL. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -76,9 +78,10 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         return rs;
     }
 
+    /* método de atualização de dados de pessoas */
     @Override
     public void Atualizar(VO vo) throws SQLException {
-        String sql = "update Pessoa set nome = ? where id = ?";
+        String sql = "update Pessoa set nome = ? where id = ?"; /* comando de atualização (update) em SQL. */
         PreparedStatement psts;
         psts = getConnection().prepareStatement(sql);
         psts.setString(1, vo.getNome());

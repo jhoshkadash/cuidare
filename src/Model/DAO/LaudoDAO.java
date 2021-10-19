@@ -6,29 +6,37 @@ import java.sql.*;
 public class LaudoDAO extends BaseDAO <LaudoVO>
 /* declaração de classe para a criação de Laudos DAO implementados a MariaDB */
 {
-    /* método de inserção de laudos ao MariaDB */
+    /* método de inserção de laudos */
     @Override
     public void Inserir (LaudoVO vo) throws SQLException {
+<<<<<<< HEAD
             String sql = "inset into Laudo (obs, id_medico, id_consulta ,id_prontuario_paciente ) values (?,?,?,?)";
+=======
+            String sql = "inset into Laudo (obs, id_medico, id_consulta ,id_paciente ) values (?,?,?,?)"; 
+>>>>>>> d61b2743b701e042d9c8d279b42e97437f2ae8a3
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setString(1, vo.getObservacoes());
             psts.setLong(2, vo.getIdMedico());
             psts.setLong(3, vo.getIdConsulta());
             psts.setLong(4, vo.getIdPaciente());
-            int affectedRows = psts.executeUpdate();
-            if (affectedRows == 0){
+            
+            int affectedRows = psts.executeUpdate(); //variável para verificação de alterações na tabela
+            
+            if (affectedRows == 0){ // verificação de alteração
                 throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
             }
-            ResultSet generatedKeys = psts.getGeneratedKeys();
-            if(generatedKeys.next()){
+            
+            ResultSet generatedKeys = psts.getGeneratedKeys(); //Id retornado da tabela
+            
+            if(generatedKeys.next()){ //caso nenhum seja id retornado, será inserido no laudo, caso não exibe falha
                 vo.setIdLaudo(generatedKeys.getLong(1));
             } else{
                 throw new SQLException("A inserção falhou. nenhum id foi retornado.");
             } 
     }
 
-    /* método de remoção de Usuarios ao MariaDB */
+    /* método de remoção de laudos */
     @Override
     public void Deletar (LaudoVO vo) throws SQLException  {
         String sql = "delete from Laudo where id_laudo = ?"; /* comando de remoção em SQL para o DB. */
@@ -38,7 +46,7 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
         ptst.executeUpdate();
     }
 
-    /* método de listagem de Usuarios ao MariaDB */
+    /* método de listagem de laudos */
     @Override
     public ResultSet Listar() throws SQLException {
         String sql = "select * from Laudo"; /* comando de listagem em SQL para o DB. */
@@ -49,8 +57,9 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
         return rs;
     }
 
+    /* método de listagem por nome de pessoas em laudos */
     public ResultSet ListarPorNome(PessoaVO vo) throws SQLException  {
-        String sql = "select * from Pessoa where id = ?";
+        String sql = "select * from Pessoa where id = ?"; /* comando SQL para listagem por nome. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -60,10 +69,10 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
         return rs;
     }
 
-
+    /* método de listagem por Id de laudos */
     @Override
     public ResultSet ListarPorId (LaudoVO vo) throws SQLException  {
-        String sql = "select * from Laudo where id_laudo = ?";
+        String sql = "select * from Laudo where id_laudo = ?"; /* comando SQL para listagem por Id. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -73,9 +82,10 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
         return rs;
     }
     
+    /* método de atualização dos dados de laudos */
     @Override
     public void Atualizar (LaudoVO vo) throws SQLException {
-        String sql = "update Laudo set obs = ? where id_laudo = ?";
+        String sql = "update Laudo set obs = ? where id_laudo = ?"; /* comando SQL para atualização (update). */
         PreparedStatement psts;
             psts = getConnection().prepareStatement(sql);
             psts.setString(1,vo.getObservacoes());

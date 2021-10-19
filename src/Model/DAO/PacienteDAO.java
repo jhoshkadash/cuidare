@@ -8,32 +8,38 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
      * declaração de classe para a criação de Pacientes DAO implementados a MariaDB
      */
 
-    /* método de inserção de Pacientes ao MariaDB */
+    /* método de inserção de pacientes */
     @Override
     public void Inserir(PacienteVO vo) throws SQLException {
         super.Inserir(vo);
+<<<<<<< HEAD
         String sql = "insert into Paciente (endereco, id_paciente_pessoa) values (?,?)"; /*
                                                                                  * comando de inserção em SQL para o DB.
                                                                                  */
+=======
+        String sql = "insert into Paciente (endereço, id_pessoa) values (?,?)"; //comando de inserção em SQL para o DB.
+                                                                                 
+>>>>>>> d61b2743b701e042d9c8d279b42e97437f2ae8a3
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ptst.setNString(1, vo.getEndereco());
         vo.setIdPessoa();
         ptst.setLong(2, vo.getIdPessoa());
-        int effectedrows = ptst.executeUpdate();
-        if (effectedrows == 0) {
+        
+        int effectedrows = ptst.executeUpdate(); //variável para verificação de alterações na tabela
+        
+        if (effectedrows == 0) { // verificação de alteração
             throw new SQLException("A inserção falhou. Nenhuma linha foi alterada");
         }
-        ResultSet generatedKeys = ptst.getGeneratedKeys();
-        if (generatedKeys.next()) {
+        ResultSet generatedKeys = ptst.getGeneratedKeys(); //Id retornado da tabela
+        if (generatedKeys.next()) { //caso nenhum seja id retornado, será inserido ao paciente, caso não, a falha é exibida
             vo.setIdPaciente(generatedKeys.getLong(1));
         } else {
             throw new SQLException("A inserção falhou. Nenhum id foi retornado");
         }
     }
 
-    /* método de remoção de dados de Pacientes do DB */
-    /* método de remoção de Usuarios ao MariaDB */
+    /* método de remoção de dados de pacientes */
     @Override
     public void Deletar(PacienteVO vo) throws SQLException {
         super.Inserir(vo);
@@ -44,7 +50,7 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         ptst.executeUpdate();
     }
 
-    /* método de listagem de Usuarios ao MariaDB */
+    /* método de listagem de pacientes */
     @Override
     public ResultSet Listar() throws SQLException {
         String sql = "select * from Paciente"; /* comando de listagem em SQL para o DB. */
@@ -55,8 +61,9 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         return rs;
     }
 
+    /* método de listagem de pacientes por nome */
     public ResultSet ListarPorNome(PacienteVO vo) throws SQLException {
-        String sql = "select * from Pessoa where nome = ?";
+        String sql = "select * from Pessoa where nome = ?"; //comando SQL para listagem por nome.
         PreparedStatement psts;
         ResultSet rs = null;
         psts = getConnection().prepareStatement(sql);
@@ -65,9 +72,10 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         return rs;
     }
 
+    /* método de listagem de pacientes por Id. */
     @Override
     public ResultSet ListarPorId(PacienteVO vo) throws SQLException {
-        String sql = "select * from Paciente where id_paciente = ?";
+        String sql = "select * from Paciente where id_paciente = ?"; //comando SQL para listagem por Id.
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -77,8 +85,13 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         return rs;
     }
 
+    /* método de listagem de pacientes por CPF. */
     public ResultSet ListarPorCpf(PacienteVO vo) throws SQLException {
+<<<<<<< HEAD
         String sql = "select * from Pessoa where cpf = ?";
+=======
+        String sql = "select * from Paciente where cpf = ?"; //comando SQL para listagem por CPF.
+>>>>>>> d61b2743b701e042d9c8d279b42e97437f2ae8a3
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -88,9 +101,10 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         return rs;
     }
 
+    /* método de atualização dos dados de pacientes */
     @Override
     public void Atualizar(PacienteVO vo) throws SQLException {
-        String sql = "update Pessoa set nome = ? where id = ?";
+        String sql = "update Pessoa set nome = ? where id = ?"; //comando SQL para a atualização (update) de dados dos pacientes
         PreparedStatement psts;
 
         psts = getConnection().prepareStatement(sql);

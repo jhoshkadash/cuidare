@@ -7,7 +7,7 @@ import java.util.Date;
 public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
 /* declaração de classe para a criação de Prontuarios DAO implementados a MariaDB */
 {
-    /* método de inserção de Prontuarios ao MariaDB */
+    /* método de inserção de prontuários */
     @Override
     public void Inserir (ProntuarioVO vo) throws SQLException{
             Date data = new Date();
@@ -24,20 +24,23 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             psts.setFloat(6, vo.getPeso());
             psts.setFloat(7, vo.getAltura());
             psts.setLong(8, vo.getIdPaciente());
-            int affectedRows = psts.executeUpdate();
-            if (affectedRows == 0){
+            
+            int affectedRows = psts.executeUpdate(); //variável para verificação de alterações na tabela
+            
+            if (affectedRows == 0){ // verificação de alteração
                 throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
             }
-            ResultSet generatedKeys = psts.getGeneratedKeys();
-            if(generatedKeys.next()){
+            
+            ResultSet generatedKeys = psts.getGeneratedKeys(); //Id retornado da tabela
+            
+            if(generatedKeys.next()){ //caso nenhum seja id retornado, será inserido ao prontuário, caso não, a falha é exibida
                 vo.setIdProntuario(generatedKeys.getLong(1));
             } else{
                 throw new SQLException("A inserção falhou. nenhum id foi retornado.");
             } 
-
         }
 
-    /* método de remoção de Usuarios ao MariaDB */
+    /* método de remoção de Usuarios */
     @Override
     public void Deletar (ProntuarioVO vo) throws SQLException{
         String sql = "delete from Prontuario where id_prontuario = ?"; /* comando de remoção em SQL para o DB. */
@@ -47,7 +50,7 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
         ptst.executeUpdate();
     }
 
-    /* método de listagem de Usuarios ao MariaDB */
+    /* método de listagem de Usuarios */
     @Override
     public ResultSet Listar() throws SQLException {
         String sql = "select * from Prontuario"; /* comando de listagem em SQL para o DB. */
@@ -58,10 +61,10 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
         return rs;
     }
 
-
+     /* método de listagem de prontuário por Id */
     @Override
     public ResultSet ListarPorId (ProntuarioVO vo) throws SQLException {
-        String sql = "select * from Prontuario where id_prontuario = ?";
+        String sql = "select * from Prontuario where id_prontuario = ?"; /* comando de listagem por Id. */
         PreparedStatement psts;
         ResultSet rs = null;
             psts = getConnection().prepareStatement(sql);
@@ -70,9 +73,10 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
         return rs;
     }
     
+    /* método de atualização de dados de prontuários */
     @Override
     public void Atualizar (ProntuarioVO vo) throws SQLException {
-        String sql = "update Prontuario set medi_atuais = ? where id_prontuario = ?";
+        String sql = "update Prontuario set medi_atuais = ? where id_prontuario = ?"; /* comando de atualização (update) em SQL. */
         PreparedStatement psts;
             psts = getConnection().prepareStatement(sql);
             psts.setString(1,vo.getMediAtuais());

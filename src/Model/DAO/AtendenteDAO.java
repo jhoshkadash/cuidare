@@ -6,7 +6,7 @@ import java.sql.*;
 public class AtendenteDAO extends UsuarioDAO <AtendenteVO> 
 /* declaração de classe para a criação de Atendentes DAO implementados a MariaDB */
 {
-    /* criação do método de inserção de atendentes ao MariaDB */
+    /* criação do método de inserção de atendentes */
     @Override
     public void Inserir (AtendenteVO vo) throws SQLException {
             super.Inserir(vo);
@@ -29,21 +29,21 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
             } 
     }
 
-    /* método de remoção de Usuarios ao MariaDB */
+    /* método de remoção de atendentes */
     @Override
     public void Deletar(AtendenteVO vo) throws SQLException {
         super.Inserir(vo);
-        String sql = "delete from Atendente where id_atendente = ?"; /* comando de remoção em SQL para o DB. */
+        String sql = "delete from Atendente where id_atendente = ?"; /* comando SQL para remoção de atendentes. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
         ptst.setDouble(1, vo.getIdAtendente());
         ptst.executeUpdate();
     }
 
-    /* método de listagem de Usuarios ao MariaDB */
+    /* método de listagem de atendentes */
     @Override
     public ResultSet Listar() {
-        String sql = "select * from Atendente"; /* comando de listagem em SQL para o DB. */
+        String sql = "select * from Atendente"; /* comando SQL para listagem de atendentes. */
         Statement st;
         ResultSet rs = null;
         try {
@@ -55,9 +55,10 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
         return rs;
     }
 
+    /* método de listagem de atendentes por nome */
     @Override
     public ResultSet ListarPorNome (AtendenteVO vo) {
-        String sql = "select * from Pessoa where nome = ?";
+        String sql = "select * from Pessoa where nome = ?"; /* comando SQL para listagem por nome de atendentes. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -71,9 +72,10 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
         return rs;
     }
 
+    /* método de listagem de atendentes por Id */
     @Override
     public ResultSet ListarPorId (AtendenteVO vo) {
-        String sql = "select * from Gerente where id_atendente = ?";
+        String sql = "select * from Gerente where id_atendente = ?"; /* comando SQL para listagem de atendentes por Id. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -87,9 +89,10 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
         return rs;
     }
     
+    /* método de atualização dos dados de atendentes */
     @Override
     public void Atualizar (AtendenteVO vo){
-        String sql = "update Pessoa set nome = ? where id = ?";
+        String sql = "update Pessoa set nome = ? where id = ?"; /* comando SQL para atualização (update) de dados de atendentes. */
         PreparedStatement psts;
         try{
             psts = getConnection().prepareStatement(sql);

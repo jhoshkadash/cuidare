@@ -8,7 +8,7 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
  * declaração de classe para a criação de Usuarios DAO implementados a MariaDB
  */
 {
-    /* método de inserção de Usuarios ao MariaDB */
+    /* método de inserção de Usuarios */
     @Override
     public void Inserir(VO vo) throws SQLException {
         super.Inserir(vo);
@@ -18,20 +18,30 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
         psts.setString(1, vo.getLogin());
         psts.setString(2, vo.getSenha());
         psts.setInt(3, vo.getTipo());
+<<<<<<< HEAD
         psts.setLong(4,vo.getIdPessoa());
         int affectedRows = psts.executeUpdate();
         if (affectedRows == 0) {
+=======
+        psts.setDouble(4, vo.getIdPessoa());
+        
+        int affectedRows = psts.executeUpdate(); //variável para verificação de alterações na tabela
+        
+        if (affectedRows == 0) { // verificação de alteração
+>>>>>>> d61b2743b701e042d9c8d279b42e97437f2ae8a3
             throw new SQLException("A inserção falhou. Nenhuma linha foi alterada.");
         }
-        ResultSet generatedKeys = psts.getGeneratedKeys();
-        if (generatedKeys.next()) {
+        
+        ResultSet generatedKeys = psts.getGeneratedKeys(); //Id retornado da tabela
+        
+        if (generatedKeys.next()) { //caso nenhum seja id retornado, será inserido ao usuário, caso não, a falha é exibida
             vo.setIdUser(generatedKeys.getLong(1));
         } else {
             throw new SQLException("A inserção falhou. nenhum id foi retornado.");
         }
     }
 
-    /* método de remoção de Usuarios ao MariaDB */
+    /* método de remoção de Usuarios */
     @Override
     public void Deletar(VO vo) throws SQLException {
         super.Inserir(vo);
@@ -42,7 +52,7 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
         ptst.executeUpdate();
     }
 
-    /* método de listagem de Usuarios ao MariaDB */
+    /* método de listagem de Usuarios */
     @Override
     public ResultSet Listar() throws SQLException {
         String sql = "select * from usuario"; /* comando de listagem em SQL para o DB. */
@@ -54,9 +64,14 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
         return rs;
     }
 
+    /* método de listagem por nome */
     @Override
     public ResultSet ListarPorNome(VO vo) throws SQLException {
+<<<<<<< HEAD
         String sql = "select * from Pessoa where nome = ?";
+=======
+        String sql = "select * from User where nome = ?"; /* comando de listagem por nome. */
+>>>>>>> d61b2743b701e042d9c8d279b42e97437f2ae8a3
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -65,10 +80,15 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
         rs = psts.executeQuery();
         return rs;
     }
-
+    
+    /* método de listagem por Id */
     @Override
     public ResultSet ListarPorId(VO vo) throws SQLException {
+<<<<<<< HEAD
         String sql = "select * from usuario where id_user = ?";
+=======
+        String sql = "select * from User where id = ?"; /* comando de listagem por Id. */
+>>>>>>> d61b2743b701e042d9c8d279b42e97437f2ae8a3
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -77,15 +97,19 @@ public class UsuarioDAO<VO extends UsuarioVO> extends PessoaDAO<VO>
         rs = psts.executeQuery();
         return rs;
     }
-
+    
+    /* comando de atualização em SQL. */
     @Override
     public void Atualizar(VO vo) throws SQLException {
+<<<<<<< HEAD
         String sql = "update Pessoa set nome = ? where id = ?";
+=======
+        String sql = "update User set nome = ? where id = ?"; /* comando de atualização em SQL. */
+>>>>>>> d61b2743b701e042d9c8d279b42e97437f2ae8a3
         PreparedStatement psts;
         psts = getConnection().prepareStatement(sql);
         psts.setString(1, vo.getNome());
         psts.setLong(2, vo.getIdPessoa());
         psts.executeUpdate();
-
     }
 }
