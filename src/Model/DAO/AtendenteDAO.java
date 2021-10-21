@@ -13,9 +13,7 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
             String sql = "inset into Atendente (id_atendente_user, id_atendente_pessoa) values (?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            vo.setIdUser();
             psts.setLong(1, vo.getIdUser());
-            vo.setIdPessoa();
             psts.setLong(2, vo.getIdPessoa());
             int affectedRows = psts.executeUpdate();
             if (affectedRows == 0){
@@ -32,12 +30,12 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
     /* método de remoção de atendentes */
     @Override
     public void Deletar(AtendenteVO vo) throws SQLException {
-        super.Inserir(vo);
         String sql = "delete from Atendente where id_atendente = ?"; /* comando SQL para remoção de atendentes. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
         ptst.setDouble(1, vo.getIdAtendente());
         ptst.executeUpdate();
+        super.Deletar(vo);
     }
 
     /* método de listagem de atendentes */

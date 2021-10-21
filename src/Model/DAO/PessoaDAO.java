@@ -19,9 +19,12 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         if (affectedRows == 0) { // verificação de alteração
             throw new SQLException("A inserção de dados falhou. Nenhuma linha foi alterada.");
         }
+
         ResultSet gerenatedKeys = ptst.getGeneratedKeys(); //Id retornado da tabela
+        
+
         if (gerenatedKeys.next()) { //caso nenhum seja id retornado, será inserido na pessoa, caso não exibe falha
-            vo.setIdPessoa(gerenatedKeys.getLong(1));
+            vo.setIdPessoa(gerenatedKeys.getLong(1)); 
         } else {
             throw new SQLException("A inserção falhou. nenhum id foi retornado");
         }
@@ -33,7 +36,7 @@ public class PessoaDAO<VO extends PessoaVO> extends BaseDAO<VO> {
         String sql = "delete from Pessoa where id = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
-        ptst.setDouble(1, vo.getIdPessoa());
+        ptst.setLong(1, vo.getIdPessoa());
         ptst.executeUpdate();
     }
 

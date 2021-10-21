@@ -4,8 +4,6 @@ public class MedicoVO extends UsuarioVO {
     private String endereco;
     private Double valorConsulta;
     private String crm;
-    private Long idPessoa;
-    private Long idUser;
     private Long idMedico;
 
     public MedicoVO(String nome, String cpf, String login, String senha, String endereco, Double valorConsulta, String crm) {
@@ -50,22 +48,6 @@ public class MedicoVO extends UsuarioVO {
     }
 
 
-
-    public Long getIdPessoa() {
-        return this.idPessoa;
-    }
-
-    public void setIdPessoa() {
-        this.idPessoa = super.getIdPessoa();
-    }
-
-    public Long getIdUser() {
-        return this.idUser;
-    }
-
-    public void setIdUser() {
-        this.idUser = super.getIdUser();
-    }
 
     public Long getIdMedico() {
         return this.idMedico;

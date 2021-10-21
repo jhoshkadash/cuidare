@@ -16,9 +16,7 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
             psts.setString(1, vo.getCrm());
             psts.setDouble(2, vo.getValorConsulta());
             psts.setString(3, vo.getEndereco());
-            vo.setIdPessoa();
             psts.setLong(4, vo.getIdPessoa());
-            vo.setIdUser();
             psts.setLong(5, vo.getIdUser());
         
             int affectedRows = psts.executeUpdate(); //variável para verificação de alterações na tabela
@@ -39,12 +37,12 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
     /* método de remoção de médicos */
     @Override
     public void Deletar(MedicoVO vo) throws SQLException {
-        super.Inserir(vo);
         String sql = "delete from Medico where id_medico = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
-        ptst.setDouble(1, vo.getIdUser());
+        ptst.setLong(1, vo.getIdMedico());
         ptst.executeUpdate();
+        super.Deletar(vo);
     }
 
     /* método de listagem de médicos */

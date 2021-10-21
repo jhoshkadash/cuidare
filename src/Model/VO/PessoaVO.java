@@ -45,7 +45,8 @@ public abstract class PessoaVO {
         return this.id;
     }
 
-    public void setIdPessoa(Long id){
-        this.id = id;
+    public void setIdPessoa(Long idPessoa){
+        this.id = idPessoa;
+        System.out.println("id pessoa : " + this.id);
     }
 }

@@ -134,26 +134,17 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
         return rs;
     }
 
-<<<<<<< HEAD
     public ResultSet ListarPorData(ConsultaVO vo) throws SQLException {
         String sql = "select * from Consulta where data = ?";
-=======
-    /* método de listagem de consultas por data */
-    public ResultSet ListarPorData(ConsultaVO vo){
-        String sql = "select * from Consulta where data = ?"; /* comando SQL para listagem por data. */
->>>>>>> d61b2743b701e042d9c8d279b42e97437f2ae8a3
         PreparedStatement psts = null;
-        ResultSet rs =  null;
+        ResultSet rs = null;
         Date data = new Date(vo.getDataConsulta().getTimeInMillis());
         final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime()); // tratamento da classe calendar para timestamp
 
-        try{
-            psts.getConnection().prepareStatement(sql);
-            psts.setTimestamp(1, dataSql, vo.getDataConsulta());
-            rs = psts.executeQuery();
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
+        psts.getConnection().prepareStatement(sql);
+        psts.setTimestamp(1, dataSql, vo.getDataConsulta());
+        rs = psts.executeQuery();
+    
         return rs;
     }
     

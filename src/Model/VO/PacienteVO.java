@@ -2,14 +2,14 @@ package Model.VO;
 
 public class PacienteVO extends PessoaVO {
     private String endereco;
-    private Long idPessoa;
     private Long idPaciente, idProntuario;
 
     public PacienteVO(String nome, String cpf, String endereco) {
         super(nome, cpf);
         this.endereco = endereco;
-    }
 
+    }
+    
     public PacienteVO() {
     }
 
@@ -26,13 +26,6 @@ public class PacienteVO extends PessoaVO {
             this.endereco = endereco;
     }
 
-    public Long getIdPessoa() {
-        return this.idPessoa;
-    }
-
-    public void setIdPessoa() {
-        this.idPessoa = super.getIdPessoa();
-    }
 
     public Long getIdPaciente() {
         return this.idPaciente;

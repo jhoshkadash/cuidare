@@ -12,18 +12,15 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
     @Override
     public void Inserir(PacienteVO vo) throws SQLException {
         super.Inserir(vo);
-<<<<<<< HEAD
-        String sql = "insert into Paciente (endereco, id_paciente_pessoa) values (?,?)"; /*
-                                                                                 * comando de inserção em SQL para o DB.
-                                                                                 */
-=======
-        String sql = "insert into Paciente (endereço, id_pessoa) values (?,?)"; //comando de inserção em SQL para o DB.
-                                                                                 
->>>>>>> d61b2743b701e042d9c8d279b42e97437f2ae8a3
+
+        System.out.println("id paciente pessoa : " + vo.getIdPessoa());
+
+        String sql = "insert into Paciente (endereco, id_paciente_pessoa) values (?,?)"; //comando de inserção em SQL para o DB.
         PreparedStatement ptst;
+
         ptst = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        
         ptst.setNString(1, vo.getEndereco());
-        vo.setIdPessoa();
         ptst.setLong(2, vo.getIdPessoa());
         
         int effectedrows = ptst.executeUpdate(); //variável para verificação de alterações na tabela
@@ -42,12 +39,12 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
     /* método de remoção de dados de pacientes */
     @Override
     public void Deletar(PacienteVO vo) throws SQLException {
-        super.Inserir(vo);
-        String sql = "delete from Paciente where id_paciente_pessoa = ?"; /* comando de remoção em SQL para o DB. */
+        String sql = "delete from Paciente where id_paciente = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
-        ptst.setDouble(1, vo.getIdPessoa());
+        ptst.setLong(1, 2L);
         ptst.executeUpdate();
+        super.Deletar(vo);
     }
 
     /* método de listagem de pacientes */
@@ -87,11 +84,7 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
 
     /* método de listagem de pacientes por CPF. */
     public ResultSet ListarPorCpf(PacienteVO vo) throws SQLException {
-<<<<<<< HEAD
         String sql = "select * from Pessoa where cpf = ?";
-=======
-        String sql = "select * from Paciente where cpf = ?"; //comando SQL para listagem por CPF.
->>>>>>> d61b2743b701e042d9c8d279b42e97437f2ae8a3
         PreparedStatement psts;
         ResultSet rs = null;
 
