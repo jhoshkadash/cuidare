@@ -41,6 +41,4 @@ public class UsuarioBO implements BaseInterBO<UsuarioVO>{
         // TODO Auto-generated method stub
         
     }
-
-
 }
