@@ -23,13 +23,15 @@ public class ConsultaVO {
     }
 
 
+
     public Long getIdConsulta() {
         return this.idConsulta;
     }
 
-    public void setIdConsulta(Long Id) {
-            this.idConsulta = Id;
+    public void setIdConsulta(Long idConsulta) {
+        this.idConsulta = idConsulta;
     }
+
 
     public Boolean isStatus() {
         return this.status;

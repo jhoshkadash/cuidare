@@ -11,6 +11,7 @@ public class GerenteDAO extends UsuarioDAO <GerenteVO>
  * declaração de classe para a criação de Gerentes DAO implementados a MariaDB
  */
 {
+
     /* método de inserção de gerentes */
     @Override
     public void Inserir(GerenteVO vo) throws SQLException {
