@@ -1,16 +1,13 @@
 {
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "d:\\Downloads\\mariadb-java-client-2.7.4-javadoc.jar",
-        "c:\\Users\\jneto\\Desktop\\lib\\javafx.base.jar",
-        "c:\\Users\\jneto\\Desktop\\lib\\javafx.controls.jar",
-        "c:\\Users\\jneto\\Desktop\\lib\\javafx.fxml.jar",
-        "c:\\Users\\jneto\\Desktop\\lib\\javafx.graphics.jar",
-        "c:\\Users\\jneto\\Desktop\\lib\\javafx.media.jar",
-        "c:\\Users\\jneto\\Desktop\\lib\\javafx.swing.jar",
-        "c:\\Users\\jneto\\Desktop\\lib\\javafx.web.jar",
-        "c:\\Users\\jneto\\Desktop\\lib\\javafx-swt.jar"
-    ]
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "d:\\Downloads\\mariadb-java-client-2.7.4-javadoc.jar"
+        ],
+        "exclude": [
+            "c:\\Users\\jneto\\Desktop\\lib\\javafx-swt.jar"
+        ]
+    }
 }

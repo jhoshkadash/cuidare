@@ -6,6 +6,21 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Teste",
+            "request": "launch",
+            "mainClass": "Model.DAO.Teste",
+            "projectName": "cuidare_8c2e6b74"
+        },
+        {
+            "type": "java",
+            "name": "Launch telaLogin",
+            "request": "launch",
+            "mainClass": "VIEW.telaLogin",
+            "projectName": "cuidare_8c2e6b74",
+            "vmArgs": "--module-path G:/Documentos/UFERSA/Disciplinas/POO/Cuidare/Repositorios/cuidare/lib/javafx-sdk-17.0.1/lib --add-modules=javafx.graphics"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -15,13 +30,6 @@
             "name": "Launch Teste",
             "request": "launch",
             "mainClass": "Model.DAO.Teste",
-            "projectName": "cuidare att dao_1b5ca4e7"
-        },
-        {
-            "type": "java",
-            "name": "Launch telaLogin",
-            "request": "launch",
-            "mainClass": "VIEW.telaLogin",
             "projectName": "cuidare att dao_1b5ca4e7"
         }
     ]

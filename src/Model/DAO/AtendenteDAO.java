@@ -56,7 +56,7 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
     /* método de listagem de atendentes por nome */
     @Override
     public ResultSet ListarPorNome (AtendenteVO vo) {
-        String sql = "select * from Pessoa where nome = ?"; /* comando SQL para listagem por nome de atendentes. */
+        String sql = "SELECT * FROM pessoa LEFT JOIN atendente ON atendente.id_atendente_pessoa = pessoa.id WHERE nome = ? "; /* comando SQL para listagem por nome de atendentes. */
         PreparedStatement psts;
         ResultSet rs = null;
 

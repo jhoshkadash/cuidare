@@ -59,7 +59,7 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
     /* método de listagem de médicos por nome */
     @Override
     public ResultSet ListarPorNome(MedicoVO vo) throws SQLException {
-        String sql = "select * from Pessoa where nome = ?"; /* comando SQL para listagem por nome. */
+        String sql = "SELECT * FROM pessoa LEFT JOIN medico ON medico.id_medico_pessoa = pessoa.id WHERE nome = ? "; /* comando SQL para listagem por nome. */
         PreparedStatement psts;
         ResultSet rs = null;
             psts = getConnection().prepareStatement(sql);

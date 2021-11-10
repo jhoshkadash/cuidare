@@ -6,6 +6,9 @@ public class GerenteVO extends UsuarioVO {
         super(nome, cpf, login, senha, 3);
     }
 
+    public GerenteVO() {
+    }
+
     public Long getIdGerente() {
         return this.idGerente;
     }

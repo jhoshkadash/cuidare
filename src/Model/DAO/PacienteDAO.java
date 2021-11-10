@@ -60,7 +60,7 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
 
     /* método de listagem de pacientes por nome */
     public ResultSet ListarPorNome(PacienteVO vo) throws SQLException {
-        String sql = "select * from Pessoa where nome = ?"; //comando SQL para listagem por nome.
+        String sql = "SELECT * FROM Pessoa LEFT JOIN Paciente ON pessoa.id = Usuario.id_user_pessoa WHERE Pessoa.nome = ? "; //comando SQL para listagem por nome.
         PreparedStatement psts;
         ResultSet rs = null;
         psts = getConnection().prepareStatement(sql);
@@ -84,7 +84,7 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
 
     /* método de listagem de pacientes por CPF. */
     public ResultSet ListarPorCpf(PacienteVO vo) throws SQLException {
-        String sql = "select * from Pessoa where cpf = ?";
+        String sql = "SELECT * FROM Pessoa LEFT JOIN Paciente ON Pessoa.id = Paciente.id_paciente_pessoa WHERE cpf = ?";
         PreparedStatement psts;
         ResultSet rs = null;
 

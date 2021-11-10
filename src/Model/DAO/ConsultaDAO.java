@@ -8,7 +8,7 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
 /* declaração de classe para a criação de Consultas DAO implementadas a MariaDB */
 {
     @Override
-    public void Inserir (ConsultaVO vo){
+    public void Inserir (ConsultaVO vo) throws SQLException{
         try{
 
             Date data = new Date(vo.getDataConsulta().getTimeInMillis());
@@ -42,42 +42,34 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
 
     /* método de remoção de consultas */
     @Override
-    public void Deletar (ConsultaVO vo) {
-        try{
+    public void Deletar (ConsultaVO vo) throws SQLException {
         String sql = "delete from Consulta where id_consulta = ?"; /* comando de remoção em SQL para o DB. */
         PreparedStatement ptst;
         ptst = getConnection().prepareStatement(sql);
         ptst.setDouble(1, vo.getIdConsulta());
         ptst.executeUpdate();
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     /* método de listagem de consultas */
     @Override
-    public ResultSet Listar() {
+    public ResultSet Listar() throws SQLException {
         String sql = "select * from Consulta"; /* comando de listagem em SQL para o DB. */
         Statement st;
         ResultSet rs = null;
-        try {
-            st = getConnection().prepareStatement(sql);
-            rs = st.executeQuery(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        st = getConnection().prepareStatement(sql);
+        rs = st.executeQuery(sql);
         return rs;
     }
     
     /* método de listagem de consultas por nome do médico */
-    public ResultSet ListarPorNomeMedico (ConsultaVO vo) {
-        String sql = "select * from Medico where id_medico = ?"; /* comando SQL para listagem por nome de médico. */
+    public ResultSet ListarPorNomeMedico (MedicoVO vo) {
+        String sql = "SELECT * FROM Pessoa INNER JOIN Medico ONM edico.id_medico_pessoa = Pessoa.id INNER JOIN Consulta ON Medico.id_medico = Consulta.id_medico WHERE nome = ? "; /* comando SQL para listagem por nome de médico. */
         PreparedStatement psts;
         ResultSet rs = null;
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setLong(1, vo.getIdMedico());
+            psts.setString(1, vo.getNome());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -103,7 +95,7 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
 
     /* método de listagem de consultas por horário */
     public ResultSet ListarPorHorario (ConsultaVO vo) {
-        String sql = "select * from Medico where id_medico = ?"; /* comando SQL para listagem por horário. */
+        String sql = ""; /* comando SQL para listagem por horário. */
         PreparedStatement psts;
         ResultSet rs = null;
 

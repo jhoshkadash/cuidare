@@ -1,10 +1,13 @@
 package Model.DAO;
 
 import Model.VO.*;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GerenteDAO extends UsuarioDAO <GerenteVO>
 /*
@@ -63,7 +66,7 @@ public class GerenteDAO extends UsuarioDAO <GerenteVO>
     /* método de listagem por nome de gerentes */
     @Override
     public ResultSet ListarPorNome(GerenteVO vo) throws SQLException {
-        String sql = "select * from Pessoa where nome = ?";
+        String sql = "SELECT * FROM pessoa LEFT JOIN gerente ON pessoa.id = gerente.id_gerente_pessoa WHERE nome = ? ";
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -95,4 +98,15 @@ public class GerenteDAO extends UsuarioDAO <GerenteVO>
         psts.setLong(2, vo.getIdPessoa());
         psts.executeUpdate();
     }
+    /* metodo para listar pelo id pessoa*/    
+    public ResultSet ListarPorIdPessoa(GerenteVO vo) throws SQLException {
+        String sql = "select * from Gerente where id_pessoa = ?"; /* comando SQL para listagem por Id. */
+        PreparedStatement psts;
+        ResultSet rs = null;
+        psts = getConnection().prepareStatement(sql);
+        psts.setLong(1, vo.getIdPessoa());
+        rs = psts.executeQuery();
+        return rs;
+    }
+
 }

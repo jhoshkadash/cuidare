@@ -4,8 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import Model.DAO.GerenteDAO;
 import Model.Exception.InsertException;
+import Model.Exception.ListException;
 import Model.VO.GerenteVO;
 import javafx.geometry.Insets;
 
@@ -13,9 +14,28 @@ public class GerenteBO implements BaseInterBO <GerenteVO>{
 
     @Override
     public List <GerenteVO> Buscar (GerenteVO vo) {
-        ResultSet rs = null;
-        ArrayList listaGerentes = new ArrayList<GerenteVO>();
-        return rs;
+        try {
+            if(vo.getCpf() == null && vo.getNome() == null){
+                throw new ListException("Insira pelo menos um filtro de busca");
+            }
+        } catch (ListException e) {
+            e.getMessage();
+        }
+        
+        List<GerenteVO> listaGerentes = new ArrayList<GerenteVO>();
+        GerenteDAO dao = new GerenteDAO(); 
+        ResultSet rs = dao.ListarPorFiltro(vo);
+        try {
+            if(rs.next()){
+                while(rs.next()){
+                    GerenteVO gerenteLista = new GerenteVO();
+                    gerenteLista.setCpf(rs.getString("cpf"));
+                    gerenteLista.setNome(rs.getString("nome"));
+                }
+            }
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
     }
 
     @Override
@@ -27,9 +47,25 @@ public class GerenteBO implements BaseInterBO <GerenteVO>{
         } catch (InsertException e){
             e.getMessage();
         }
+
+        try{
+            if(vo.getCpf() == null){ // verificando se existe dados dentro do cpf
+                throw new InsertException("CPF está vazio");
+            }
+        } catch (InsertException e){
+            e.getMessage();
+        }
+
+        try {
+            if(vo.getCpf().matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+                throw new InsertException("CPF só pode conter números");
+            }
+        } catch (InsertException e) {
+            e.getMessage();
+        }
         
         try{
-            if(vo.getTipo() != 3){
+            if(vo.getTipo() != 3){ // verificando o tipo de usuário cadastrado
                 throw new InsertException("Usuário informado não é do tipo GERENTE");
             }
         }catch(InsertException e){
@@ -37,12 +73,22 @@ public class GerenteBO implements BaseInterBO <GerenteVO>{
         }
 
         try{
-            if(vo.getCpf() == null){
-                throw new InsertException("CPF está vazio");
+            if(vo.getNome() == null){ // verirficando se existe dados no nome
+                throw new InsertException("Gerente com nome vázio");
             }
-        } catch (InsertException e){
+
+        }catch(InsertException e){
             e.getMessage();
         }
+
+        try {
+            if(vo.getSenha().length() < 6){ // definindo tamanho mínimo de senha
+                throw new InsertException("A senha deve conter no mínimo 6 caracteres");
+            }
+        } catch (InsertException e) {
+            e.getMessage();
+        }
+
     }
 
     @Override
