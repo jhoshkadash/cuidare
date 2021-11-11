@@ -58,7 +58,6 @@ public class UsuarioDAO <VO extends UsuarioVO> extends PessoaDAO <VO>
     }
 
     /* método de listagem por nome */
-    @Override
     public ResultSet ListarPorNome(VO vo) throws SQLException {
         String sql = "select * from Pessoa left join usuario on pessoa.id = usuario.id_pessoa where pessoa.nome = ? ";
         PreparedStatement psts;

@@ -8,6 +8,10 @@ public class AtendenteVO extends UsuarioVO {
     }
 
 
+    public AtendenteVO() {
+    }
+
+
     public Long getIdAtendente() {
         return this.idAtendente;
     }

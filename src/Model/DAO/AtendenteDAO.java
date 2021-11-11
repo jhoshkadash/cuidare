@@ -10,7 +10,7 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
     @Override
     public void Inserir (AtendenteVO vo) throws SQLException {
             super.Inserir(vo);
-            String sql = "inset into Atendente (id_atendente_user, id_atendente_pessoa) values (?,?)";
+            String sql = "insert into Atendente (id_atendente_user, id_atendente_pessoa) values (?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setLong(1, vo.getIdUser());
