@@ -55,7 +55,7 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
 
     /* método de listagem por nome de pessoas em laudos */
     public ResultSet ListarPorNome(PessoaVO vo) throws SQLException  {
-        String sql = "select * from Pessoa where id = ?"; /* comando SQL para listagem por nome. */
+        String sql = "select * from Pessoa left join Laudo on laudo.id_paciente = pessoa.id where id = ?"; /* comando SQL para listagem por nome. */
         PreparedStatement psts;
         ResultSet rs = null;
 

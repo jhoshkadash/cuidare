@@ -63,7 +63,7 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
     
     /* método de listagem de consultas por nome do médico */
     public ResultSet ListarPorNomeMedico (MedicoVO vo) {
-        String sql = "SELECT * FROM Pessoa INNER JOIN Medico ONM edico.id_medico_pessoa = Pessoa.id INNER JOIN Consulta ON Medico.id_medico = Consulta.id_medico WHERE nome = ? "; /* comando SQL para listagem por nome de médico. */
+        String sql = "SELECT * FROM Pessoa INNER JOIN Medico ON Medico.id_medico_pessoa = Pessoa.id INNER JOIN Consulta ON Medico.id_medico = Consulta.id_medico WHERE nome = ? "; /* comando SQL para listagem por nome de médico. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -79,7 +79,7 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
     
     /* método de listagem de consultas por nome do paciente */
     public ResultSet ListarPorNomePaciente (ConsultaVO vo) {
-        String sql = "select * from Paciente where id_Paciente = ?"; /* comando SQL para listagem por nome de paciente. */
+        String sql = "select * from Pessoa inner join Paciente on Paciente.id_paciente_pessoa = Pessoa.id inner join Consulta on Paciente.id_paciente = Consulta.id_paciente where nome = ?"; /* comando SQL para listagem por nome de paciente. */
         PreparedStatement psts;
         ResultSet rs = null;
 
