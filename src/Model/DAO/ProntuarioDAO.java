@@ -13,7 +13,7 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             Date data = new Date();
             data = vo.getDataNascimento().getTime();
             java.sql.Date dataSQL = new java.sql.Date(data.getTime());
-            String sql = "inset into Laudo ( data_nascimento, ante_patologico, medi_atuais, medi_alergicos, historico_doenças, peso, altura, id_paciente) values (?,?,?,?,?)";
+            String sql = "insert into Prontuario ( data_nascimento, ante_patologico, medi_atuais, medi_alergicos, historico_doenças, peso, altura, id_prontuario_paciente) values (?,?,?,?,?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setDate(1, dataSQL ,vo.getDataNascimento());
@@ -76,10 +76,10 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
     /* método de atualização de dados de prontuários */
     @Override
     public void Atualizar (ProntuarioVO vo) throws SQLException {
-        String sql = "update Prontuario set medi_atuais = ? where id_prontuario = ?"; /* comando de atualização (update) em SQL. */
+        String sql = "update Prontuario set peso = ? where id_prontuario = ?"; /* comando de atualização (update) em SQL. */
         PreparedStatement psts;
             psts = getConnection().prepareStatement(sql);
-            psts.setString(1,vo.getMediAtuais());
+            psts.setFloat(1,vo.getPeso());
             psts.setLong(2, vo.getIdProntuario());
             psts.executeUpdate();
     }

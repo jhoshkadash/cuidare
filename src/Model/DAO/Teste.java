@@ -5,29 +5,30 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
+
 
 import Model.VO.*;
 
 public class Teste {
     public static void main(String[] args) throws SQLException {
-        AtendenteDAO dao = new AtendenteDAO();
-        AtendenteVO vo = new AtendenteVO("Maria", "93412452389", "mariazinha", "1234");
-        AtendenteVO vo2 = new AtendenteVO("Creuza", "53426709545", "creuzaaaa", "45678");
-        ResultSet rs = dao.ListarPorNome(vo);
+        ConsultaDAO dao = new ConsultaDAO();
+        MedicoVO vo = new MedicoVO("pedro", "", "", "", "", 0d , "");
         //listar atendente
-        List <AtendenteVO> atendentes = new ArrayList<AtendenteVO>();
+        List <ConsultaVO> consultas = new ArrayList<ConsultaVO>();
+        ResultSet rs = dao.ListarPorNomeMedico(vo);
         while (rs.next()){
-            AtendenteVO aux = new AtendenteVO();
-            aux.setCpf(rs.getString("CPF"));
-            aux.setIdAtendente(rs.getLong("id_atendente"));
-            aux.setIdPessoa(rs.getLong("id_atendente_pessoa"));
-            aux.setIdUser(rs.getLong("id_atendente_user"));
-            aux.setNome(rs.getString("nome"));
-            atendentes.add(aux);//setando atributos e adicionando na lista
+            ConsultaVO aux = new ConsultaVO();
+            aux.setDataConsulta(rs.getString("data"));
+            aux.setIdConsulta(rs.getLong("id_consulta"));
+            aux.setIdMedico(rs.getLong("id_medico"));
+            aux.setIdPaciente(rs.getLong("id_paciente"));
+            aux.setStatus(rs.getBoolean("status"));
+            consultas.add(aux);//setando atributos e adicionando na lista
         }
-        for(AtendenteVO vo3 : atendentes){
-            System.out.println("nome : " + vo3.getNome());// exibindo o que foi armazenado na lista
+        for(ConsultaVO vo3 : consultas){
+            System.out.println("data da consulta : " + vo3.getDataConsulta());// exibindo o que foi armazenado na lista
+            System.out.println("id consulta : " + vo3.getIdConsulta());
         }
+        
     }
 }

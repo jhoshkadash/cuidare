@@ -10,7 +10,7 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
     @Override
     public void Inserir(MedicoVO vo) throws SQLException {
             super.Inserir(vo);
-            String sql = "inset into Medico (crm, valor_consulta, endereco, id_medico_pessoa, id_medico_user, ) values (?,?,?,?,?)";
+            String sql = "insert into Medico (crm, valorconsulta, endereco, id_medico_pessoa, id_medico_user) values (?,?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setString(1, vo.getCrm());
@@ -82,7 +82,7 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
 
     /* método de listagem de médicos por CRM */
     public ResultSet ListarPorCrm(MedicoVO vo) throws SQLException {
-        String sql = "select * from Medico where crm = ?"; /* comando SQL para listagem por CRM. */
+        String sql = "select * from Pessoa Left Join medico ON medico.id_medico_pessoa = pessoa.id where crm = ?"; /* comando SQL para listagem por CRM. */
         PreparedStatement psts;
         ResultSet rs = null;
             psts = getConnection().prepareStatement(sql);

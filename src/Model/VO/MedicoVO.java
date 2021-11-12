@@ -13,6 +13,9 @@ public class MedicoVO extends UsuarioVO {
         this.crm = crm;
     }
 
+    public MedicoVO() {
+    }
+
     public String getEndereco() {
         return endereco;
     }
@@ -26,11 +29,11 @@ public class MedicoVO extends UsuarioVO {
             this.endereco = endereco;
     }
 
-    public double getValorConsulta() {
+    public Double getValorConsulta() {
         return valorConsulta;
     }
 
-    public void setValorConsulta(double valorConsulta) {
+    public void setValorConsulta(Double valorConsulta) {
         this.valorConsulta = valorConsulta;
     }
 

@@ -9,6 +9,29 @@ public class ConsultaVO {
     private Boolean status;
     private Calendar dataConsulta = Calendar.getInstance();
 
+
+
+
+    public ConsultaVO(Long idMedico, Long idPaciente, Boolean status, String dataConsulta) {
+        this.idMedico = idMedico;
+        this.idPaciente = idPaciente;
+        this.status = status;
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        try {
+            this.dataConsulta.setTime(formato.parse(dataConsulta));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public ConsultaVO() {
+    }
+
+
+
     public void setDataConsulta( String dConsulta) {
         try {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");

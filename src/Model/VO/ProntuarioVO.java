@@ -71,9 +71,6 @@ public class ProntuarioVO  {
     }
 
     public void setPeso(Float Peso) {
-        if (Peso == null) {
-            System.out.println("o campo Peso está vazio");
-        } else
             this.peso = Peso;
     }
 

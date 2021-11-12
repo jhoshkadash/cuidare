@@ -14,7 +14,7 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
             Date data = new Date(vo.getDataConsulta().getTimeInMillis());
             final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());// tratamento da classe calendar para timestamp
 
-            String sql = "inset into Consulta (id_medico, id_paciente, data, status) values (?,?,?,?)";
+            String sql = "insert into Consulta (id_medico, id_paciente, data, status) values (?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setLong(1, vo.getIdMedico());
