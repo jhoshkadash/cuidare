@@ -12,10 +12,12 @@ import Model.VO.*;
 public class Teste {
     public static void main(String[] args) throws SQLException {
         ConsultaDAO dao = new ConsultaDAO();
-        MedicoVO vo = new MedicoVO("pedro", "", "", "", "", 0d , "");
+        ConsultaVO vo2 = new ConsultaVO(2l, 5l, false, "15/11/2021 16:00");
+        PacienteVO vo = new PacienteVO("Claudinho do pneu", "cpf", "endereco");
+
         //listar atendente
         List <ConsultaVO> consultas = new ArrayList<ConsultaVO>();
-        ResultSet rs = dao.ListarPorNomeMedico(vo);
+        ResultSet rs = dao.ListarPorNomePaciente(vo);
         while (rs.next()){
             ConsultaVO aux = new ConsultaVO();
             aux.setDataConsulta(rs.getString("data"));

@@ -78,14 +78,14 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
     }
     
     /* método de listagem de consultas por nome do paciente */
-    public ResultSet ListarPorNomePaciente (ConsultaVO vo) {
-        String sql = "select * from Pessoa inner join Paciente on Paciente.id_paciente_pessoa = Pessoa.id inner join Consulta on Paciente.id_paciente = Consulta.id_paciente where nome = ?"; /* comando SQL para listagem por nome de paciente. */
+    public ResultSet ListarPorNomePaciente (PacienteVO vo) {
+        String sql = "SELECT * FROM Pessoa INNER JOIN Paciente ON Paciente.id_paciente_pessoa = Pessoa.id INNER JOIN Consulta on Paciente.id_paciente = Consulta.id_paciente WHERE nome = ?"; /* comando SQL para listagem por nome de paciente. */
         PreparedStatement psts;
         ResultSet rs = null;
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setLong(1, vo.getIdPaciente());
+            psts.setString(1, vo.getNome());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,13 +95,16 @@ public class ConsultaDAO extends BaseDAO < ConsultaVO >
 
     /* método de listagem de consultas por horário */
     public ResultSet ListarPorHorario (ConsultaVO vo) {
-        String sql = ""; /* comando SQL para listagem por horário. */
+        String sql = "SELECT * FROM Consulta WHERE data = ?"; /* comando SQL para listagem por horário. */
         PreparedStatement psts;
         ResultSet rs = null;
 
+        Date data = new Date(vo.getDataConsulta().getTimeInMillis());
+        final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());
+
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setLong(1, vo.getIdMedico());
+            psts.setTimestamp(1, dataSql);
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();

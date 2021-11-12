@@ -34,7 +34,7 @@ public class ConsultaVO {
 
     public void setDataConsulta( String dConsulta) {
         try {
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             this.dataConsulta.setTime(formato.parse(dConsulta));
         } catch (ParseException e) {
             e.printStackTrace();
