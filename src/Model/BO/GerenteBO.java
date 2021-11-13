@@ -34,7 +34,7 @@ public class GerenteBO implements BaseInterBO <GerenteVO>{
                 }
             }
         } catch (Exception e) {
-            //TODO: handle exception
+            e.getMessage();
         }
     }
 
@@ -88,7 +88,6 @@ public class GerenteBO implements BaseInterBO <GerenteVO>{
         } catch (InsertException e) {
             e.getMessage();
         }
-
     }
 
     @Override
