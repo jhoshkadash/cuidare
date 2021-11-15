@@ -8,7 +8,7 @@ import javax.swing.text.html.parser.Entity;
 import Model.Exception.InsertException;
 
 public interface BaseInterBO <VO> {
-    public List<VO> Buscar(VO Entity);
+    public List<VO> Buscar(VO Entity) throws SQLException;
     public void Cadastrar(VO entity);
     public void Editar(VO entity);
     public void Excluir(VO entity);
