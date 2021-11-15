@@ -4,7 +4,7 @@ import Model.VO.*;
 import java.sql.*;
 
 
-public class ConsultaDAO extends BaseDAO < ConsultaVO >
+public class ConsultaDAO extends BaseDAO <ConsultaVO>
 /* declaração de classe para a criação de Consultas DAO implementadas a MariaDB */
 {
     @Override

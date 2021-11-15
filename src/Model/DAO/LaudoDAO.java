@@ -9,7 +9,7 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
     /* método de inserção de laudos */
     @Override
     public void Inserir (LaudoVO vo) throws SQLException {
-            String sql = "inset into Laudo (obs, id_medico, id_consulta ,id_prontuario_paciente ) values (?,?,?,?)";
+            String sql = "insert into Laudo (obs, id_medico, id_consulta ,id_prontuario_paciente ) values (?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setString(1, vo.getObservacoes());
@@ -54,8 +54,8 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
     }
 
     /* método de listagem por nome de pessoas em laudos */
-    public ResultSet ListarPorNome(PessoaVO vo) throws SQLException  {
-        String sql = "select * from Pessoa left join Laudo on laudo.id_paciente = pessoa.id where id = ?"; /* comando SQL para listagem por nome. */
+    public ResultSet ListarPorNomePaciente(PacienteVO vo) throws SQLException  {
+        String sql = "select * from Pessoa left join Laudo on laudo.id_paciente = pessoa.id where nome = ?"; /* comando SQL para listagem por nome. */
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -88,7 +88,7 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
             psts.executeUpdate();
     }
     public ResultSet ListarPorData(ConsultaVO vo) throws SQLException {
-        String sql = "SELECT * FROM consulta  LEFT JOIN laudo ON consulta.id_consulta = laudo.id_consulta WHERE consulta.data = ?"; /* comando de listagem em SQL para o DB. */
+        String sql = "SELECT * FROM consulta LEFT JOIN laudo ON consulta.id_consulta = laudo.id_consulta WHERE consulta.data = ?"; /* comando de listagem em SQL para o DB. */
         Statement st;
         PreparedStatement psts = null;
         ResultSet rs = null;
