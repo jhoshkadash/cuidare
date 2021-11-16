@@ -101,4 +101,12 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
             e.printStackTrace();
         }
     }
+
+    public ResultSet ListarPorNome(MedicoVO vo) {
+        return null;
+    }
+
+    public ResultSet ListarPorCpf(AtendenteVO vo) {
+        return null;
+    }
 }
