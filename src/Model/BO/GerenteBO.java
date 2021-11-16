@@ -1,104 +1,70 @@
 package Model.BO;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import Model.DAO.GerenteDAO;
-import Model.Exception.InsertException;
-import Model.Exception.ListException;
-import Model.VO.GerenteVO;
-import javafx.geometry.Insets;
+import java.sql.*;
+import java.util.*;
+import Model.DAO.*;
+import Model.Exception.*;
+import Model.VO.*;
 
-public class GerenteBO{
+public class GerenteBO {
 
-    @Override
-    public List <GerenteVO> Buscar (GerenteVO vo) {
+    BaseInterDAO<MedicoVO> dao_medico = new MedicoDAO();
+    BaseInterDAO<PacienteVO> dao_paciente = new PacienteDAO();
+    BaseInterDAO<AtendenteVO> dao_atendente = new AtendenteDAO();
+    BaseInterDAO<GerenteVO> dao_gerente = new GerenteDAO();
+
+    public void CadastrarMedico(MedicoVO vo) throws  SQLException{
         try {
-            if(vo.getCpf() == null && vo.getNome() == null){
-                throw new ListException("Insira pelo menos um filtro de busca");
-            }
-        } catch (ListException e) {
-            e.getMessage();
-        }
-        
-        List<GerenteVO> listaGerentes = new ArrayList<GerenteVO>();
-        GerenteDAO dao = new GerenteDAO(); 
-        ResultSet rs = dao.ListarPorFiltro(vo);
-        try {
-            if(rs.next()){
-                while(rs.next()){
-                    GerenteVO gerenteLista = new GerenteVO();
-                    gerenteLista.setCpf(rs.getString("cpf"));
-                    gerenteLista.setNome(rs.getString("nome"));
-                }
+            ResultSet rs = dao_medico.ListarPorId(vo);
+            if (rs.next()) {
+                throw new InsertException("Impossível cadastrar, já existe um médico com este ID.");
+            } else {
+               dao_medico.Inserir(vo); 
             }
         } catch (Exception e) {
             e.getMessage();
         }
     }
 
-    @Override
-    public void Cadastrar(GerenteVO vo) {
-        try{
-            if(vo.getCpf().length() != 11){ // verificando se a string de cpf possui 11 digitos
-                throw new InsertException("CPF inválido, possui mais de 11 digitos, não escreva ponto e nem linhas");
-            }
-        } catch (InsertException e){
-            e.getMessage();
-        }
-
-        try{
-            if(vo.getCpf() == null){ // verificando se existe dados dentro do cpf
-                throw new InsertException("CPF está vazio");
-            }
-        } catch (InsertException e){
-            e.getMessage();
-        }
-
+    public void CadastrarPaciente(PacienteVO vo) throws  SQLException{
         try {
-            if(vo.getCpf().matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
-                throw new InsertException("CPF só pode conter números");
+            ResultSet rs = dao_paciente.ListarPorId(vo);
+            if (rs.next()) {
+                throw new InsertException("Impossível cadastrar, já existe um paciente com este ID.");
+            } else {
+               dao_paciente.Inserir(vo); 
             }
-        } catch (InsertException e) {
+        } catch (Exception e) {
             e.getMessage();
         }
-        
-        try{
-            if(vo.getTipo() != 3){ // verificando o tipo de usuário cadastrado
-                throw new InsertException("Usuário informado não é do tipo GERENTE");
-            }
-        }catch(InsertException e){
-            e.getMessage();
-        }
+    }
 
-        try{
-            if(vo.getNome() == null){ // verirficando se existe dados no nome
-                throw new InsertException("Gerente com nome vázio");
-            }
-
-        }catch(InsertException e){
-            e.getMessage();
-        }
-
+    public void CadastrarAtendente(AtendenteVO vo) throws  SQLException{
         try {
-            if(vo.getSenha().length() < 6){ // definindo tamanho mínimo de senha
-                throw new InsertException("A senha deve conter no mínimo 6 caracteres");
+            ResultSet rs = dao_atendente.ListarPorId(vo);
+            if (rs.next()) {
+                throw new InsertException("Impossível cadastrar, já existe um atendente com este ID.");
+            } else {
+               dao_atendente.Inserir(vo); 
             }
-        } catch (InsertException e) {
+        } catch (Exception e) {
             e.getMessage();
         }
     }
 
-    @Override
-    public void Editar(GerenteVO vo){
-        // TODO Auto-generated method stub
-        
+    public void CadastrarGerente(GerenteVO vo) throws  SQLException{
+        try {
+            ResultSet rs = dao_gerente.ListarPorId(vo);
+            if (rs.next()) {
+                throw new InsertException("Impossível cadastrar, já existe um gerente com este ID.");
+            } else {
+               dao_gerente.Inserir(vo); 
+        }
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 
-    @Override
-    public void Excluir(GerenteVO vo) {
-        // TODO Auto-generated method stub
-        
-    }
+    
+   
 }

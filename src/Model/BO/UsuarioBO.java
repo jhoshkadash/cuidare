@@ -1,44 +1,25 @@
 package Model.BO;
 
 import java.sql.*;
-import java.util.List;
-import Model.DAO.*;
-import Model.Exception.InsertException;
+import java.util.*;
+
+import Model.DAO.BaseDAO;
+import Model.DAO.BaseInterDAO;
+import Model.DAO.UsuarioDAO;
 import Model.VO.UsuarioVO;
 
-public class UsuarioBO{
-    BaseInterDAO<UsuarioVO> dao = new UsuarioDAO();
+public class UsuarioBO<VO extends UsuarioVO> {
 
+    static private BaseInterDAO<UsuarioVO> usuario_dao = new UsuarioDAO<UsuarioVO>();
 
-    public void Cadastrar(UsuarioVO vo) throws InsertException {
+    public UsuarioVO autenticar(UsuarioVO vo) {
+        ResultSet usuario_rs = usuario_dao.buscarPorLogin(vo);
         try {
-            ResultSet rs = dao.ListarPorId(vo);
-            if (rs.next()) {
-                throw new InsertException("mensagem de erro");
-            } else {
-                dao.Inserir(vo);
-            }
-        } catch (SQLException e) {
-            throw new InsertException(e.getMessage());
+            
+        } catch (Exception e) {
+            //TODO: handle exception
         }
-        
-    }
 
-    @Override
-    public List<UsuarioVO> Buscar(UsuarioVO vo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void Editar(UsuarioVO vo) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void Excluir(UsuarioVO vo) {
-        // TODO Auto-generated method stub
-        
+        return vo;
     }
 }
