@@ -76,7 +76,7 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
             rs = psts.executeQuery();
         return rs;
     }
-    
+
     /* método de atualização dos dados de laudos */
     @Override
     public void Atualizar (LaudoVO vo) throws SQLException {
@@ -95,7 +95,6 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
         Date data = new Date(vo.getDataConsulta().getTimeInMillis());
         final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());
         st = getConnection().prepareStatement(sql);
-
         psts.setTimestamp(1, dataSql);
         rs = st.executeQuery(sql);
         return rs;

@@ -7,10 +7,9 @@ import Model.Exception.InsertException;
 import Model.Exception.ListException;
 import Model.VO.MedicoVO;
 
-public class MedicoBO  implements BaseInterBO<MedicoVO> {
+public class MedicoBO{
 
-    @Override
-    public List<MedicoVO> Buscar(MedicoVO vo) {
+    public List<MedicoVO> Buscar(MedicoVO vo) throws SQLException {
         try {
             if(vo.getCpf() == null && vo.getNome() == null){
                 throw new ListException("Insira pelo menos um filtro de busca");
@@ -21,7 +20,7 @@ public class MedicoBO  implements BaseInterBO<MedicoVO> {
         
         List<MedicoVO> listaMedicos = new ArrayList<MedicoVO>();
         MedicoDAO dao = new MedicoDAO(); 
-        ResultSet rs = dao.ListarPorFiltro(vo);
+        ResultSet rs = dao.ListarPorCrm(vo);
         try {
             if(rs.next()){
                 while(rs.next()){

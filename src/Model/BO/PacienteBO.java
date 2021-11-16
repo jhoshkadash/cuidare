@@ -6,7 +6,7 @@ import Model.DAO.PacienteDAO;
 import Model.Exception.ListException;
 import Model.VO.PacienteVO;
 
-public class PacienteBO  implements BaseInterBO<PacienteVO>{
+public class PacienteBO{
 
     @Override
     public List<PacienteVO> Buscar(PacienteVO vo) throws SQLException {

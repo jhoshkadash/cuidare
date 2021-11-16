@@ -10,7 +10,7 @@ import Model.Exception.ListException;
 import Model.VO.GerenteVO;
 import javafx.geometry.Insets;
 
-public class GerenteBO implements BaseInterBO <GerenteVO>{
+public class GerenteBO{
 
     @Override
     public List <GerenteVO> Buscar (GerenteVO vo) {

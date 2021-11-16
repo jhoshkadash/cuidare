@@ -1,45 +1,15 @@
 package Model.BO;
 
-import java.sql.*;
-import java.util.*;
-import Model.DAO.AtendenteDAO;
 import Model.Exception.InsertException;
-import Model.Exception.ListException;
 import Model.VO.AtendenteVO;
+import Model.VO.PacienteVO;
 
-public class AtendenteBO implements BaseInterBO<AtendenteVO>{
+public class AtendenteBO{
 
-    @Override
-    public List<AtendenteVO> Buscar(AtendenteVO vo) {
-        try {
-            if(vo.getCpf() == null && vo.getNome() == null){
-                throw new ListException("Insira pelo menos um filtro de busca");
-            }
-        } catch (ListException e) {
-            e.getMessage();
-        }
-        
-        List<AtendenteVO> listaAtendentes = new ArrayList<AtendenteVO>();
-        AtendenteDAO dao = new AtendenteDAO(); 
-        ResultSet rs = dao.ListarPorFiltro(vo);
-        try {
-            if(rs.next()){
-                while(rs.next()){
-                    AtendenteVO atendenteLista = new AtendenteVO();
-                    atendenteLista.setCpf(rs.getString("cpf"));
-                    atendenteLista.setNome(rs.getString("nome"));
-                }
-            }
-        } catch (Exception e) {
-            e.getMessage();
-        }
-    }
-
-    @Override
-    public void Cadastrar(AtendenteVO vo) {
+    public void CadastrarPaciente(PacienteVO vo) {
         try{
             if(vo.getCpf().length() != 11){ // verificando se a string de cpf possui 11 digitos
-                throw new InsertException("CPF inválido, possui mais de 11 digitos, não escreva ponto e nem linhas");
+                throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
             }
         } catch (InsertException e){
             e.getMessage();
@@ -60,40 +30,35 @@ public class AtendenteBO implements BaseInterBO<AtendenteVO>{
         } catch (InsertException e) {
             e.getMessage();
         }
-        
-        try{
-            if(vo.getTipo() != 1){ // verificando o tipo de usuário cadastrado
-                throw new InsertException("Usuário informado não é do tipo ATENDENTE");
-            }
-        }catch(InsertException e){
-            e.getMessage();
-        }
 
         try{
-            if(vo.getNome() == null){ // verirficando se existe dados no nome
-                throw new InsertException("Atendente com nome vazio");
+            if(vo.getNome() == null && vo.getNome() == ""){ // verirficando se existe dados no nome
+                throw new InsertException("Paciente com nome vazio");
             }
 
         }catch(InsertException e){
             e.getMessage();
         }
-
         try {
-            if(vo.getSenha().length() < 6){ // definindo tamanho mínimo de senha
-                throw new InsertException("A senha deve conter no mínimo 6 caracteres");
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+        try{
+            if(vo.getEndereco() == null && vo.getEndereco() == ""){ // verirficando se existe dados no nome
+                throw new InsertException("Paciente com endereço vazio");
             }
-        } catch (InsertException e) {
+
+        }catch(InsertException e){
             e.getMessage();
-        }     
+        } 
+     
     }
 
-    @Override
     public void Editar(AtendenteVO vo) {
         // TODO Auto-generated method stub
         
     }
 
-    @Override
     public void Excluir(AtendenteVO vo) {
         // TODO Auto-generated method stub
         

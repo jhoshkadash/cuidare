@@ -12,12 +12,11 @@ import Model.VO.*;
 public class Teste {
     public static void main(String[] args) throws SQLException {
         ConsultaDAO dao = new ConsultaDAO();
-        ConsultaVO vo2 = new ConsultaVO(2l, 5l, false, "15/11/2021 16:00");
-        PacienteVO vo = new PacienteVO("Claudinho do pneu", "cpf", "endereco");
+        String horario = "15:30";
 
         //listar atendente
         List <ConsultaVO> consultas = new ArrayList<ConsultaVO>();
-        ResultSet rs = dao.ListarPorNomePaciente(vo);
+        ResultSet rs = dao.ListarPorHorario("15:30");
         while (rs.next()){
             ConsultaVO aux = new ConsultaVO();
             aux.setDataConsulta(rs.getString("data"));

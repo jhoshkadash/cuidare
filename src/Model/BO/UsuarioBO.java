@@ -6,10 +6,10 @@ import Model.DAO.*;
 import Model.Exception.InsertException;
 import Model.VO.UsuarioVO;
 
-public class UsuarioBO implements BaseInterBO<UsuarioVO>{
+public class UsuarioBO{
     BaseInterDAO<UsuarioVO> dao = new UsuarioDAO();
 
-    @Override
+
     public void Cadastrar(UsuarioVO vo) throws InsertException {
         try {
             ResultSet rs = dao.ListarPorId(vo);

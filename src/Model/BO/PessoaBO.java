@@ -5,7 +5,7 @@ import java.util.List;
 
 import Model.VO.PessoaVO;
 
-public class PessoaBO implements BaseInterBO<PessoaVO> {
+public class PessoaBO{
 
     @Override
     public List<PessoaVO> Buscar(PessoaVO vo) throws SQLException {

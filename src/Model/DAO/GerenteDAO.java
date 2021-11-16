@@ -91,11 +91,14 @@ public class GerenteDAO extends UsuarioDAO <GerenteVO>
     /* método para a atualização de dados de gerentes */
     @Override
     public void Atualizar(GerenteVO vo) throws SQLException { 
-        String sql = "update Pessoa set nome = ? where id = ?"; /* comando SQL para atualização (update). */
+        String sql = "update gerente set (nome, cpf, login, senha) values (?,?,?,?) where id_gerente = ?"; /* comando SQL para atualização (update). */
         PreparedStatement psts;
         psts = getConnection().prepareStatement(sql);
         psts.setString(1, vo.getNome());
-        psts.setLong(2, vo.getIdPessoa());
+        psts.setString(2, vo.getCpf());
+        psts.setString(3, vo.getLogin());
+        psts.setString(4, vo.getSenha());
+        psts.setLong(5, vo.getIdGerente());
         psts.executeUpdate();
     }
     /* metodo para listar pelo id pessoa*/    
