@@ -72,6 +72,21 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             rs = psts.executeQuery();
         return rs;
     }
+
+    public ResultSet ListarPorPaciente(PacienteVO vo) {
+        String sql = "SELECT * FROM Pessoa INNER JOIN Paciente ON Paciente.id_paciente_pessoa = Pessoa.id INNER JOIN Prontuario on Paciente.id_paciente = Prontuario.id_paciente WHERE nome = ?"; /*comando sql */
+        PreparedStatement psts;
+        ResultSet rs = null;
+
+        try {
+            psts = getConnection().prepareStatement(sql);
+            psts.setString(1, vo.getNome());
+            rs = psts.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs; 
+    }
     
     /* método de atualização de dados de prontuários */
     @Override
@@ -84,7 +99,11 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             psts.executeUpdate();
     }
 
-    public ResultSet ListarPorPaciente(ProntuarioVO vo) {
+    @Override
+    public ResultSet buscarPorLogin(UsuarioVO vo) {
+        // TODO Auto-generated method stub
         return null;
     }
+
+    
 }

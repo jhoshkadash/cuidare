@@ -159,8 +159,6 @@ public class GerenteBO {
                         pacienteVO.setCpf(rs.getString("CPF"));
                         pacienteVO.setEndereco(rs.getString("endereco"));
                         pacienteVO.setNome(rs.getString("nome"));
-                        pacienteVO.setIdPaciente(rs.getLong("id_paciente"));
-                        pacienteVO.setIdPessoa(rs.getLong("id_paciente_pessoa"));
                         pacientes.add(pacienteVO);
                     }
                 }
@@ -192,8 +190,6 @@ public class GerenteBO {
                         pacienteVO.setCpf(rs.getString("CPF"));
                         pacienteVO.setEndereco(rs.getString("endereco"));
                         pacienteVO.setNome(rs.getString("nome"));
-                        pacienteVO.setIdPaciente(rs.getLong("id_paciente"));
-                        pacienteVO.setIdPessoa(rs.getLong("id_paciente_pessoa"));
                         pacientes.add(pacienteVO);
 
                     }
@@ -226,8 +222,6 @@ public class GerenteBO {
                         medicoVO.setCpf(rs.getString("CPF"));
                         medicoVO.setEndereco(rs.getString("endereco"));
                         medicoVO.setCrm(rs.getString("crm"));
-                        medicoVO.setIdMedico(rs.getLong("id_medico"));
-                        medicoVO.setIdPessoa(rs.getLong("id_pessoa"));
                         medicoVO.setValorConsulta(rs.getDouble("valorconsulta"));
                         medicos.add(medicoVO);
                     }
@@ -261,8 +255,6 @@ public class GerenteBO {
                         medicoVO.setCpf(rs.getString("CPF"));
                         medicoVO.setEndereco(rs.getString("endereco"));
                         medicoVO.setCrm(rs.getString("crm"));
-                        medicoVO.setIdMedico(rs.getLong("id_medico"));
-                        medicoVO.setIdPessoa(rs.getLong("id_pessoa"));
                         medicoVO.setValorConsulta(rs.getDouble("valorconsulta"));
                         medicos.add(medicoVO);
                     }
@@ -290,8 +282,6 @@ public class GerenteBO {
                         medicoVO.setCpf(rs.getString("CPF"));
                         medicoVO.setEndereco(rs.getString("endereco"));
                         medicoVO.setCrm(rs.getString("crm"));
-                        medicoVO.setIdMedico(rs.getLong("id_medico"));
-                        medicoVO.setIdPessoa(rs.getLong("id_pessoa"));
                         medicoVO.setValorConsulta(rs.getDouble("valorconsulta"));
                         medicos.add(medicoVO);
                     }
@@ -322,8 +312,6 @@ public class GerenteBO {
                         AtendenteVO atendenteVO = new AtendenteVO();
                         atendenteVO.setNome(rs.getString("nome"));
                         atendenteVO.setCpf(rs.getString("CPF"));
-                        atendenteVO.setIdAtendente("id_atendente");
-                        atendenteVO.setIdPessoa(rs.getLong("id_pessoa"));
                         atendentes.add(atendenteVO);
                     }
                 }
@@ -354,8 +342,6 @@ public class GerenteBO {
                         AtendenteVO atendenteVO = new AtendenteVO();
                         atendenteVO.setNome(rs.getString("nome"));
                         atendenteVO.setCpf(rs.getString("CPF"));
-                        atendenteVO.setIdAtendente("id_atendente");
-                        atendenteVO.setIdPessoa(rs.getLong("id_pessoa"));
                         atendentes.add(atendenteVO);
                     }
                 }
@@ -365,5 +351,65 @@ public class GerenteBO {
             return atendentes;
         }
     }
-   
+
+    /* =========================================================== */
+    
+
+    /* ================ MÉTODOS DE BUSCA (GERENTE) ================ */ 
+
+    public List <GerenteVO> BuscarGerentePorNome (GerenteVO vo) throws Exception {
+        if(vo.getNome() == null || vo.getNome() == ""){ // verirficando se existe dados no nome
+            throw new Exception("Gerente com nome vazio");
+        }
+        else{ // metodo de busca
+            ResultSet rs;
+            List <GerenteVO> gerentes = new ArrayList<GerenteVO>();
+            GerenteDAO dao = new GerenteDAO();
+            try {
+                rs = dao.ListarPorNome(vo);
+                    while(rs.next()){
+                        GerenteVO gerenteVO = new GerenteVO();
+                        gerenteVO.setNome(rs.getString("nome"));
+                        gerenteVO.setCpf(rs.getString("CPF"));
+                        gerentes.add(gerenteVO);
+                    }
+                }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return gerentes;
+        }
+    } 
+
+    public List <GerenteVO> BuscarGerentePorCpf (GerenteVO vo) throws Exception {
+        if(vo.getCpf().length() != 11){ // verificando se a string de cpf possui 11 digitos
+            throw new Exception("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+        }
+        if(vo.getCpf() == null){ // verificando se existe dados dentro do cpf
+            throw new Exception("CPF está vazio");
+        }
+        if(vo.getCpf().matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+            throw new Exception("CPF só pode conter números");
+        }
+        else{ // metodo de busca
+            ResultSet rs;
+            List <GerenteVO> gerentes = new ArrayList<GerenteVO>();
+            GerenteDAO dao = new GerenteDAO();
+            try {
+                rs = dao.ListarPorCpf(vo);
+                    while(rs.next()){
+                        GerenteVO gerenteVO = new GerenteVO();
+                        gerenteVO.setNome(rs.getString("nome"));
+                        gerenteVO.setCpf(rs.getString("CPF"));
+                        gerentes.add(gerenteVO);
+                    }
+                }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return gerentes;
+        }
+    }
+
+
 }

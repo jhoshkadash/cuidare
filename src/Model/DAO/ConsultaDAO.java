@@ -79,7 +79,7 @@ public class ConsultaDAO extends BaseDAO<ConsultaVO>
                                                                                                                                                                                     * nome
                                                                                                                                                                                     * de
                                                                                                                                                                                     * médico.
-                                                                                                                                                                                    */
+                                                                                                                                                                            */
         PreparedStatement psts;
         ResultSet rs = null;
 

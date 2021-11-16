@@ -101,6 +101,18 @@ public class GerenteDAO extends UsuarioDAO <GerenteVO>
         psts.setLong(5, vo.getIdGerente());
         psts.executeUpdate();
     }
+
+    public ResultSet ListarPorCpf(GerenteVO vo)  throws SQLException {
+        String sql = "SELECT * FROM Pessoa LEFT JOIN Gerente ON Pessoa.id = Gerente.id_gerente_pessoa WHERE cpf = ?";
+        PreparedStatement psts;
+        ResultSet rs = null;
+
+        psts = getConnection().prepareStatement(sql);
+        psts.setString(1, vo.getCpf());
+        rs = psts.executeQuery();
+        return rs;
+    }
+
     /* metodo para listar pelo id pessoa*/    
     public ResultSet ListarPorIdPessoa(GerenteVO vo) throws SQLException {
         String sql = "select * from Gerente where id_pessoa = ?"; /* comando SQL para listagem por Id. */
@@ -112,4 +124,5 @@ public class GerenteDAO extends UsuarioDAO <GerenteVO>
         return rs;
     }
 
+    
 }
