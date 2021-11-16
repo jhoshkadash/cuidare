@@ -41,7 +41,6 @@ public class AtendenteBO{
                             dao.Inserir(vo);
                         }
                     } catch (SQLException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
@@ -57,8 +56,6 @@ public class AtendenteBO{
         if(vo.getIdPaciente() == null){
             throw new InsertException("Paciente não definido");
         }
-
-
     }
 
 

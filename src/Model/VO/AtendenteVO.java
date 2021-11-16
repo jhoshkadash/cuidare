@@ -16,8 +16,12 @@ public class AtendenteVO extends UsuarioVO {
         return this.idAtendente;
     }
 
-    public void setIdAtendente(Long idAtendente) {
-        this.idAtendente = idAtendente;
+    public void setIdAtendente(long l) {
+        this.idAtendente = l;
+    }
+
+
+    public void setIdAtendente(String string) {
     }
 
 }

@@ -105,4 +105,8 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         psts.setLong(2, vo.getIdPessoa());
         psts.executeUpdate();
     }
+
+    public ResultSet ListarPorNome(MedicoVO vo) {
+        return null;
+    }
 }

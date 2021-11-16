@@ -86,6 +86,18 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
         }
         return rs;
     }
+
+    public ResultSet ListarPorCpf(AtendenteVO vo) throws SQLException {
+        String sql = "SELECT * FROM Pessoa LEFT JOIN Atendente ON Pessoa.id = Atendente.id_atendente_pessoa WHERE cpf = ?";
+        PreparedStatement psts;
+        ResultSet rs = null;
+
+        psts = getConnection().prepareStatement(sql);
+        psts.setString(1, vo.getCpf());
+        rs = psts.executeQuery();
+        return rs;
+    }
+
     
     /* método de atualização dos dados de atendentes */
     @Override
@@ -100,13 +112,5 @@ public class AtendenteDAO extends UsuarioDAO <AtendenteVO>
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public ResultSet ListarPorNome(MedicoVO vo) {
-        return null;
-    }
-
-    public ResultSet ListarPorCpf(AtendenteVO vo) {
-        return null;
     }
 }

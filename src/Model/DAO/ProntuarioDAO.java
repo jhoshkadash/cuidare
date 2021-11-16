@@ -83,4 +83,8 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             psts.setLong(2, vo.getIdProntuario());
             psts.executeUpdate();
     }
+
+    public ResultSet ListarPorPaciente(ProntuarioVO vo) {
+        return null;
+    }
 }

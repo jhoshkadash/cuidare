@@ -9,9 +9,6 @@ public class ConsultaVO {
     private Boolean status;
     private Calendar dataConsulta = Calendar.getInstance();
 
-
-
-
     public ConsultaVO(Long idMedico, Long idPaciente, Boolean status, String dataConsulta) {
         this.idMedico = idMedico;
         this.idPaciente = idPaciente;

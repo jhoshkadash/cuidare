@@ -91,6 +91,18 @@ public class MedicoDAO extends UsuarioDAO < MedicoVO >
         return rs;
     }
 
+    public ResultSet ListarPorCpf(MedicoVO vo) throws SQLException {
+        String sql = "SELECT * FROM Pessoa LEFT JOIN Medico ON Pessoa.id = Medico.id_pessoa WHERE cpf = ?";
+        PreparedStatement psts;
+        ResultSet rs = null;
+
+        psts = getConnection().prepareStatement(sql);
+        psts.setString(1, vo.getCpf());
+        rs = psts.executeQuery();
+        return rs;
+    }
+
+
     /* método para atualização dos dados de médicos */
     @Override
     public void Atualizar(MedicoVO vo) throws SQLException {
