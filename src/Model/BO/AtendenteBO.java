@@ -78,7 +78,6 @@ public class AtendenteBO{
             PacienteDAO dao = new PacienteDAO();
             try {
                 rs = dao.ListarPorCpf(vo);
-                if(rs.next()){
                     while(rs.next()){
                         PacienteVO pacienteVO = new PacienteVO();
                         pacienteVO.setCpf(rs.getString("CPF"));
@@ -87,12 +86,10 @@ public class AtendenteBO{
                         pacienteVO.setIdPaciente(rs.getLong("id_paciente"));
                         pacienteVO.setIdPessoa(rs.getLong("id_paciente_pessoa"));
                         pacientes.add(pacienteVO);
+
                     }
-                }else{
-                    throw new ListException("Não foi encontrado nenhum resultado para a busca");
                 }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
+            catch (SQLException e) {
                 e.printStackTrace();
             }
             return pacientes;
