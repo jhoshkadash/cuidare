@@ -9,6 +9,13 @@
             "name": "Launch testeBO",
             "request": "launch",
             "mainClass": "Model.BO.testeBO",
+            "projectName": "cuidare_638e6bd1"
+        },
+        {
+            "type": "java",
+            "name": "Launch testeBO",
+            "request": "launch",
+            "mainClass": "Model.BO.testeBO",
             "projectName": "cuidare_8c2e6b74"
         },
         {
