@@ -3,13 +3,10 @@ package Model.BO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-
-import Model.DAO.PacienteDAO;
+import Model.DAO.*;
 import Model.Exception.InsertException;
 import Model.Exception.ListException;
-import Model.VO.AtendenteVO;
-import Model.VO.ConsultaVO;
-import Model.VO.PacienteVO;
+import Model.VO.*;
 import javafx.scene.chart.PieChart;
 
 public class AtendenteBO{
@@ -58,7 +55,6 @@ public class AtendenteBO{
         }
     }
 
-
     public List <PacienteVO> BuscarPacientePorCPF (PacienteVO vo) throws ListException {
         if(vo.getCpf().length() != 11){ // verificando se a string de cpf possui 11 digitos
             throw new ListException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
@@ -93,13 +89,62 @@ public class AtendenteBO{
         }
     }
 
-    public void Editar(AtendenteVO vo) {
-        // TODO Auto-generated method stub
-        
+    public List <MedicoVO> BuscarMedicoPorCpf (MedicoVO vo) throws ListException {
+        if(vo.getCpf().length() != 11){ // verificando se a string de cpf possui 11 digitos
+            throw new ListException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+        }
+        if(vo.getCpf() == null){ // verificando se existe dados dentro do cpf
+            throw new ListException("CPF está vazio");
+        }
+        if(vo.getCpf().matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+            throw new ListException("CPF só pode conter números");
+        }
+        else{ // metodo de busca
+            ResultSet rs;
+            List <MedicoVO> medicos = new ArrayList<MedicoVO>();
+            MedicoDAO dao = new MedicoDAO();
+            try {
+                rs = dao.ListarPorCpf(vo);
+                    while(rs.next()){
+                        MedicoVO medicoVO = new MedicoVO();
+                        medicoVO.setCpf(rs.getString("CPF"));
+                        medicoVO.setNome(rs.getString("nome"));
+                        medicoVO.setEndereco(rs.getString("endereco"));
+                        medicoVO.setCrm(rs.getString("crm"));
+                        medicos.add(medicoVO);
+                    }
+                }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return medicos;
+        }
     }
 
-    public void Excluir(AtendenteVO vo) {
-        // TODO Auto-generated method stub
-        
+    public List <ProntuarioVO> BuscarProntuario (ProntuarioVO vo) throws ListException {
+            ResultSet rs;
+            List <ProntuarioVO> prontuarios = new ArrayList<ProntuarioVO>();
+            ProntuarioDAO dao = new ProntuarioDAO();
+            try {
+                rs = dao.ListarPorId(vo);
+                    while(rs.next()){
+                        ProntuarioVO prontuarioVO = new ProntuarioVO();
+                        prontuarioVO.setIdPaciente(rs.getLong("id_paciente"));
+                        prontuarioVO.setIdProntuario(rs.getLong("id_prontuario"));
+                        prontuarioVO.setPeso(rs.getFloat("peso"));
+                        prontuarioVO.setAltura(rs.getFloat("altura"));
+                        prontuarioVO.setAntenPatologico(rs.getString("ante_patologico"));
+                        prontuarioVO.setHistoricoDoenca(rs.getString("historico_doenças"));
+                        prontuarioVO.setMediAlergia(rs.getString("medi_alergicos"));
+                        prontuarioVO.setMediAtuais(rs.getString("medi_atuais"));
+                        prontuarios.add(prontuarioVO);
+                    }
+                }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return prontuarios;
+        }
     }
+    
 }
