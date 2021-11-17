@@ -92,4 +92,15 @@ public class UsuarioDAO <VO extends UsuarioVO> extends PessoaDAO <VO>
         psts.setLong(2, vo.getIdPessoa());
         psts.executeUpdate();
     }
+
+    public ResultSet buscarPorLogin(UsuarioVO vo) throws SQLException {
+        String sql = "select * from Pessoa left join usuario on pessoa.id = usuario.id_pessoa where usuario.login = ? ";
+        PreparedStatement psts;
+        ResultSet rs = null;
+
+        psts = getConnection().prepareStatement(sql);
+        psts.setString(1, vo.getLogin());
+        rs = psts.executeQuery();
+        return rs;
+    };
 }

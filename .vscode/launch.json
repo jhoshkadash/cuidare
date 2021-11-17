@@ -4,6 +4,14 @@
     // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
+        {
+            "type": "java",
+            "name": "Launch telaLogin",
+            "request": "launch",
+            "mainClass": "VIEW.telaLogin",
+            "projectName": "cuidare_638e6bd1"
+        },
         {
             "type": "java",
             "name": "Launch testeBO",

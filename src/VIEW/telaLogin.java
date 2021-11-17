@@ -1,8 +1,10 @@
 package VIEW;
 
+import controller.FrontController;
 import javafx.application.*;
 import javafx.fxml.*;
 import javafx.scene.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.*;
 
 public class telaLogin extends Application {
@@ -13,7 +15,7 @@ public class telaLogin extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader= FXMLLoader.load(getClass().getResource("telaLogin.fxml"));
+        FXMLLoader loader= FXMLLoader.load(getClass().getResource("G:/Documentos/UFERSA/Disciplinas/POO/cuidare/src/VIEW/VE/telaLogin.fxml"));
 
         Parent root = loader.load();
 

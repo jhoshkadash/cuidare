@@ -97,13 +97,5 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             psts.setFloat(1,vo.getPeso());
             psts.setLong(2, vo.getIdProntuario());
             psts.executeUpdate();
-    }
-
-    @Override
-    public ResultSet buscarPorLogin(UsuarioVO vo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    
+    }    
 }

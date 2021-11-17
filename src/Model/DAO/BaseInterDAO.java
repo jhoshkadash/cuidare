@@ -10,5 +10,4 @@ public interface BaseInterDAO <VO> {
     public void Deletar(VO entity) throws SQLException;
     public ResultSet ListarPorId(VO entity) throws SQLException;
     public ResultSet Listar() throws SQLException;
-    public ResultSet buscarPorLogin(UsuarioVO vo);
 }
