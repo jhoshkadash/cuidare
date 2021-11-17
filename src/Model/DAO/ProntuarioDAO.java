@@ -99,11 +99,6 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             psts.executeUpdate();
     }
 
-    @Override
-    public ResultSet buscarPorLogin(UsuarioVO vo) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
+    
     
 }

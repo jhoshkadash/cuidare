@@ -27,7 +27,7 @@ public class MedicoBO {
 
     }
 
-    public List<ProntuarioVO> BuscarPronturarioPaciente (ProntuarioVO vo) {
+    public List<ProntuarioVO> BuscarPronturarioPaciente (PacienteVO vo) {
             ResultSet rs;
             List <ProntuarioVO> prontuarios = new ArrayList<ProntuarioVO>();
             ProntuarioDAO dao = new ProntuarioDAO();
