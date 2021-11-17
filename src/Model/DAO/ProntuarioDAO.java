@@ -97,5 +97,12 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             psts.setFloat(1,vo.getPeso());
             psts.setLong(2, vo.getIdProntuario());
             psts.executeUpdate();
+<<<<<<< HEAD
     }    
+=======
+    }
+
+    
+    
+>>>>>>> 7567889212288cbb6bdb9e5e1d8fd079291ada87
 }
