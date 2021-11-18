@@ -8,14 +8,12 @@ import javafx.stage.*;
 public class telaLogin extends Application {
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader= FXMLLoader.load(getClass().getResource("VE/telaLogin.fxml"));
-
-        Parent root = loader.load();
+        Parent root = FXMLLoader.load(getClass().getResource("VE/telaLogin.fxml"));
 
         Scene cena = new Scene(root);
 
