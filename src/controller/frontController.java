@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +9,5 @@ public class FrontController{
     @FXML private TextField login;
     @FXML private TextField senha;
     public void autenticar(ActionEvent event) {
-
     }
 }
