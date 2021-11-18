@@ -8,7 +8,7 @@ import javafx.stage.*;
 public class telaLogin extends Application {
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class telaLogin extends Application {
 
         Parent root = loader.load();
 
-        Scene cena = new Scene(root, 800, 500);
+        Scene cena = new Scene(root);
 
         primaryStage.setTitle("CUIDARE");
         primaryStage.setScene(cena);
