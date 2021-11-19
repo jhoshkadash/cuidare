@@ -1,5 +1,6 @@
 package Model.VO;
 
+import java.security.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -29,19 +30,28 @@ public class ConsultaVO {
 
 
 
-    public void setDataConsulta( String dConsulta) {
+    public void setDataConsulta(String dConsulta) {
         try {
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             this.dataConsulta.setTime(formato.parse(dConsulta));
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
-    public Calendar getDataConsulta(){
-        return this.dataConsulta;
+    public void setDataConsultaDao(java.sql.Timestamp dConsulta) {
+            this.dataConsulta.setTime(dConsulta);
     }
 
+    public String getDataConsulta(){
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String dConsulta = formato.format(this.dataConsulta.getTime());
+        return dConsulta;
+    }
+
+    public Calendar getDataConsultaDao(){
+        return this.dataConsulta;
+    }
 
 
     public Long getIdConsulta() {

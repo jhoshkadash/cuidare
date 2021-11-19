@@ -1,5 +1,6 @@
 package Model.VO;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,8 +30,14 @@ public class ProntuarioVO  {
 
     public ProntuarioVO() {
     }
-    public Calendar getDataNascimento() {
-        return dataNascimento;
+    public String getDataNascimento() {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String dNascimento = formato.format(this.dataNascimento.getTime());
+        return dNascimento;
+    }
+
+    public Calendar getDataNascimentoDao() {
+        return this.dataNascimento;
     }
 
     public void setDataNascimento(String dNascimento) {
@@ -40,6 +47,10 @@ public class ProntuarioVO  {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setDataNascimentoDao(Timestamp dNascimento) {
+            this.dataNascimento.setTime(dNascimento);
     }
 
     public String getAntenPatologico() {

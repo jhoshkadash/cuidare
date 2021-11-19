@@ -74,13 +74,13 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
     }
 
     public ResultSet ListarPorPaciente(PacienteVO vo) {
-        String sql = "SELECT * FROM Pessoa INNER JOIN Paciente ON Paciente.id_paciente_pessoa = Pessoa.id INNER JOIN Prontuario on Paciente.id_paciente = Prontuario.id_paciente WHERE nome = ?"; /*comando sql */
+        String sql = "SELECT * FROM Pessoa LEFT JOIN Paciente ON Paciente.id_paciente_pessoa = Pessoa.id LEFT JOIN Prontuario on Paciente.id_paciente = Prontuario.id_prontuario_paciente WHERE pessoa.cpf = ?"; /*comando sql */
         PreparedStatement psts;
         ResultSet rs = null;
 
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setString(1, vo.getNome());
+            psts.setString(1, vo.getCpf());
             rs = psts.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,12 +97,5 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             psts.setFloat(1,vo.getPeso());
             psts.setLong(2, vo.getIdProntuario());
             psts.executeUpdate();
-<<<<<<< HEAD
     }    
-=======
-    }
-
-    
-    
->>>>>>> 7567889212288cbb6bdb9e5e1d8fd079291ada87
 }

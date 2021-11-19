@@ -16,7 +16,7 @@ public class ConsultaDAO extends BaseDAO<ConsultaVO>
     public void Inserir(ConsultaVO vo) throws SQLException {
         try {
 
-            Date data = new Date(vo.getDataConsulta().getTimeInMillis());
+            Date data = new Date(vo.getDataConsultaDao().getTimeInMillis());
             final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());// tratamento da classe calendar
                                                                                       // para timestamp
 
@@ -25,7 +25,7 @@ public class ConsultaDAO extends BaseDAO<ConsultaVO>
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setLong(1, vo.getIdMedico());
             psts.setLong(2, vo.getIdPaciente());
-            psts.setTimestamp(3, dataSql, vo.getDataConsulta());
+            psts.setTimestamp(3, dataSql, vo.getDataConsultaDao());
             psts.setBoolean(4, vo.isStatus());
 
             int affectedRows = psts.executeUpdate(); // variável para verificação de alterações na tabela
@@ -132,12 +132,12 @@ public class ConsultaDAO extends BaseDAO<ConsultaVO>
         PreparedStatement psts = null;
         ResultSet rs = null;
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date data = new Date(vo.getDataConsulta().getTimeInMillis());
+        Date data = new Date(vo.getDataConsultaDao().getTimeInMillis());
         final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime()); // tratamento da classe calendar para
                                                                                    // timestamp
 
         psts.getConnection().prepareStatement(sql);
-        psts.setTimestamp(1, dataSql, vo.getDataConsulta());
+        psts.setTimestamp(1, dataSql, vo.getDataConsultaDao());
         rs = psts.executeQuery();
 
         return rs;
@@ -151,12 +151,12 @@ public class ConsultaDAO extends BaseDAO<ConsultaVO>
                                                                             * consulta.
                                                                             */
         PreparedStatement psts;
-        Date data = new Date(vo.getDataConsulta().getTimeInMillis());
+        Date data = new Date(vo.getDataConsultaDao().getTimeInMillis());
         final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime()); // tratamento da classe calendar para
                                                                                    // timestamp
         try {
             psts = getConnection().prepareStatement(sql);
-            psts.setTimestamp(1, dataSql, vo.getDataConsulta());
+            psts.setTimestamp(1, dataSql, vo.getDataConsultaDao());
             psts.setBoolean(2, vo.getStatus());
             psts.setLong(3, vo.getIdConsulta());
             psts.executeUpdate();

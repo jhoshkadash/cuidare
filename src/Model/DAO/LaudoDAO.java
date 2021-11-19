@@ -92,7 +92,7 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
         Statement st;
         PreparedStatement psts = null;
         ResultSet rs = null;
-        Date data = new Date(vo.getDataConsulta().getTimeInMillis());
+        Date data = new Date(vo.getDataConsultaDao().getTimeInMillis());
         final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());
         st = getConnection().prepareStatement(sql);
         psts.setTimestamp(1, dataSql);

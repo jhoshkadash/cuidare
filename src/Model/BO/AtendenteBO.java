@@ -43,16 +43,56 @@ public class AtendenteBO{
                 }
             } 
     
-    public void MarcarConsulta (ConsultaVO vo) throws InsertException {
-        if(vo.getDataConsulta() == null){
+
+    public void CriarProntuario(ProntuarioVO ProntuarioVo, PacienteVO pacienteVo) throws InsertException {
+        if(ProntuarioVo.getAltura() == null || ProntuarioVo.getAltura() == 0 || ProntuarioVo.getAltura() < 0){
+            throw new InsertException("Altura não informada ou inválida");
+        }
+        if(ProntuarioVo.getDataNascimento() == null){
+            throw new InsertException("Data de nascimento não informada");
+        }
+        if(ProntuarioVo.getPeso() == null || ProntuarioVo.getPeso() == 0 || ProntuarioVo.getPeso() < 0){
+            throw new InsertException("Peso não informado ou inválido");
+        }
+        if(pacienteVo.getIdPaciente() == null){
+            throw new InsertException("Paciente informado sem id cadastrado");
+        }
+
+        else{
+            if(pacienteVo.getIdPaciente() != null){
+                ProntuarioVo.setIdPaciente(pacienteVo.getIdPaciente());
+            }
+            ProntuarioDAO dao = new ProntuarioDAO();
+            try {
+                dao.Inserir(ProntuarioVo);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void MarcarConsulta (ConsultaVO consulta, PacienteVO paciente, MedicoVO medico) throws InsertException {
+        if(consulta.getDataConsulta() == null){
           throw new InsertException("Data não informada");
         }
-        if(vo.getIdMedico() == null){
+        if(consulta.getIdMedico() == null){
             throw new InsertException("Médico não definido");
         }
-        if(vo.getIdPaciente() == null){
+        if(consulta.getIdPaciente() == null){
             throw new InsertException("Paciente não definido");
-        }
+        }else{
+        try {
+            if(medico.getIdMedico() != null){
+                consulta.setIdMedico(medico.getIdMedico());
+            }
+            if(paciente.getIdPaciente() != null){
+                consulta.setIdPaciente(paciente.getIdPaciente());
+            }
+            ConsultaDAO dao = new ConsultaDAO();
+            dao.Inserir(consulta);    
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }}
     }
 
     public List <PacienteVO> BuscarPacientePorCPF (PacienteVO vo) throws ListException {
@@ -120,14 +160,22 @@ public class AtendenteBO{
             return medicos;
         }
     }
-
-    public List <ProntuarioVO> BuscarProntuario (ProntuarioVO vo) throws ListException {
+    public List <ProntuarioVO> BuscarProntuario (PacienteVO vo) throws ListException {
             ResultSet rs;
             List <ProntuarioVO> prontuarios = new ArrayList<ProntuarioVO>();
-            ProntuarioDAO dao = new ProntuarioDAO();
+            List <PacienteVO> pacientes = new ArrayList<PacienteVO>();
+            PacienteDAO dao = new PacienteDAO();
+            ProntuarioDAO prontDao = new ProntuarioDAO();
             try {
-                rs = dao.ListarPorId(vo);
-                    while(rs.next()){
+                rs = dao.ListarPorCpf(vo);
+                while(rs.next()){
+                    PacienteVO paciente = new PacienteVO();
+                    paciente.setIdPaciente(rs.getLong("id_paciente"));
+                    paciente.setIdPessoa(rs.getLong("id_paciente_pessoa"));
+                    pacientes.add(paciente);
+                }    
+                rs = prontDao.ListarPorPaciente(vo);
+                while(rs.next()){
                         ProntuarioVO prontuarioVO = new ProntuarioVO();
                         prontuarioVO.setIdPaciente(rs.getLong("id_paciente"));
                         prontuarioVO.setIdProntuario(rs.getLong("id_prontuario"));
@@ -138,6 +186,7 @@ public class AtendenteBO{
                         prontuarioVO.setMediAlergia(rs.getString("medi_alergicos"));
                         prontuarioVO.setMediAtuais(rs.getString("medi_atuais"));
                         prontuarios.add(prontuarioVO);
+                        prontuarios.add(prontuarioVO); 
                     }
                 }
             catch (SQLException e) {
@@ -147,4 +196,3 @@ public class AtendenteBO{
         }
     }
     
-}
