@@ -214,11 +214,10 @@ public class AtendenteBO{
             ResultSet rs;
             List <MedicoVO> medicos = new ArrayList<MedicoVO>();
             MedicoDAO dao = new MedicoDAO();
-
+            MedicoVO medicoVO = new MedicoVO("", cpf, "", "", "", 0d, "");
             try {
-                rs = dao.ListarPorCpf(vo);
+                rs = dao.ListarPorCpf(medicoVO);
                     while(rs.next()){
-                        MedicoVO medicoVO = new MedicoVO();
                         medicoVO.setCpf(rs.getString("CPF"));
                         medicoVO.setNome(rs.getString("nome"));
                         medicoVO.setEndereco(rs.getString("endereco"));
