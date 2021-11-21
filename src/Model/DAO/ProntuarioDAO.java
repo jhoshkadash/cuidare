@@ -11,12 +11,12 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
     @Override
     public void Inserir (ProntuarioVO vo) throws SQLException{
             Date data = new Date();
-            data = vo.getDataNascimento().getTime();
+            data = vo.getDataNascimentoDao().getTime();
             java.sql.Date dataSQL = new java.sql.Date(data.getTime());
             String sql = "insert into Prontuario ( data_nascimento, ante_patologico, medi_atuais, medi_alergicos, historico_doenças, peso, altura, id_prontuario_paciente) values (?,?,?,?,?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            psts.setDate(1, dataSQL ,vo.getDataNascimento());
+            psts.setDate(1, dataSQL ,vo.getDataNascimentoDao());
             psts.setString(2, vo.getAntenPatologico());
             psts.setString(3, vo.getMediAtuais());
             psts.setString(4, vo.getMediAlergia());

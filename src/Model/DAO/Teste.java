@@ -11,30 +11,27 @@ import Model.VO.*;
 
 public class Teste {
     public static void main(String[] args) throws SQLException {
-        ProntuarioDAO dao = new ProntuarioDAO();
-        PacienteVO vo = new PacienteVO("Pedro Antonio", "34502328412", "Pedro leite");
+        PacienteDAO dao = new PacienteDAO();
+        PacienteVO vo = new PacienteVO("Iara Kateucha", "30490200350", "");
+        dao.AtualizarNome(vo);
 
-        //listar atendente
-        List <ProntuarioVO> pronturaio = new ArrayList<ProntuarioVO>();
-        ResultSet rs = dao.ListarPorPaciente(vo);
+        //*listar atendente
+        /*List <PacienteVO> pronturaio = new ArrayList<PacienteVO>();
+        ResultSet rs = dao.ListarPorCpf(vo);
         while (rs.next()){
-            ProntuarioVO aux = new ProntuarioVO();
-            aux.setAltura(rs.getFloat("altura"));;
-            aux.setPeso(rs.getFloat("peso"));
-            aux.setDataNascimentoDao(rs.getTimestamp("data_nascimento"));
-            aux.setAntenPatologico(rs.getNString("ante_patologico"));
-            aux.setHistoricoDoenca(rs.getString("historico_doenças"));
-            aux.setIdPaciente(rs.getLong("id_prontuario_paciente"));
-            aux.setIdProntuario(rs.getLong("id_prontuario"));
-            aux.setMediAlergia(rs.getString("medi_alergicos"));
-            aux.setMediAtuais(rs.getString("medi_atuais"));
+            PacienteVO aux = new PacienteVO();
+            aux.setIdPaciente(rs.getLong("id_paciente"));
+            aux.setCpf(rs.getString("cpf"));
+            aux.setNome(rs.getString("nome"));
+            aux.setIdPessoa(rs.getLong("id_paciente_pessoa"));
             pronturaio.add(aux);//setando atributos e adicionando na lista
         }
-        for(ProntuarioVO vo3 : pronturaio){
-            System.out.println("id prontuario : " + vo3.getIdProntuario());// exibindo o que foi armazenado na lista
+        for(PacienteVO vo3 : pronturaio){
+            System.out.println("id pessoa : " + vo3.getIdPessoa());// exibindo o que foi armazenado na lista
             System.out.println("id paciente : " + vo3.getIdPaciente());
-            System.out.println("data nascimento : " + vo3.getDataNascimento());
-        }
+            System.out.println("nome : " + vo3.getNome());
+            System.out.println("CPf : " + vo3.getCpf());
+        }*/
         
     }
 }

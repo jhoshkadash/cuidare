@@ -8,9 +8,14 @@ import Model.VO.PacienteVO;
 
 public class testeBO {
     public static void main(String[] args) {
-        PacienteVO vo  = new PacienteVO("", "84593402394", "");
         AtendenteBO bo = new AtendenteBO();
         try {
+            bo.MarcarConsulta("29/11/2021 14:30", "30490200350", "João");;    
+        } catch (InsertException e) {
+            e.getMessage();
+        }
+        
+        /*try {
             List <PacienteVO> pacientes = bo.BuscarPacientePorCPF(vo);
             for (PacienteVO aux : pacientes ){
                 System.out.println("Nome do paciente : " + aux.getNome());
@@ -22,7 +27,7 @@ public class testeBO {
         } catch (ListException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
+        }*/
         
     }
 }

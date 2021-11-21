@@ -105,4 +105,14 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         psts.setLong(2, vo.getIdPessoa());
         psts.executeUpdate();
     }
+
+    public void AtualizarNome(PacienteVO vo) throws SQLException{
+        String sql = "UPDATE Pessoa LEFT JOIN Paciente ON pessoa.id = Paciente.id_paciente_pessoa SET Pessoa.nome = ? WHERE Pessoa.cpf = ?";
+        PreparedStatement psts;
+
+        psts = getConnection().prepareStatement(sql);
+        psts.setString(1, vo.getNome());
+        psts.setString(2, vo.getCpf());
+        psts.executeUpdate();
+    }
 }
