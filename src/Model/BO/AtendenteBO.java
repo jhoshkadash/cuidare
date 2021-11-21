@@ -231,21 +231,21 @@ public class AtendenteBO{
             return medicos;
         }
     }
-    public List <ProntuarioVO> BuscarProntuario (PacienteVO vo) throws ListException {
+    public List <ProntuarioVO> BuscarProntuario (String cpfPaciente) throws ListException {
             ResultSet rs;
             List <ProntuarioVO> prontuarios = new ArrayList<ProntuarioVO>();
             List <PacienteVO> pacientes = new ArrayList<PacienteVO>();
             PacienteDAO dao = new PacienteDAO();
             ProntuarioDAO prontDao = new ProntuarioDAO();
+            PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
             try {
-                rs = dao.ListarPorCpf(vo);
+                rs = dao.ListarPorCpf(paciente);
                 while(rs.next()){
-                    PacienteVO paciente = new PacienteVO();
                     paciente.setIdPaciente(rs.getLong("id_paciente"));
                     paciente.setIdPessoa(rs.getLong("id_paciente_pessoa"));
                     pacientes.add(paciente);
                 }    
-                rs = prontDao.ListarPorPaciente(vo);
+                rs = prontDao.ListarPorPaciente(paciente);
                 while(rs.next()){
                         ProntuarioVO prontuarioVO = new ProntuarioVO();
                         prontuarioVO.setIdPaciente(rs.getLong("id_paciente"));
