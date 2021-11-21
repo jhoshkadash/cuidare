@@ -10,13 +10,10 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
     /* método de inserção de prontuários */
     @Override
     public void Inserir (ProntuarioVO vo) throws SQLException{
-            Date data = new Date();
-            data = vo.getDataNascimentoDao().getTime();
-            java.sql.Date dataSQL = new java.sql.Date(data.getTime());
             String sql = "insert into Prontuario ( data_nascimento, ante_patologico, medi_atuais, medi_alergicos, historico_doenças, peso, altura, id_prontuario_paciente) values (?,?,?,?,?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            psts.setDate(1, dataSQL ,vo.getDataNascimentoDao());
+            psts.setDate(1, vo.getDataNascimentoDao());
             psts.setString(2, vo.getAntenPatologico());
             psts.setString(3, vo.getMediAtuais());
             psts.setString(4, vo.getMediAlergia());
@@ -97,5 +94,14 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             psts.setFloat(1,vo.getPeso());
             psts.setLong(2, vo.getIdProntuario());
             psts.executeUpdate();
-    }    
+    }
+    
+    public void AtualizarDataNascimento (ProntuarioVO vo) throws SQLException {
+        String sql = "UPDATE Prontuario SET data_nascimento = ? WHERE id_prontuario_paciente = ?"; /* comando de atualização (update) em SQL. */
+        PreparedStatement psts;
+            psts = getConnection().prepareStatement(sql);
+            psts.setDate(1,vo.getDataNascimentoDao());
+            psts.setLong(2, vo.getIdPaciente());
+            psts.executeUpdate();
+    }     
 }

@@ -9,8 +9,7 @@ import Model.DAO.ConsultaDAO;
 import Model.DAO.MedicoDAO;
 import Model.DAO.PacienteDAO;
 import Model.DAO.ProntuarioDAO;
-import Model.Exception.InsertException;
-import Model.Exception.ListException;
+import Model.Exception.*;
 import Model.VO.ConsultaVO;
 import Model.VO.MedicoVO;
 import Model.VO.PacienteVO;
@@ -95,11 +94,11 @@ public class AtendenteBO{
         }
     }
 
-    public void MarcarConsulta (String dataConsulta, String cpfPaciente, String nomeMedico) throws InsertException {
+    public void MarcarConsulta (String dataConsulta, String cpfPaciente, String crmMedico) throws InsertException {
         if(dataConsulta == null){
           throw new InsertException("Data não informada");
         }
-        if(nomeMedico == null || nomeMedico == ""){ // verirficando se existe dados no nome
+        if(crmMedico == null || crmMedico == ""){ // verirficando se existe dados no nome
             throw new InsertException("Paciente com nome vazio");
         }
         if(cpfPaciente.length() != 11){ // verificando se a string de cpf possui 11 digitos
@@ -113,7 +112,7 @@ public class AtendenteBO{
         }else{
         try {
             PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
-            MedicoVO medico = new MedicoVO(nomeMedico, "", "", "", "", null, "");
+            MedicoVO medico = new MedicoVO("", "", "", "", "", null, crmMedico);
             PacienteDAO pacienteD = new PacienteDAO();
             MedicoDAO medicoD = new MedicoDAO();
             ResultSet rs;
@@ -124,7 +123,7 @@ public class AtendenteBO{
                 paciente.setIdPaciente(rs.getLong("id_paciente"));
                 paciente.setIdPessoa(rs.getLong("id_paciente_pessoa"));
                 }
-            rs = medicoD.ListarPorNome(medico);
+            rs = medicoD.ListarPorCrm(medico);
             if(rs.next()){
                 medico.setNome(rs.getString("nome"));
                 medico.setCrm(rs.getString("crm"));
@@ -143,24 +142,87 @@ public class AtendenteBO{
     }
 
 
-    public void EditarNomePaciente (String cpf, String nomeNovo) throws InsertException{
+    public void EditarNomePaciente (String cpf, String nomeNovo) throws UpdateException{
         if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
-            throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+            throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
         }
         if(cpf == null){
-            throw new InsertException("CPF está vazio");
+            throw new UpdateException("CPF está vazio");
         }
         if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
-            throw new InsertException("CPF só pode conter números");
+            throw new UpdateException("CPF só pode conter números");
         }
         if(nomeNovo == null || nomeNovo == ""){ // verirficando se existe dados no nome
-            throw new InsertException("Paciente com nome vazio");
+            throw new UpdateException("Paciente com nome vazio");
         }else{
             PacienteVO vo = new PacienteVO(nomeNovo, cpf, "");
             PacienteDAO dao = new PacienteDAO();
             try{
                 dao.AtualizarNome(vo);
             }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void EditarCpfPaciente(String idPaciente, String cpfNovo ) throws UpdateException{
+        Long idPacienteL = Long.parseLong(idPaciente);
+        PacienteVO paciente = new PacienteVO("", cpfNovo, "");
+
+        paciente.setIdPaciente(idPacienteL);
+
+        PacienteDAO dao = new PacienteDAO();
+
+        if(cpfNovo.length() != 11){ // verificando se a string de cpf possui 11 digitos
+            throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+        }
+        if(cpfNovo == null){
+            throw new UpdateException("CPF está vazio");
+        }
+        if(cpfNovo.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+            throw new UpdateException("CPF só pode conter números");
+        }else{
+            try {
+                ResultSet rs;
+                rs = dao.ListarPorId(paciente);
+                if(rs.next()){
+                    dao.AtualizarCpf(paciente);
+                }else{
+                    throw new UpdateException("Nenhum paciente com o id informado");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void EditarDataNascimento(String dataNova, String cpfPaciente) throws UpdateException{
+        PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
+        PacienteDAO dao = new PacienteDAO();
+        ResultSet rs;
+        if(cpfPaciente.length() != 11){ // verificando se a string de cpf possui 11 digitos
+            throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+        }
+        if(cpfPaciente == null){
+            throw new UpdateException("CPF está vazio");
+        }
+        if(cpfPaciente.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+            throw new UpdateException("CPF só pode conter números");
+        }else{
+            try {
+                rs= dao.ListarPorCpf(paciente);
+                if (rs.next()){
+                    ProntuarioVO prontuario = new ProntuarioVO(dataNova, "", "", "", 0f, 0f, "", 0L);
+                    
+                    prontuario.setIdPaciente(rs.getLong("id_paciente"));
+                    
+                    ProntuarioDAO dao2 = new ProntuarioDAO();
+                    dao2.AtualizarDataNascimento(prontuario);
+                }else{
+                    throw new UpdateException("Nenhum paciente com o cpf informado");
+                }
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -231,6 +293,9 @@ public class AtendenteBO{
             return medicos;
         }
     }
+
+
+
     public List <ProntuarioVO> BuscarProntuario (String cpfPaciente) throws ListException {
             ResultSet rs;
             List <ProntuarioVO> prontuarios = new ArrayList<ProntuarioVO>();
@@ -265,5 +330,6 @@ public class AtendenteBO{
             }
             return prontuarios;
         }
+
     }
     

@@ -60,9 +60,10 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
 
     /* método de listagem de pacientes por nome */
     public ResultSet ListarPorNome(PacienteVO vo) throws SQLException {
-        String sql = "SELECT * FROM Pessoa LEFT JOIN Paciente ON pessoa.id = Paciente.id_paciente_pessoa WHERE Pessoa.nome = ? "; //comando SQL para listagem por nome.
+        String sql = "SELECT * FROM Pessoa LEFT JOIN Paciente ON pessoa.id = Paciente.id_paciente_pessoa WHERE Pessoa.nome LIKE ? "; //comando SQL para listagem por nome.
         PreparedStatement psts;
         ResultSet rs = null;
+        vo.setNome("%" + vo.getNome() + "%");
         psts = getConnection().prepareStatement(sql);
         psts.setString(1, vo.getNome());
         rs = psts.executeQuery();
@@ -113,6 +114,16 @@ public class PacienteDAO extends PessoaDAO<PacienteVO> {
         psts = getConnection().prepareStatement(sql);
         psts.setString(1, vo.getNome());
         psts.setString(2, vo.getCpf());
+        psts.executeUpdate();
+    }
+
+    public void AtualizarCpf(PacienteVO vo) throws SQLException{
+        String sql = "UPDATE Pessoa LEFT JOIN Paciente ON pessoa.id = Paciente.id_paciente_pessoa SET Pessoa.cpf = ? WHERE Paciente.id_paciente = ?";
+        PreparedStatement psts;
+
+        psts = getConnection().prepareStatement(sql);
+        psts.setString(1, vo.getCpf());
+        psts.setLong(2, vo.getIdPaciente());
         psts.executeUpdate();
     }
 }

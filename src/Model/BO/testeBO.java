@@ -4,14 +4,15 @@ import java.util.List;
 
 import Model.Exception.InsertException;
 import Model.Exception.ListException;
+import Model.Exception.UpdateException;
 import Model.VO.PacienteVO;
 
 public class testeBO {
     public static void main(String[] args) {
         AtendenteBO bo = new AtendenteBO();
         try {
-            bo.MarcarConsulta("29/11/2021 14:30", "30490200350", "João");;    
-        } catch (InsertException e) {
+            bo.EditarDataNascimento("28/07/1999", "84593402394");    
+        } catch (UpdateException e) {
             e.getMessage();
         }
         

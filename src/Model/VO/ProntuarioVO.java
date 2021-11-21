@@ -1,9 +1,10 @@
 package Model.VO;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.*;
 
 public class ProntuarioVO  {
     private Calendar dataNascimento = Calendar.getInstance();
@@ -36,8 +37,11 @@ public class ProntuarioVO  {
         return dNascimento;
     }
 
-    public Calendar getDataNascimentoDao() {
-        return this.dataNascimento;
+    public Date getDataNascimentoDao() {
+        java.util.Date data = new java.util.Date();
+        data = this.dataNascimento.getTime();
+        java.sql.Date dataSQL = new java.sql.Date(data.getTime());
+        return dataSQL;
     }
 
     public void setDataNascimento(String dNascimento) {

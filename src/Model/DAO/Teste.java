@@ -12,12 +12,10 @@ import Model.VO.*;
 public class Teste {
     public static void main(String[] args) throws SQLException {
         PacienteDAO dao = new PacienteDAO();
-        PacienteVO vo = new PacienteVO("Iara Kateucha", "30490200350", "");
-        dao.AtualizarNome(vo);
-
-        //*listar atendente
-        /*List <PacienteVO> pronturaio = new ArrayList<PacienteVO>();
-        ResultSet rs = dao.ListarPorCpf(vo);
+        PacienteVO vo = new PacienteVO("Iara", "", "");
+        //listar atendente
+        List <PacienteVO> pronturaio = new ArrayList<PacienteVO>();
+        ResultSet rs = dao.ListarPorNome(vo);
         while (rs.next()){
             PacienteVO aux = new PacienteVO();
             aux.setIdPaciente(rs.getLong("id_paciente"));
@@ -31,7 +29,7 @@ public class Teste {
             System.out.println("id paciente : " + vo3.getIdPaciente());
             System.out.println("nome : " + vo3.getNome());
             System.out.println("CPf : " + vo3.getCpf());
-        }*/
+        }
         
     }
 }
