@@ -167,30 +167,29 @@ public class AtendenteBO{
     }
 
 
-    public List <PacienteVO> BuscarPacientePorCPF (PacienteVO vo) throws ListException {
-        if(vo.getCpf().length() != 11){ // verificando se a string de cpf possui 11 digitos
+    public List <PacienteVO> BuscarPacientePorCPF (String cpf) throws ListException {
+        if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
             throw new ListException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
         }
-        if(vo.getCpf() == null){ // verificando se existe dados dentro do cpf
+        if(cpf == null){ // verificando se existe dados dentro do cpf
             throw new ListException("CPF está vazio");
         }
-        if(vo.getCpf().matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+        if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
             throw new ListException("CPF só pode conter números");
         }
         else{ // metodo de busca
             ResultSet rs;
             List <PacienteVO> pacientes = new ArrayList<PacienteVO>();
             PacienteDAO dao = new PacienteDAO();
+            PacienteVO vo = new PacienteVO("", cpf, "");
             try {
                 rs = dao.ListarPorCpf(vo);
                     while(rs.next()){
-                        PacienteVO pacienteVO = new PacienteVO();
-                        pacienteVO.setCpf(rs.getString("CPF"));
-                        pacienteVO.setEndereco(rs.getString("endereco"));
-                        pacienteVO.setNome(rs.getString("nome"));
-                        pacienteVO.setIdPaciente(rs.getLong("id_paciente"));
-                        pacienteVO.setIdPessoa(rs.getLong("id_paciente_pessoa"));
-                        pacientes.add(pacienteVO);
+                        vo.setEndereco(rs.getString("endereco"));
+                        vo.setNome(rs.getString("nome"));
+                        vo.setIdPaciente(rs.getLong("id_paciente"));
+                        vo.setIdPessoa(rs.getLong("id_paciente_pessoa"));
+                        pacientes.add(vo);
 
                     }
                 }
@@ -201,20 +200,21 @@ public class AtendenteBO{
         }
     }
 
-    public List <MedicoVO> BuscarMedicoPorCpf (MedicoVO vo) throws ListException {
-        if(vo.getCpf().length() != 11){ // verificando se a string de cpf possui 11 digitos
+    public List <MedicoVO> BuscarMedicoPorCpf (String cpf) throws ListException {
+        if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
             throw new ListException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
         }
-        if(vo.getCpf() == null){ // verificando se existe dados dentro do cpf
+        if(cpf == null){ // verificando se existe dados dentro do cpf
             throw new ListException("CPF está vazio");
         }
-        if(vo.getCpf().matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+        if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
             throw new ListException("CPF só pode conter números");
         }
         else{ // metodo de busca
             ResultSet rs;
             List <MedicoVO> medicos = new ArrayList<MedicoVO>();
             MedicoDAO dao = new MedicoDAO();
+
             try {
                 rs = dao.ListarPorCpf(vo);
                     while(rs.next()){
