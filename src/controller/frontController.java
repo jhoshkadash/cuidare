@@ -20,6 +20,13 @@ public class FrontController{
 
         try {
             UsuarioVO autenticado = usuBO.autenticar(vo.getLogin(), vo.getSenha());
+
+            if(autenticado instanceof GerenteVO) {
+
+            }
+            if(autenticado instanceof AtendenteVO) {
+
+            }
         } catch (Exception e) {
             erroAut.setVisible(true);
         }
