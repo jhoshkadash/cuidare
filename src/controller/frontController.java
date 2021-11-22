@@ -2,6 +2,7 @@ package Controller;
 
 import Model.BO.UsuarioBO;
 import Model.VO.*;
+import VIEW.Telas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -21,15 +22,18 @@ public class FrontController{
         try {
             UsuarioVO autenticado = usuBO.autenticar(vo.getLogin(), vo.getSenha());
 
-            if(autenticado instanceof GerenteVO) {
-
+            if(autenticado.getTipo() == 1) {
+                //abrir janela de atendente
             }
-            if(autenticado instanceof AtendenteVO) {
-
+            if(autenticado.getTipo() == 2) {
+                //abrir janela de medico
             }
+            if(autenticado.getTipo() == 3) {
+                Telas.telaPrincipalGerente();
+            }
+
         } catch (Exception e) {
             erroAut.setVisible(true);
         }
-
     }
 }
