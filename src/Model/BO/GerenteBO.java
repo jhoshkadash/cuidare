@@ -10,35 +10,36 @@ public class GerenteBO {
 
     /* =============== MÉTODOS DE CADASTRO =============== */
 
-    public void CadastrarMedico(MedicoVO vo) throws InsertException{
-        if(vo.getCpf().length() != 11){ // verificando se a string de cpf possui 11 digitos
+    public void CadastrarMedico(String nome, String cpf, String endereco, String crm, Double valorconsulta) throws InsertException {
+        if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
             throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
         }
-        if(vo.getCpf() == null){ // verificando se existe dados dentro do cpf
+        if(cpf == null){
             throw new InsertException("CPF está vazio");
         }
-        if(vo.getCpf().matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+        if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
             throw new InsertException("CPF só pode conter números");
         }
-        if(vo.getNome() == null || vo.getNome() == ""){ // verificando se existe dados no nome
+        if(nome == null || nome == ""){ // verificando se existe dados no nome
             throw new InsertException("Médico com nome vazio");
         }
-        if(vo.getEndereco() == null || vo.getEndereco() == ""){ // verificando se existe dados no nome
+        if(endereco == null || endereco == ""){ // verificando se existe dados no endereço
             throw new InsertException("Médico com endereço vazio");
-        }
-        if(vo.getCrm() == null || vo.getCrm() == ""){ // verificando se existe dados de CRM cadastrados
+        } 
+        if(crm == null || crm == ""){ // verificando se existe dados no crm
             throw new InsertException("Médico com CRM vazio");
         }
-        if(vo.getValorConsulta() == null){ // verificando se existe dados de valor de consulta cadastrado
-            throw new InsertException("Não há valor de consulta cadastrado");
+        if(valorconsulta == null){ // verificando se existe dados no valorconsulta
+            throw new InsertException("Médico com valor de consulta não especificado");
         }
         else {
+                MedicoVO vo = new MedicoVO(nome, cpf, endereco, crm, valorconsulta);
                 MedicoDAO dao = new MedicoDAO();
                 ResultSet rs;
                 try {
-                    rs = dao.ListarPorId(vo);
+                    rs = dao.ListarPorCpf(vo);
                     if(rs.next()){
-                        throw new InsertException("Médico com mesmo ID já cadastrado");
+                        throw new InsertException("Médico com mesmo cpf já cadastrado");
                     } else{
                         dao.Inserir(vo);
                     }
@@ -48,96 +49,98 @@ public class GerenteBO {
             }
         } 
 
-    public void CadastrarPaciente(PacienteVO vo) throws InsertException{
-        if(vo.getCpf().length() != 11){ // verificando se a string de cpf possui 11 digitos
-            throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
-        }
-        if(vo.getCpf() == null){ // verificando se existe dados dentro do cpf
-            throw new InsertException("CPF está vazio");
-        }
-        if(vo.getCpf().matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
-            throw new InsertException("CPF só pode conter números");
-        }
-        if(vo.getNome() == null || vo.getNome() == ""){ // verirficando se existe dados no nome
-            throw new InsertException("Paciente com nome vazio");
-        }
-        if(vo.getEndereco() == null || vo.getEndereco() == ""){ // verirficando se existe dados no nome
-            throw new InsertException("Paciente com endereço vazio");
-        } 
-        else {
-                PacienteDAO dao = new PacienteDAO();
-                ResultSet rs;
-                try {
-                    rs = dao.ListarPorNome(vo);
-                    if(rs.next()){
-                        throw new InsertException("Paciente com mesmo nome já cadastrado");
-                    } else{
-                        dao.Inserir(vo);
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        public void CadastrarPaciente(String nome, String cpf, String endereco) throws InsertException {
+            if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
+                throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
             }
-        } 
-
-    public void CadastrarAtendente(AtendenteVO vo) throws InsertException{
-        if(vo.getCpf().length() != 11){ // verificando se a string de cpf possui 11 digitos
-            throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
-        }
-        if(vo.getCpf() == null){ // verificando se existe dados dentro do cpf
-            throw new InsertException("CPF está vazio");
-        }
-        if(vo.getCpf().matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
-            throw new InsertException("CPF só pode conter números");
-        }
-        if(vo.getClass() == null || vo.getNome() == ""){ // verificando se existe dados no nome
-            throw new InsertException("Atendente com nome vazio");
-        }
-        else {
-                AtendenteDAO dao = new AtendenteDAO();
-                ResultSet rs;
-                try {
-                    rs = dao.ListarPorId(vo);
-                    if(rs.next()){
-                        throw new InsertException("Atendente com mesmo ID já cadastrado");
-                    } else{
-                        dao.Inserir(vo);
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+            if(cpf == null){
+                throw new InsertException("CPF está vazio");
             }
-    }
-
-    public void CadastrarGerente(GerenteVO vo) throws InsertException{
-        if(vo.getCpf().length() != 11){ // verificando se a string de cpf possui 11 digitos
-            throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
-        }
-        if(vo.getCpf() == null){ // verificando se existe dados dentro do cpf
-            throw new InsertException("CPF está vazio");
-        }
-        if(vo.getCpf().matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
-            throw new InsertException("CPF só pode conter números");
-        }
-        if(vo.getNome() == null || vo.getNome() == ""){ // verificando se existe dados no nome
-            throw new InsertException("Gerente com nome vazio");
-        }
-    
-        else {
-                GerenteDAO dao = new GerenteDAO();
-                ResultSet rs;
-                try {
-                    rs = dao.ListarPorId(vo);
-                    if(rs.next()){
-                        throw new InsertException("Gerente com mesmo ID já cadastrado");
-                    } else{
-                        dao.Inserir(vo);
+            if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+                throw new InsertException("CPF só pode conter números");
+            }
+            if(nome == null || nome == ""){ // verirficando se existe dados no nome
+                throw new InsertException("Paciente com nome vazio");
+            }
+            if(endereco == null || endereco == ""){ // verirficando se existe dados no nome
+                throw new InsertException("Paciente com endereço vazio");
+            } 
+            else {
+                    PacienteVO vo = new PacienteVO(nome, cpf, endereco);
+                    PacienteDAO dao = new PacienteDAO();
+                    ResultSet rs;
+                    try {
+                        rs = dao.ListarPorCpf(vo);
+                        if(rs.next()){
+                            throw new InsertException("Paciente com mesmo cpf já cadastrado");
+                        } else{
+                            dao.Inserir(vo);
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
-            }    
-    }
+            } 
+
+            public void CadastrarAtendente(String nome, String cpf) throws InsertException {
+                if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
+                    throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+                }
+                if(cpf == null){
+                    throw new InsertException("CPF está vazio");
+                }
+                if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+                    throw new InsertException("CPF só pode conter números");
+                }
+                if(nome == null || nome == ""){ // verificando se existe dados no nome
+                    throw new InsertException("Atendente com nome vazio");
+                }
+                else {
+                        AtendenteVO vo = new AtendenteVO(nome, cpf);
+                        AtendenteDAO dao = new AtendenteDAO();
+                        ResultSet rs;
+                        try {
+                            rs = dao.ListarPorCpf(vo);
+                            if(rs.next()){
+                                throw new InsertException("Atendente com mesmo cpf já cadastrado");
+                            } else{
+                                dao.Inserir(vo);
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } 
+
+                public void CadastrarGerente(String nome, String cpf) throws InsertException {
+                    if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
+                        throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+                    }
+                    if(cpf == null){
+                        throw new InsertException("CPF está vazio");
+                    }
+                    if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+                        throw new InsertException("CPF só pode conter números");
+                    }
+                    if(nome == null || nome == ""){ // verificando se existe dados no nome
+                        throw new InsertException("Gerente com nome vazio");
+                    }
+                    else {
+                            GerenteVO vo = new GerenteVO(nome, cpf);
+                            GerenteDAO dao = new GerenteDAO();
+                            ResultSet rs;
+                            try {
+                                rs = dao.ListarPorCpf(vo);
+                                if(rs.next()){
+                                    throw new InsertException("Gerente com mesmo cpf já cadastrado");
+                                } else{
+                                    dao.Inserir(vo);
+                                }
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
 
     /* ============================================================= */
 

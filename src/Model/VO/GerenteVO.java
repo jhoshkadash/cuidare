@@ -9,6 +9,9 @@ public class GerenteVO extends UsuarioVO {
     public GerenteVO() {
     }
 
+    public GerenteVO(String nome, String cpf) {
+    }
+
     public Long getIdGerente() {
         return this.idGerente;
     }

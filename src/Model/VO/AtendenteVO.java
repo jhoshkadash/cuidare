@@ -12,6 +12,10 @@ public class AtendenteVO extends UsuarioVO {
     }
 
 
+    public AtendenteVO(String nome, String cpf) {
+    }
+
+
     public Long getIdAtendente() {
         return this.idAtendente;
     }

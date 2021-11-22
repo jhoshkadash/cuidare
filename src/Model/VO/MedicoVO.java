@@ -16,6 +16,9 @@ public class MedicoVO extends UsuarioVO {
     public MedicoVO() {
     }
 
+    public MedicoVO(String nome, String cpf, String endereco2, String crm2, Double valorconsulta2) {
+    }
+
     public String getEndereco() {
         return endereco;
     }

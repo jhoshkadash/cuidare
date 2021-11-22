@@ -1,19 +1,10 @@
 package Model.BO;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import Model.DAO.ConsultaDAO;
-import Model.DAO.MedicoDAO;
-import Model.DAO.PacienteDAO;
-import Model.DAO.ProntuarioDAO;
+import java.sql.*;
+import java.util.*;
+import Model.DAO.*;
 import Model.Exception.*;
-import Model.VO.ConsultaVO;
-import Model.VO.MedicoVO;
-import Model.VO.PacienteVO;
-import Model.VO.ProntuarioVO;
+import Model.VO.*;
 
 public class AtendenteBO{
 
