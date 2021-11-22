@@ -24,6 +24,7 @@ public class UsuarioBO {
                 usuario.setIdUser(rs.getLong("id_user"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setTipo(rs.getInt("tipo"));
+                usuario.setCpf(rs.getString("cpf"));
             }else{
                 throw new ListException("Nenhum usuário com as informações passadas encontrado");
             }
