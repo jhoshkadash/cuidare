@@ -232,13 +232,13 @@ public class AtendenteBO{
         ConsultaDAO dao = new ConsultaDAO();
         try {
             ResultSet rs = dao.ListarPorId(consulta);
-            if(rs.next()){
+            if(rs.next()){ // consulta se a consulta informada existe
                 consulta.setIdMedico(rs.getLong("id_medico"));
                 consulta.setIdPaciente(rs.getLong("id_paciente"));
                 consulta.setStatus(rs.getBoolean("status"));
                 try {
                     rs = dao.ListarPorData(consulta);
-                    if(rs.next()){
+                    if(rs.next()){ // consulta se já existe uma consulta do mesmo médico no horario
                         ConsultaVO aux = new ConsultaVO();
                         aux.setDataConsultaDao(rs.getTimestamp("data"));
                         aux.setIdConsulta(rs.getLong("id_consulta"));
