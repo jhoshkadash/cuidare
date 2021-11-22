@@ -8,6 +8,8 @@ import Model.VO.*;
 
 public class AtendenteBO{
 
+    /* =============== MÉTODOS DE CADASTRO =============== */
+
     public void CadastrarPaciente(String nome, String cpf, String endereco) throws InsertException {
             if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
                 throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
@@ -133,6 +135,178 @@ public class AtendenteBO{
     }
 
 
+
+/* ================ MÉTODOS DE BUSCA (PACIENTE) ================ */
+
+    public List <PacienteVO> BuscarPacientePorCPF (String cpf) throws ListException {
+        if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
+            throw new ListException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+        }
+        if(cpf == null){ // verificando se existe dados dentro do cpf
+            throw new ListException("CPF está vazio");
+        }
+        if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+            throw new ListException("CPF só pode conter números");
+        }
+        else{ // metodo de busca
+            ResultSet rs;
+            List <PacienteVO> pacientes = new ArrayList<PacienteVO>();
+            PacienteDAO dao = new PacienteDAO();
+            PacienteVO vo = new PacienteVO("", cpf, "");
+            try {
+                rs = dao.ListarPorCpf(vo);
+                    while(rs.next()){
+                        vo.setEndereco(rs.getString("endereco"));
+                        vo.setNome(rs.getString("nome"));
+                        vo.setIdPaciente(rs.getLong("id_paciente"));
+                        vo.setIdPessoa(rs.getLong("id_paciente_pessoa"));
+                        pacientes.add(vo);
+
+                    }
+                }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return pacientes;
+        }
+    }
+
+/* ================ MÉTODOS DE BUSCA (Medico) ================ */
+
+    public List <MedicoVO> BuscarMedicoPorCpf (String cpf) throws ListException {
+        if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
+            throw new ListException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+        }
+        if(cpf == null){ // verificando se existe dados dentro do cpf
+            throw new ListException("CPF está vazio");
+        }
+        if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+            throw new ListException("CPF só pode conter números");
+        }
+        else{ // metodo de busca
+            ResultSet rs;
+            List <MedicoVO> medicos = new ArrayList<MedicoVO>();
+            MedicoDAO dao = new MedicoDAO();
+            MedicoVO medicoVO = new MedicoVO("", cpf, "", "", "", 0d, "");
+            try {
+                rs = dao.ListarPorCpf(medicoVO);
+                    while(rs.next()){
+                        medicoVO.setCpf(rs.getString("CPF"));
+                        medicoVO.setNome(rs.getString("nome"));
+                        medicoVO.setEndereco(rs.getString("endereco"));
+                        medicoVO.setCrm(rs.getString("crm"));
+                        medicos.add(medicoVO);
+                    }
+                }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return medicos;
+        }
+    }
+
+/* ================ MÉTODOS DE BUSCA (PRONTUARIO) ================ */
+
+    public List <ProntuarioVO> BuscarProntuario (String cpfPaciente) throws ListException {
+            ResultSet rs;
+            List <ProntuarioVO> prontuarios = new ArrayList<ProntuarioVO>();
+            List <PacienteVO> pacientes = new ArrayList<PacienteVO>();
+            PacienteDAO dao = new PacienteDAO();
+            ProntuarioDAO prontDao = new ProntuarioDAO();
+            PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
+            try {
+                rs = dao.ListarPorCpf(paciente);
+                while(rs.next()){
+                    paciente.setIdPaciente(rs.getLong("id_paciente"));
+                    paciente.setIdPessoa(rs.getLong("id_paciente_pessoa"));
+                    pacientes.add(paciente);
+                }    
+                rs = prontDao.ListarPorPaciente(paciente);
+                while(rs.next()){
+                        ProntuarioVO prontuarioVO = new ProntuarioVO();
+                        prontuarioVO.setIdPaciente(rs.getLong("id_paciente"));
+                        prontuarioVO.setIdProntuario(rs.getLong("id_prontuario"));
+                        prontuarioVO.setPeso(rs.getFloat("peso"));
+                        prontuarioVO.setAltura(rs.getFloat("altura"));
+                        prontuarioVO.setAntenPatologico(rs.getString("ante_patologico"));
+                        prontuarioVO.setHistoricoDoenca(rs.getString("historico_doenças"));
+                        prontuarioVO.setMediAlergia(rs.getString("medi_alergicos"));
+                        prontuarioVO.setMediAtuais(rs.getString("medi_atuais"));
+                        prontuarios.add(prontuarioVO);
+                        prontuarios.add(prontuarioVO); 
+                    }
+                }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return prontuarios;
+        }
+
+        /* ================ MÉTODOS DE EDITAR (PRONTUARIO) ================ */
+
+        public void EditarDataNascimento(String dataNova, String cpfPaciente) throws UpdateException{
+            PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
+            PacienteDAO dao = new PacienteDAO();
+            ResultSet rs;
+            if(cpfPaciente.length() != 11){ // verificando se a string de cpf possui 11 digitos
+                throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+            }
+            if(cpfPaciente == null){
+                throw new UpdateException("CPF está vazio");
+            }
+            if(cpfPaciente.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+                throw new UpdateException("CPF só pode conter números");
+            }else{
+                try {
+                    rs= dao.ListarPorCpf(paciente);
+                    if (rs.next()){
+                        ProntuarioVO prontuario = new ProntuarioVO(dataNova, "", "", "", 0f, 0f, "", 0L);
+                        
+                        prontuario.setIdPaciente(rs.getLong("id_paciente"));
+                        
+                        ProntuarioDAO dao2 = new ProntuarioDAO();
+                        dao2.AtualizarDataNascimento(prontuario);
+                    }else{
+                        throw new UpdateException("Nenhum paciente com o cpf informado");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        public void EditarAntePato(String antePato, String cpfPaciente) throws UpdateException{
+            PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
+            PacienteDAO dao = new PacienteDAO();
+            ResultSet rs;
+            if(cpfPaciente.length() != 11){ // verificando se a string de cpf possui 11 digitos
+                throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+            }
+            if(cpfPaciente == null){
+                throw new UpdateException("CPF está vazio");
+            }
+            if(cpfPaciente.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+                throw new UpdateException("CPF só pode conter números");
+            }else{
+                try {
+                    rs= dao.ListarPorCpf(paciente);
+                    if (rs.next()){
+                        ProntuarioVO prontuario = new ProntuarioVO("", antePato, "", "", 0f, 0f, "", 0L);
+                        
+                        prontuario.setIdPaciente(rs.getLong("id_paciente"));
+                        
+                        ProntuarioDAO dao2 = new ProntuarioDAO();
+                        dao2.AtualizarDataNascimento(prontuario);
+                    }else{
+                        throw new UpdateException("Nenhum paciente com o cpf informado");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    /* ================ MÉTODOS DE EDITAR (PACIENTE) ================ */
+
     public void EditarNomePaciente (String cpf, String nomeNovo) throws UpdateException{
         if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
             throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
@@ -188,37 +362,9 @@ public class AtendenteBO{
     }
 
 
-    public void EditarDataNascimento(String dataNova, String cpfPaciente) throws UpdateException{
-        PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
-        PacienteDAO dao = new PacienteDAO();
-        ResultSet rs;
-        if(cpfPaciente.length() != 11){ // verificando se a string de cpf possui 11 digitos
-            throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
-        }
-        if(cpfPaciente == null){
-            throw new UpdateException("CPF está vazio");
-        }
-        if(cpfPaciente.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
-            throw new UpdateException("CPF só pode conter números");
-        }else{
-            try {
-                rs= dao.ListarPorCpf(paciente);
-                if (rs.next()){
-                    ProntuarioVO prontuario = new ProntuarioVO(dataNova, "", "", "", 0f, 0f, "", 0L);
-                    
-                    prontuario.setIdPaciente(rs.getLong("id_paciente"));
-                    
-                    ProntuarioDAO dao2 = new ProntuarioDAO();
-                    dao2.AtualizarDataNascimento(prontuario);
-                }else{
-                    throw new UpdateException("Nenhum paciente com o cpf informado");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
+    /* ================ MÉTODOS DE EDITAR (CONSULTA) ================ */
+    
     public void EditarDataConsulta(String idConsulta, String dataNova) throws UpdateException{
         if(idConsulta == null || idConsulta == " "){
             throw new UpdateException("Id da consulta não informado");
@@ -262,110 +408,6 @@ public class AtendenteBO{
         }
         }    
         
-
-
-
-    public List <PacienteVO> BuscarPacientePorCPF (String cpf) throws ListException {
-        if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
-            throw new ListException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
-        }
-        if(cpf == null){ // verificando se existe dados dentro do cpf
-            throw new ListException("CPF está vazio");
-        }
-        if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
-            throw new ListException("CPF só pode conter números");
-        }
-        else{ // metodo de busca
-            ResultSet rs;
-            List <PacienteVO> pacientes = new ArrayList<PacienteVO>();
-            PacienteDAO dao = new PacienteDAO();
-            PacienteVO vo = new PacienteVO("", cpf, "");
-            try {
-                rs = dao.ListarPorCpf(vo);
-                    while(rs.next()){
-                        vo.setEndereco(rs.getString("endereco"));
-                        vo.setNome(rs.getString("nome"));
-                        vo.setIdPaciente(rs.getLong("id_paciente"));
-                        vo.setIdPessoa(rs.getLong("id_paciente_pessoa"));
-                        pacientes.add(vo);
-
-                    }
-                }
-            catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return pacientes;
-        }
-    }
-
-    public List <MedicoVO> BuscarMedicoPorCpf (String cpf) throws ListException {
-        if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
-            throw new ListException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
-        }
-        if(cpf == null){ // verificando se existe dados dentro do cpf
-            throw new ListException("CPF está vazio");
-        }
-        if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
-            throw new ListException("CPF só pode conter números");
-        }
-        else{ // metodo de busca
-            ResultSet rs;
-            List <MedicoVO> medicos = new ArrayList<MedicoVO>();
-            MedicoDAO dao = new MedicoDAO();
-            MedicoVO medicoVO = new MedicoVO("", cpf, "", "", "", 0d, "");
-            try {
-                rs = dao.ListarPorCpf(medicoVO);
-                    while(rs.next()){
-                        medicoVO.setCpf(rs.getString("CPF"));
-                        medicoVO.setNome(rs.getString("nome"));
-                        medicoVO.setEndereco(rs.getString("endereco"));
-                        medicoVO.setCrm(rs.getString("crm"));
-                        medicos.add(medicoVO);
-                    }
-                }
-            catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return medicos;
-        }
-    }
-
-
-
-    public List <ProntuarioVO> BuscarProntuario (String cpfPaciente) throws ListException {
-            ResultSet rs;
-            List <ProntuarioVO> prontuarios = new ArrayList<ProntuarioVO>();
-            List <PacienteVO> pacientes = new ArrayList<PacienteVO>();
-            PacienteDAO dao = new PacienteDAO();
-            ProntuarioDAO prontDao = new ProntuarioDAO();
-            PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
-            try {
-                rs = dao.ListarPorCpf(paciente);
-                while(rs.next()){
-                    paciente.setIdPaciente(rs.getLong("id_paciente"));
-                    paciente.setIdPessoa(rs.getLong("id_paciente_pessoa"));
-                    pacientes.add(paciente);
-                }    
-                rs = prontDao.ListarPorPaciente(paciente);
-                while(rs.next()){
-                        ProntuarioVO prontuarioVO = new ProntuarioVO();
-                        prontuarioVO.setIdPaciente(rs.getLong("id_paciente"));
-                        prontuarioVO.setIdProntuario(rs.getLong("id_prontuario"));
-                        prontuarioVO.setPeso(rs.getFloat("peso"));
-                        prontuarioVO.setAltura(rs.getFloat("altura"));
-                        prontuarioVO.setAntenPatologico(rs.getString("ante_patologico"));
-                        prontuarioVO.setHistoricoDoenca(rs.getString("historico_doenças"));
-                        prontuarioVO.setMediAlergia(rs.getString("medi_alergicos"));
-                        prontuarioVO.setMediAtuais(rs.getString("medi_atuais"));
-                        prontuarios.add(prontuarioVO);
-                        prontuarios.add(prontuarioVO); 
-                    }
-                }
-            catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return prontuarios;
-        }
 
     }
     

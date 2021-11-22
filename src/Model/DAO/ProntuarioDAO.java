@@ -103,5 +103,59 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
             psts.setDate(1,vo.getDataNascimentoDao());
             psts.setLong(2, vo.getIdPaciente());
             psts.executeUpdate();
-    }     
+    }
+    
+    public void AtualizarAntePato (ProntuarioVO vo) throws SQLException {
+        String sql = "UPDATE Prontuario SET ante_patologico = ? WHERE id_prontuario_paciente = ?"; /* comando de atualização (update) em SQL. */
+        PreparedStatement psts;
+            psts = getConnection().prepareStatement(sql);
+            psts.setString(1,vo.getAntenPatologico());
+            psts.setLong(2, vo.getIdPaciente());
+            psts.executeUpdate();
+    }
+    
+    public void AtualizarMediAtuais (ProntuarioVO vo) throws SQLException {
+        String sql = "UPDATE Prontuario SET medi_atuais = ? WHERE id_prontuario_paciente = ?"; /* comando de atualização (update) em SQL. */
+        PreparedStatement psts;
+            psts = getConnection().prepareStatement(sql);
+            psts.setString(1,vo.getMediAtuais());
+            psts.setLong(2, vo.getIdPaciente());
+            psts.executeUpdate();
+    }
+
+    public void AtualizarMediAlergicos (ProntuarioVO vo) throws SQLException {
+        String sql = "UPDATE Prontuario SET medi_alergicos = ? WHERE id_prontuario_paciente = ?"; /* comando de atualização (update) em SQL. */
+        PreparedStatement psts;
+            psts = getConnection().prepareStatement(sql);
+            psts.setString(1,vo.getMediAtuais());
+            psts.setLong(2, vo.getIdPaciente());
+            psts.executeUpdate();
+    }
+    
+    public void AtualizarHistoricoDoencas (ProntuarioVO vo) throws SQLException {
+        String sql = "UPDATE Prontuario SET historico_doenças = ? WHERE id_prontuario_paciente = ?"; /* comando de atualização (update) em SQL. */
+        PreparedStatement psts;
+            psts = getConnection().prepareStatement(sql);
+            psts.setDate(1,vo.getDataNascimentoDao());
+            psts.setLong(2, vo.getIdPaciente());
+            psts.executeUpdate();
+    }
+    
+    public void AtualizarPeso (ProntuarioVO vo) throws SQLException {
+        String sql = "UPDATE Prontuario SET peso = ? WHERE id_prontuario_paciente = ?"; /* comando de atualização (update) em SQL. */
+        PreparedStatement psts;
+            psts = getConnection().prepareStatement(sql);
+            psts.setFloat(1,vo.getPeso());
+            psts.setLong(2, vo.getIdPaciente());
+            psts.executeUpdate();
+    }
+
+    public void AtualizarAltura (ProntuarioVO vo) throws SQLException {
+        String sql = "UPDATE Prontuario SET altura = ? WHERE id_prontuario_paciente = ?"; /* comando de atualização (update) em SQL. */
+        PreparedStatement psts;
+            psts = getConnection().prepareStatement(sql);
+            psts.setFloat(1,vo.getAltura());
+            psts.setLong(2, vo.getIdPaciente());
+            psts.executeUpdate();
+    } 
 }
