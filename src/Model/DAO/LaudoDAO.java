@@ -90,13 +90,11 @@ public class LaudoDAO extends BaseDAO <LaudoVO>
     public ResultSet ListarPorData(ConsultaVO vo) throws SQLException {
         String sql = "SELECT * FROM consulta LEFT JOIN laudo ON consulta.id_consulta = laudo.id_consulta WHERE consulta.data = ?"; /* comando de listagem em SQL para o DB. */
         Statement st;
-        PreparedStatement psts = null;
+        PreparedStatement psts;
         ResultSet rs = null;
-        Date data = new Date(vo.getDataConsultaDao().getTimeInMillis());
-        final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());
-        st = getConnection().prepareStatement(sql);
-        psts.setTimestamp(1, dataSql);
-        rs = st.executeQuery(sql);
+        psts = getConnection().prepareStatement(sql);
+        psts.setTimestamp(1, vo.getDataConsultaDao());
+        rs = psts.executeQuery(sql);
         return rs;
     }
 }
