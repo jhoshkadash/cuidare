@@ -8,15 +8,17 @@ import Model.Exception.ListException;
 import Model.Exception.UpdateException;
 import Model.VO.ConsultaVO;
 import Model.VO.PacienteVO;
+import Model.VO.UsuarioVO;
 
 public class testeBO {
     public static void main(String[] args) {
-        AtendenteBO bo = new AtendenteBO();
+        UsuarioBO bo = new UsuarioBO();
         try {
-            bo.DesmarcarConsulta("2");
-        } catch (DeleteException e) {
+           UsuarioVO vo = bo.autenticar("jngoncalo", "batata");
+        } catch (ListException e) {
             System.out.println(e.getMessage());
         }
+
            /* List <ConsultaVO> consultas = bo.BuscarPacientePorCPF(vo);
             for (PacienteVO aux : pacientes ){
                 System.out.println("Nome do paciente : " + aux.getNome());

@@ -59,7 +59,7 @@ public class UsuarioDAO <VO extends UsuarioVO> extends PessoaDAO <VO>
 
     /* método de listagem por nome */
     public ResultSet ListarPorNome(VO vo) throws SQLException {
-        String sql = "select * from Pessoa left join usuario on pessoa.id = usuario.id_pessoa where pessoa.nome = ? ";
+        String sql = "select * from Pessoa left join usuario on pessoa.id = usuario.id_user_pessoa where pessoa.nome = ? ";
         PreparedStatement psts;
         ResultSet rs = null;
 
@@ -81,6 +81,19 @@ public class UsuarioDAO <VO extends UsuarioVO> extends PessoaDAO <VO>
         rs = psts.executeQuery();
         return rs;
     }
+
+    public ResultSet ListarPorLoginSenha(UsuarioVO vo) throws SQLException {
+        String sql = "select * from Pessoa left join usuario on pessoa.id = usuario.id_user_pessoa where usuario.login = ? and usuario.senha = ? ";
+        PreparedStatement psts;
+        ResultSet rs;
+
+        psts = getConnection().prepareStatement(sql);
+        psts.setString(1, vo.getLogin());
+        psts.setString(2, vo.getSenha());
+        rs = psts.executeQuery();
+        return rs;
+    }
+
     
     /* comando de atualização em SQL. */
     @Override
