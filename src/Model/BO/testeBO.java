@@ -2,6 +2,7 @@ package Model.BO;
 
 import java.util.List;
 
+import Model.Exception.DeleteException;
 import Model.Exception.InsertException;
 import Model.Exception.ListException;
 import Model.Exception.UpdateException;
@@ -12,12 +13,8 @@ public class testeBO {
     public static void main(String[] args) {
         AtendenteBO bo = new AtendenteBO();
         try {
-            bo.EditarAltura("1.87", "84593402394");
-            bo.EditarPeso("85.7", "84593402394");
-            bo.EditarHistoricoDoencas("Cancer de pele", "84593402394");
-            bo.EditarMediAlergicos("Bezetacil", "84593402394");
-            bo.EditarMediAtuais("Ampliquitil, Oprazolam", "84593402394");
-        } catch (UpdateException e) {
+            bo.DesmarcarConsulta("2");
+        } catch (DeleteException e) {
             System.out.println(e.getMessage());
         }
            /* List <ConsultaVO> consultas = bo.BuscarPacientePorCPF(vo);

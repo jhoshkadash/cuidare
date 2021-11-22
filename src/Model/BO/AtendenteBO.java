@@ -588,6 +588,20 @@ public class AtendenteBO{
         }
         }    
         
-
+        /* ================ MÉTODOS DE DELETAR  ================ */
+        public void DesmarcarConsulta (String idConsulta) throws DeleteException{
+            if(idConsulta == null || idConsulta == " "){
+                throw new DeleteException("Id da consulta não informado");
+            }
+            try {
+                ConsultaVO vo = new ConsultaVO();
+                Long idConsultaL = Long.parseLong(idConsulta);
+                vo.setIdConsulta(idConsultaL);
+                ConsultaDAO dao = new ConsultaDAO();
+                dao.Deletar(vo);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
