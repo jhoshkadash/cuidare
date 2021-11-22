@@ -127,7 +127,7 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
         String sql = "UPDATE Prontuario SET medi_alergicos = ? WHERE id_prontuario_paciente = ?"; /* comando de atualização (update) em SQL. */
         PreparedStatement psts;
             psts = getConnection().prepareStatement(sql);
-            psts.setString(1,vo.getMediAtuais());
+            psts.setString(1,vo.getMediAlergia());
             psts.setLong(2, vo.getIdPaciente());
             psts.executeUpdate();
     }
@@ -136,7 +136,7 @@ public class ProntuarioDAO extends BaseDAO <ProntuarioVO>
         String sql = "UPDATE Prontuario SET historico_doenças = ? WHERE id_prontuario_paciente = ?"; /* comando de atualização (update) em SQL. */
         PreparedStatement psts;
             psts = getConnection().prepareStatement(sql);
-            psts.setDate(1,vo.getDataNascimentoDao());
+            psts.setString(1,vo.getHistoricoDoenca());
             psts.setLong(2, vo.getIdPaciente());
             psts.executeUpdate();
     }

@@ -12,7 +12,11 @@ public class testeBO {
     public static void main(String[] args) {
         AtendenteBO bo = new AtendenteBO();
         try {
-            bo.EditarDataConsulta("2", "15/11/2021 16:00");    
+            bo.EditarAltura("1.87", "84593402394");
+            bo.EditarPeso("85.7", "84593402394");
+            bo.EditarHistoricoDoencas("Cancer de pele", "84593402394");
+            bo.EditarMediAlergicos("Bezetacil", "84593402394");
+            bo.EditarMediAtuais("Ampliquitil, Oprazolam", "84593402394");
         } catch (UpdateException e) {
             System.out.println(e.getMessage());
         }

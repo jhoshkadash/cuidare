@@ -287,16 +287,196 @@ public class AtendenteBO{
             }
             if(cpfPaciente.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
                 throw new UpdateException("CPF só pode conter números");
+            }
+            if(antePato == null || antePato == " "){
+                throw new UpdateException("Campo não preenchido");
             }else{
                 try {
                     rs= dao.ListarPorCpf(paciente);
                     if (rs.next()){
-                        ProntuarioVO prontuario = new ProntuarioVO("", antePato, "", "", 0f, 0f, "", 0L);
+                        ProntuarioVO prontuario = new ProntuarioVO();
+                        prontuario.setAntenPatologico(antePato);
+                        prontuario.setIdPaciente(rs.getLong("id_paciente"));
+                        
+                        ProntuarioDAO dao2 = new ProntuarioDAO();
+                        dao2.AtualizarAntePato(prontuario);
+                    }else{
+                        throw new UpdateException("Nenhum paciente com o cpf informado");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        public void EditarMediAtuais(String mediAtuais, String cpfPaciente) throws UpdateException{
+            PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
+            PacienteDAO dao = new PacienteDAO();
+            ResultSet rs;
+            if(cpfPaciente.length() != 11){ // verificando se a string de cpf possui 11 digitos
+                throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+            }
+            if(cpfPaciente == null){
+                throw new UpdateException("CPF está vazio");
+            }
+            if(cpfPaciente.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+                throw new UpdateException("CPF só pode conter números");
+            }
+            if(mediAtuais == null || mediAtuais == " "){
+                throw new UpdateException("Campo não preenchido");
+            }else{
+                try {
+                    rs= dao.ListarPorCpf(paciente);
+                    if (rs.next()){
+                        ProntuarioVO prontuario = new ProntuarioVO();
+                        prontuario.setMediAtuais(mediAtuais);
                         
                         prontuario.setIdPaciente(rs.getLong("id_paciente"));
                         
                         ProntuarioDAO dao2 = new ProntuarioDAO();
-                        dao2.AtualizarDataNascimento(prontuario);
+                        dao2.AtualizarMediAtuais(prontuario);
+                    }else{
+                        throw new UpdateException("Nenhum paciente com o cpf informado");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        public void EditarMediAlergicos (String mediAlergico, String cpfPaciente) throws UpdateException{
+            PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
+            PacienteDAO dao = new PacienteDAO();
+            ResultSet rs;
+            if(cpfPaciente.length() != 11){ // verificando se a string de cpf possui 11 digitos
+                throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+            }
+            if(cpfPaciente == null){
+                throw new UpdateException("CPF está vazio");
+            }
+            if(cpfPaciente.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+                throw new UpdateException("CPF só pode conter números");
+            }
+            if(mediAlergico == null || mediAlergico == " "){
+                throw new UpdateException("Campo não preenchido");
+            }else{
+                try {
+                    rs= dao.ListarPorCpf(paciente);
+                    if (rs.next()){
+                        ProntuarioVO prontuario = new ProntuarioVO();
+                        prontuario.setMediAlergia(mediAlergico);
+                        
+                        prontuario.setIdPaciente(rs.getLong("id_paciente"));
+                        
+                        ProntuarioDAO dao2 = new ProntuarioDAO();
+                        dao2.AtualizarMediAlergicos(prontuario);
+                    }else{
+                        throw new UpdateException("Nenhum paciente com o cpf informado");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        public void EditarHistoricoDoencas(String historico, String cpfPaciente) throws UpdateException{
+            PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
+            PacienteDAO dao = new PacienteDAO();
+            ResultSet rs;
+            if(cpfPaciente.length() != 11){ // verificando se a string de cpf possui 11 digitos
+                throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+            }
+            if(cpfPaciente == null){
+                throw new UpdateException("CPF está vazio");
+            }
+            if(cpfPaciente.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+                throw new UpdateException("CPF só pode conter números");
+            }
+            if(historico == null || historico == " "){
+                throw new UpdateException("Campo não preenchido");
+            }else{
+                try {
+                    rs= dao.ListarPorCpf(paciente);
+                    if (rs.next()){
+                        ProntuarioVO prontuario = new ProntuarioVO();
+                        prontuario.setHistoricoDoenca(historico);
+                        
+                        prontuario.setIdPaciente(rs.getLong("id_paciente"));
+                        
+                        ProntuarioDAO dao2 = new ProntuarioDAO();
+                        dao2.AtualizarHistoricoDoencas(prontuario);
+                    }else{
+                        throw new UpdateException("Nenhum paciente com o cpf informado");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        public void EditarPeso(String peso, String cpfPaciente) throws UpdateException{
+            PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
+            PacienteDAO dao = new PacienteDAO();
+            ResultSet rs;
+            if(cpfPaciente.length() != 11){ // verificando se a string de cpf possui 11 digitos
+                throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+            }
+            if(cpfPaciente == null){
+                throw new UpdateException("CPF está vazio");
+            }
+            if(cpfPaciente.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+                throw new UpdateException("CPF só pode conter números");
+            }
+            if(peso == null || peso == " "){
+                throw new UpdateException("Campo não preenchido");
+            }else{
+                try {
+                    rs= dao.ListarPorCpf(paciente);
+                    if (rs.next()){
+                        Float pesoF = Float.parseFloat(peso);
+                        ProntuarioVO prontuario = new ProntuarioVO();
+                        prontuario.setPeso(pesoF);
+                        
+                        prontuario.setIdPaciente(rs.getLong("id_paciente"));
+                        
+                        ProntuarioDAO dao2 = new ProntuarioDAO();
+                        dao2.AtualizarPeso(prontuario);
+                    }else{
+                        throw new UpdateException("Nenhum paciente com o cpf informado");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        public void EditarAltura(String altura, String cpfPaciente) throws UpdateException{
+            PacienteVO paciente = new PacienteVO("", cpfPaciente, "");
+            PacienteDAO dao = new PacienteDAO();
+            ResultSet rs;
+            if(cpfPaciente.length() != 11){ // verificando se a string de cpf possui 11 digitos
+                throw new UpdateException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
+            }
+            if(cpfPaciente == null){
+                throw new UpdateException("CPF está vazio");
+            }
+            if(cpfPaciente.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
+                throw new UpdateException("CPF só pode conter números");
+            }
+            if(altura == null || altura == " "){
+                throw new UpdateException("Campo não preenchido");
+            }else{
+                try {
+                    rs= dao.ListarPorCpf(paciente);
+                    if (rs.next()){
+                        Float alturaF = Float.parseFloat(altura);
+                        ProntuarioVO prontuario = new ProntuarioVO();
+                        prontuario.setAltura(alturaF);
+                        
+                        prontuario.setIdPaciente(rs.getLong("id_paciente"));
+                        
+                        ProntuarioDAO dao2 = new ProntuarioDAO();
+                        dao2.AtualizarAltura(prontuario);
                     }else{
                         throw new UpdateException("Nenhum paciente com o cpf informado");
                     }
