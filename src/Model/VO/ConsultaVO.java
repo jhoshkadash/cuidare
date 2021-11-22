@@ -41,7 +41,8 @@ public class ConsultaVO {
 
     public void setDataConsultaDao(java.sql.Timestamp dConsulta) {
             this.dataConsulta.setTime(dConsulta);
-    }
+        }
+
 
     public String getDataConsulta(){
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -49,8 +50,10 @@ public class ConsultaVO {
         return dConsulta;
     }
 
-    public Calendar getDataConsultaDao(){
-        return this.dataConsulta;
+    public java.sql.Timestamp getDataConsultaDao(){
+        Date data = new Date(this.dataConsulta.getTimeInMillis());
+        final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());
+        return dataSql;
     }
 
 

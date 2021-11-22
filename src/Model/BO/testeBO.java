@@ -5,19 +5,18 @@ import java.util.List;
 import Model.Exception.InsertException;
 import Model.Exception.ListException;
 import Model.Exception.UpdateException;
+import Model.VO.ConsultaVO;
 import Model.VO.PacienteVO;
 
 public class testeBO {
     public static void main(String[] args) {
         AtendenteBO bo = new AtendenteBO();
         try {
-            bo.EditarDataNascimento("28/07/1999", "84593402394");    
+            bo.EditarDataConsulta("2", "15/11/2021 16:00");    
         } catch (UpdateException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
-        
-        /*try {
-            List <PacienteVO> pacientes = bo.BuscarPacientePorCPF(vo);
+           /* List <ConsultaVO> consultas = bo.BuscarPacientePorCPF(vo);
             for (PacienteVO aux : pacientes ){
                 System.out.println("Nome do paciente : " + aux.getNome());
                 System.out.println("CPf do paciente : " + aux.getCpf());

@@ -219,6 +219,51 @@ public class AtendenteBO{
         }
     }
 
+    public void EditarDataConsulta(String idConsulta, String dataNova) throws UpdateException{
+        if(idConsulta == null || idConsulta == " "){
+            throw new UpdateException("Id da consulta não informado");
+        }
+        if(dataNova == null || dataNova == ""){
+            throw new UpdateException("Data nova não informada");
+        }
+        Long idConsultaL = Long.parseLong(idConsulta); 
+        ConsultaVO consulta = new ConsultaVO(0L, 0L, false, dataNova);
+        consulta.setIdConsulta(idConsultaL);
+        ConsultaDAO dao = new ConsultaDAO();
+        try {
+            ResultSet rs = dao.ListarPorId(consulta);
+            if(rs.next()){
+                consulta.setIdMedico(rs.getLong("id_medico"));
+                consulta.setIdPaciente(rs.getLong("id_paciente"));
+                consulta.setStatus(rs.getBoolean("status"));
+                try {
+                    rs = dao.ListarPorData(consulta);
+                    if(rs.next()){
+                        ConsultaVO aux = new ConsultaVO();
+                        aux.setDataConsultaDao(rs.getTimestamp("data"));
+                        aux.setIdConsulta(rs.getLong("id_consulta"));
+                        aux.setIdMedico(rs.getLong("id_medico"));
+                        aux.setIdPaciente(rs.getLong("id_paciente"));
+                        aux.setStatus(rs.getBoolean("status"));
+                        if(aux.getDataConsulta() == consulta.getDataConsulta() && aux.getIdMedico() == consulta.getIdMedico()){
+                            throw new UpdateException("Consulta já marcada com o mesmo médico para o mesmo horário e data");
+                        }else{
+                            dao.AtualizarDataConsulta(consulta);
+                        }
+                    }else{
+                        dao.AtualizarDataConsulta(consulta);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        }    
+        
+
+
 
     public List <PacienteVO> BuscarPacientePorCPF (String cpf) throws ListException {
         if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos

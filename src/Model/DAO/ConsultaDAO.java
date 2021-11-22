@@ -16,16 +16,12 @@ public class ConsultaDAO extends BaseDAO<ConsultaVO>
     public void Inserir(ConsultaVO vo) throws SQLException {
         try {
 
-            Date data = new Date(vo.getDataConsultaDao().getTimeInMillis());
-            final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime());// tratamento da classe calendar
-                                                                                      // para timestamp
-
             String sql = "insert into Consulta (id_medico, id_paciente, data, status) values (?,?,?,?)";
             PreparedStatement psts;
             psts = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             psts.setLong(1, vo.getIdMedico());
             psts.setLong(2, vo.getIdPaciente());
-            psts.setTimestamp(3, dataSql, vo.getDataConsultaDao());
+            psts.setTimestamp(3, vo.getDataConsultaDao());
             psts.setBoolean(4, vo.isStatus());
 
             int affectedRows = psts.executeUpdate(); // variável para verificação de alterações na tabela
@@ -131,13 +127,8 @@ public class ConsultaDAO extends BaseDAO<ConsultaVO>
         String sql = "select * from Consulta where data = ?";
         PreparedStatement psts = null;
         ResultSet rs = null;
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date data = new Date(vo.getDataConsultaDao().getTimeInMillis());
-        final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime()); // tratamento da classe calendar para
-                                                                                   // timestamp
-
-        psts.getConnection().prepareStatement(sql);
-        psts.setTimestamp(1, dataSql, vo.getDataConsultaDao());
+        psts = getConnection().prepareStatement(sql);
+        psts.setTimestamp(1, vo.getDataConsultaDao());
         rs = psts.executeQuery();
 
         return rs;
@@ -145,23 +136,29 @@ public class ConsultaDAO extends BaseDAO<ConsultaVO>
 
     /* método de atualização de dados de consultas */
     @Override
-    public void Atualizar(ConsultaVO vo) {
+    public void Atualizar(ConsultaVO vo) throws SQLException{
         String sql = "update Consulta set (data, status) values (?,?) where id_consulta = ?"; /*
                                                                             * comando SQL para atualizar data da
                                                                             * consulta.
                                                                             */
         PreparedStatement psts;
-        Date data = new Date(vo.getDataConsultaDao().getTimeInMillis());
-        final java.sql.Timestamp dataSql = new java.sql.Timestamp(data.getTime()); // tratamento da classe calendar para
-                                                                                   // timestamp
-        try {
-            psts = getConnection().prepareStatement(sql);
-            psts.setTimestamp(1, dataSql, vo.getDataConsultaDao());
-            psts.setBoolean(2, vo.getStatus());
-            psts.setLong(3, vo.getIdConsulta());
-            psts.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        psts = getConnection().prepareStatement(sql);
+        psts.setTimestamp(1, vo.getDataConsultaDao());
+        psts.setBoolean(2, vo.getStatus());
+        psts.setLong(3, vo.getIdConsulta());
+        psts.executeUpdate();
+     
+    }
+
+    public void AtualizarDataConsulta(ConsultaVO vo) throws SQLException {
+        String sql = "UPDATE Consulta SET data = ? WHERE id_consulta = ?";
+        PreparedStatement psts;
+        
+        psts = getConnection().prepareStatement(sql);
+        psts.setTimestamp(1, vo.getDataConsultaDao());
+        psts.setLong(2, vo.getIdConsulta());
+        psts.executeUpdate();
+
     }
 }
