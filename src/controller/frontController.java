@@ -23,10 +23,10 @@ public class FrontController{
             UsuarioVO autenticado = usuBO.autenticar(vo.getLogin(), vo.getSenha());
 
             if(autenticado.getTipo() == 1) {
-                //abrir janela de atendente
+                Telas.telaPrincipalAtendente();
             }
             if(autenticado.getTipo() == 2) {
-                //abrir janela de medico
+                Telas.telaPrincipalMedico();
             }
             if(autenticado.getTipo() == 3) {
                 Telas.telaPrincipalGerente();
