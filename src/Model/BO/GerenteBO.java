@@ -10,7 +10,7 @@ public class GerenteBO {
 
     /* =============== MÉTODOS DE CADASTRO =============== */
 
-    public void CadastrarMedico(String nome, String cpf, String endereco, String crm, Double valorconsulta) throws InsertException {
+    public void CadastrarMedico(String nome, String cpf, String endereco, String crm, String valorconsulta) throws InsertException {
         if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
             throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
         }
@@ -23,23 +23,24 @@ public class GerenteBO {
         if(nome == null || nome == ""){ // verificando se existe dados no nome
             throw new InsertException("Médico com nome vazio");
         }
-        if(endereco == null || endereco == ""){ // verificando se existe dados no endereço
+        if(endereco == null || endereco == " "){ // verificando se existe dados no endereço
             throw new InsertException("Médico com endereço vazio");
         } 
-        if(crm == null || crm == ""){ // verificando se existe dados no crm
+        if(crm == null || crm == " "){ // verificando se existe dados no crm
             throw new InsertException("Médico com CRM vazio");
         }
-        if(valorconsulta == null){ // verificando se existe dados no valorconsulta
+        if(valorconsulta == null || valorconsulta == " "){ // verificando se existe dados no valorconsulta
             throw new InsertException("Médico com valor de consulta não especificado");
         }
         else {
-                MedicoVO vo = new MedicoVO(nome, cpf, endereco, crm, valorconsulta);
+                Double valorConsultaD = Double.parseDouble(valorconsulta);
+                MedicoVO vo = new MedicoVO(nome, cpf, endereco, crm, valorConsultaD);
                 MedicoDAO dao = new MedicoDAO();
                 ResultSet rs;
                 try {
-                    rs = dao.ListarPorCpf(vo);
+                    rs = dao.ListarPorCrm(vo);
                     if(rs.next()){
-                        throw new InsertException("Médico com mesmo cpf já cadastrado");
+                        throw new InsertException("Médico com mesmo crm já cadastrado");
                     } else{
                         dao.Inserir(vo);
                     }
@@ -82,7 +83,7 @@ public class GerenteBO {
                 }
             } 
 
-            public void CadastrarAtendente(String nome, String cpf) throws InsertException {
+            public void CadastrarAtendente(String nome, String cpf, String login, String senha) throws InsertException {
                 if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
                     throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
                 }
@@ -92,11 +93,17 @@ public class GerenteBO {
                 if(cpf.matches("^[0-9]*$") == false){ // verificando se só contem números no cpf
                     throw new InsertException("CPF só pode conter números");
                 }
-                if(nome == null || nome == ""){ // verificando se existe dados no nome
+                if(nome == null || nome == " "){ // verificando se existe dados no nome
                     throw new InsertException("Atendente com nome vazio");
                 }
+                if(login == null || login == " "){
+                    throw new InsertException("Login não informado");
+                }
+                if(senha == null || senha.length() < 6){
+                    throw new InsertException("Senha não informada ou muito curta. Tamanho mínimo de 6 caracteres para a senha");
+                }
                 else {
-                        AtendenteVO vo = new AtendenteVO(nome, cpf);
+                        AtendenteVO vo = new AtendenteVO(nome, cpf, login, senha);
                         AtendenteDAO dao = new AtendenteDAO();
                         ResultSet rs;
                         try {
@@ -112,7 +119,7 @@ public class GerenteBO {
                     }
                 } 
 
-                public void CadastrarGerente(String nome, String cpf) throws InsertException {
+                public void CadastrarGerente(String nome, String cpf, String login, String senha) throws InsertException {
                     if(cpf.length() != 11){ // verificando se a string de cpf possui 11 digitos
                         throw new InsertException("CPF inválido, não possui 11 digitos, não escreva pontos e nem linhas");
                     }
@@ -125,8 +132,14 @@ public class GerenteBO {
                     if(nome == null || nome == ""){ // verificando se existe dados no nome
                         throw new InsertException("Gerente com nome vazio");
                     }
+                    if(login == null || login == " "){
+                        throw new InsertException("Login não informado");
+                    }
+                    if(senha == null || senha.length() < 6){
+                        throw new InsertException("Senha não informada ou muito curta. Tamanho mínimo de 6 caracteres para a senha");
+                    }
                     else {
-                            GerenteVO vo = new GerenteVO(nome, cpf);
+                            GerenteVO vo = new GerenteVO(nome, cpf, login, senha);
                             GerenteDAO dao = new GerenteDAO();
                             ResultSet rs;
                             try {
