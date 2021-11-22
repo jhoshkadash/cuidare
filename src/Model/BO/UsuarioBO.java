@@ -26,7 +26,7 @@ public class UsuarioBO {
                 usuario.setTipo(rs.getInt("tipo"));
                 usuario.setCpf(rs.getString("cpf"));
             }else{
-                throw new ListException("Nenhu usuário com as informações passadas encontrado");
+                throw new ListException("Nenhum usuário com as informações passadas encontrado");
             }
         } catch (Exception e) {
             e.printStackTrace();
