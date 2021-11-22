@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="topo" fitHeight="73.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@container%20superior.png" />
+         </image>
+      </ImageView>
+      <ImageView id="cuidare_full_logo" fx:id="cuidare_logo" fitHeight="149.0" fitWidth="281.0" layoutX="168.0" layoutY="-39.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cuidare_full_logo.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="barra_pesquisa" layoutX="118.0" layoutY="78.0" prefHeight="31.0" prefWidth="326.0" style="-fx-background-color: #C4C4C4;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <ImageView fx:id="lupa_pesquisa" fitHeight="31.0" fitWidth="56.0" layoutX="452.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@lupa.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="filtrar" layoutX="252.0" layoutY="110.0" mnemonicParsing="false" style="-fx-background-color: none;" text="filtrar busca" underline="true">
+         <font>
+            <Font name="Candara Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Group>
+         <children>
+            <TableView fx:id="tabela_preview" editable="true" layoutX="25.0" layoutY="140.0" prefHeight="233.0" prefWidth="544.0">
+              <columns>
+                <TableColumn fx:id="medico" prefWidth="298.0" text="Paciente" />
+                <TableColumn fx:id="paciente" prefWidth="137.0" text="Data" />
+                  <TableColumn fx:id="hora" prefWidth="92.66668701171875" text="Horário" />
+              </columns>
+            </TableView>
+            <ScrollBar fx:id="consulta_scroll" layoutX="553.0" layoutY="165.0" orientation="VERTICAL" prefHeight="208.0" prefWidth="16.0" />
+         </children>
+      </Group>
+   </children>
+</Pane>

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Teste",
+            "request": "launch",
+            "mainClass": "Model.DAO.Teste",
+            "projectName": "cuidare_6ad9e187"
+        },
+        {
+            "type": "java",
             "name": "Launch telaLogin",
             "request": "launch",
             "mainClass": "VIEW.telaLogin",
