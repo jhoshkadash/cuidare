@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Telas extends Application {
-    private static Stage primaryStage;
+    public static Stage primaryStage;
 
     public static Stage getPrimaryStage() {
         return primaryStage;

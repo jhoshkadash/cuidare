@@ -17,6 +17,10 @@ public class telaLogin extends Application {
 
         Scene cena = new Scene(root);
 
+        Telas tela = new Telas();
+        
+        tela.setPrimaryStage(primaryStage);
+
         primaryStage.setTitle("CUIDARE");
         primaryStage.setScene(cena);
         primaryStage.show();

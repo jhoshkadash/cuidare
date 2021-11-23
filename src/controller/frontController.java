@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.BO.UsuarioBO;
+import Model.Exception.ListException;
 import Model.VO.*;
 import VIEW.Telas;
 import javafx.event.ActionEvent;
@@ -14,7 +15,7 @@ public class FrontController{
     @FXML private Label erroAut;
 
     UsuarioBO usuBO = new UsuarioBO();
-    public void autenticar(ActionEvent event) {
+    public void autenticar(ActionEvent event) throws Exception {
         UsuarioVO vo = new UsuarioVO();
         vo.setLogin(login.getText());
         vo.setSenha(senha.getText());
@@ -22,7 +23,7 @@ public class FrontController{
         try {
             UsuarioVO autenticado = usuBO.autenticar(vo.getLogin(), vo.getSenha());
 
-            if(autenticado.getTipo() == 1) {
+            if(autenticado.getTipo() == 1){
                 Telas.telaPrincipalAtendente();
             }
             if(autenticado.getTipo() == 2) {
@@ -32,7 +33,7 @@ public class FrontController{
                 Telas.telaPrincipalGerente();
             }
 
-        } catch (Exception e) {
+        } catch (ListException e) {
             erroAut.setVisible(true);
         }
     }
