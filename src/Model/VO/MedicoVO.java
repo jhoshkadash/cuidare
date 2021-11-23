@@ -36,8 +36,8 @@ public class MedicoVO extends UsuarioVO {
         return valorConsulta;
     }
 
-    public void setValorConsulta(Double valorConsulta) {
-        this.valorConsulta = valorConsulta;
+    public void setValorConsulta(double valorconsulta2) {
+        this.valorConsulta = valorconsulta2;
     }
 
     public String getCrm() {
