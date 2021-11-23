@@ -23,6 +23,7 @@ public class Telas extends Application {
         primaryStage.show();
         telaLogin();
     }
+    
 
     public static void telaLogin() throws Exception {
         Parent root = FXMLLoader.load(Telas.class.getResource("VE/telaLogin.fxml"));

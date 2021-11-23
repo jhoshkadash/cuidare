@@ -39,15 +39,20 @@
       </Button>
       <Group>
          <children>
-            <TableView fx:id="tabela_preview" editable="true" layoutX="25.0" layoutY="140.0" prefHeight="233.0" prefWidth="544.0">
+            <TableView fx:id="tabela_preview" editable="true" layoutX="25.0" layoutY="140.0" prefHeight="204.0" prefWidth="544.0">
               <columns>
                 <TableColumn fx:id="medico" prefWidth="298.0" text="Paciente" />
                 <TableColumn fx:id="paciente" prefWidth="137.0" text="Data" />
                   <TableColumn fx:id="hora" prefWidth="92.66668701171875" text="Horário" />
               </columns>
             </TableView>
-            <ScrollBar fx:id="consulta_scroll" layoutX="553.0" layoutY="165.0" orientation="VERTICAL" prefHeight="208.0" prefWidth="16.0" />
+            <ScrollBar fx:id="consulta_scroll" layoutX="553.0" layoutY="165.0" orientation="VERTICAL" prefHeight="178.0" prefWidth="16.0" />
          </children>
       </Group>
+      <Button layoutX="474.0" layoutY="358.0" mnemonicParsing="false" style="-fx-background-color: C84949;" text="Criar relatório" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
